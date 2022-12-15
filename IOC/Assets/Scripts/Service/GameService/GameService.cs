@@ -1,5 +1,8 @@
-﻿using Attributes;
+﻿using Addressables;
+using Attributes;
 using Service.AudioService;
+using UnityEngine;
+using static UnityEngine.AddressableAssets.Addressables;
 
 namespace Service
 {
@@ -12,6 +15,14 @@ namespace Service
         private void Initialize()
         {
             m_audioService.PlaySound(0);
+           AddressableHelper.LoadAssetAsyncWithCompletionHandler<GameObject>("LeBurger", GenerateBurger);
         }
+
+        private void GenerateBurger(GameObject gameObject)
+        {
+            var burger = Object.Instantiate(gameObject);
+            Release(gameObject);
+        }
+        
     }
 }
