@@ -4,10 +4,14 @@ using UnityEngine;
 
 namespace Service
 {
-public interface ISwitchableService : IService
-{
-   public void EnabledService();
-   public void DisabledService();
-   public bool GetIsActiveService();
-}
+    public interface ISwitchableService : IService
+    {
+        void EnabledService();
+        void DisabledService();
+
+        bool GetIsActiveService
+        {
+            get;
+        }
+    }
 }

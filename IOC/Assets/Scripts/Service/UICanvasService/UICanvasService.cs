@@ -27,7 +27,7 @@ namespace Service
             canvas = linker.mainCanvas;
             linker.button.onClick
                 .AddListener(new UnityAction((() => { _sceneService.LoadScene("ThirdScene");})));
-            linker.toggle.onClick .AddListener(new UnityAction((() => {if(GetIsActiveService())DisabledService(); else EnabledService();})));
+            linker.toggle.onClick .AddListener(new UnityAction((() => {if(GetIsActiveService)DisabledService(); else EnabledService();})));
             EnabledService();
             Release(gameObject);
         }
@@ -36,16 +36,13 @@ namespace Service
         {
             isActive = true;
             canvas.SetActive(true);
-            
         }
-
         public void DisabledService()
         {
             isActive = false;
             canvas.SetActive(false);
         }
-
-        public bool GetIsActiveService() => isActive;
+        public bool GetIsActiveService => isActive;
         
     }
 }

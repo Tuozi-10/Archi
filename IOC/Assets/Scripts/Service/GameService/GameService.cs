@@ -15,7 +15,7 @@ namespace Service
         private ISceneService sceneService;
         
         [DependsOnService]
-        private IUICanvasService uiCanvasService;
+        private IUICanvasSwitchableService uiCanvasService;
         
         [ServiceInit]
         private void Initialize()
