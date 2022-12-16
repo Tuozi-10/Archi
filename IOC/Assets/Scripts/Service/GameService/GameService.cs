@@ -2,6 +2,7 @@
 using Attributes;
 using Service.AudioService;
 using Service.SceneService;
+using Unity.VisualScripting;
 using UnityEngine;
 using static UnityEngine.AddressableAssets.Addressables;
 
@@ -32,6 +33,20 @@ namespace Service
         private void LoadMenu(GameObject menuObj)
         {
             var menu = Object.Instantiate(menuObj).GetComponent<MenuAssigner>();
+            
+            menu.AssignToggleMethod(SwitchSceneService);
+
+            void SwitchSceneService(bool value)
+            {
+                if (value)
+                {
+                    m_sceneService.Enable();
+                }
+                else
+                {
+                    m_sceneService.Disable();
+                }
+            }
             
             menu.AssignButtonMethod(()=>m_sceneService.LoadScene(0));
             
