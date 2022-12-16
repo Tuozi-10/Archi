@@ -13,6 +13,7 @@ namespace Service
     {
         [DependsOnService] private ISceneService _sceneService;
 
+        [DependsOnService] private ITickeableSwitchableService tickeableService;
         private bool isActive;
         private GameObject canvas;
         public void LinkButton()
@@ -26,8 +27,20 @@ namespace Service
             var linker = canvasObject.GetComponent<CanvasLinker>();
             canvas = linker.mainCanvas;
             linker.button.onClick
-                .AddListener(new UnityAction((() => { _sceneService.LoadScene("ThirdScene");})));
-            linker.toggle.onClick .AddListener(new UnityAction((() => {if(GetIsActiveService)DisabledService(); else EnabledService();})));
+                .AddListener(new UnityAction((() => { _sceneService.LoadScene("ThirdScene"); })));
+            linker.toggle.onClick .AddListener(new UnityAction((() =>
+            {
+                if (GetIsActiveService)
+                {
+                    DisabledService();
+                    tickeableService.DisabledService();
+                }
+                else
+                {
+                    EnabledService();
+                    tickeableService.EnabledService();
+                }
+            })));
             EnabledService();
             Release(gameObject);
         }

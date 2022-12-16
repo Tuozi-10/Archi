@@ -203,7 +203,7 @@ public class Compositor : MonoBehaviour
 
     private void CreateAndWireObjects()
     {
-        AddService<ITickeableService>(new TickService());
+        AddService<ITickeableSwitchableService>(new TickService());
         AddService<IGameService>(new GameService());
         AddService<IAudioService>(new AudioService());
         AddService<ISceneService>(new SceneService());

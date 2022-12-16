@@ -7,19 +7,21 @@ using UnityEngine;
 
 namespace Service
 {
-    public class TickService : ITickeableService
+    public class TickService : ITickeableSwitchableService
 {
     [SerializeField] private float tickRate = 10f;
     private float tickTimer;
     private static float tickTime;
     public static event Action tickEvent;
-
+    public bool isActive;
+// les ref c'est comme un pointeur
     [ServiceInit]
     void SetUp()
     {
         tickTime = 1 / tickRate;
         tickTimer = 0;
         Tick();
+        EnabledService();
     }
     public static float getTickTime
     {
@@ -29,16 +31,35 @@ namespace Service
     {
         while (true)
         {
+            if (!isActive)
+            {
+                await UniTask.WaitUntil((PredicateIsActiveService));
+            }
             if (tickTimer >= tickTime)
         {
             tickTimer -= tickTime;
             tickEvent?.Invoke();
-     
         }
         else tickTimer += Time.deltaTime;
         await UniTask.DelayFrame(0);
         }
     }
-  
+
+    private bool PredicateIsActiveService()
+    {
+        return GetIsActiveService;
+    }
+
+    public void EnabledService()
+    {
+        isActive = true;
+    }
+
+    public void DisabledService()
+    {
+        isActive = false;
+    }
+
+    public bool GetIsActiveService { get => isActive; }
 }
 }
