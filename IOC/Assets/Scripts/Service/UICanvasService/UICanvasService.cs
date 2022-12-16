@@ -9,10 +9,12 @@ using static UnityEngine.AddressableAssets.Addressables;
 
 namespace Service
 {
-    public class UICanvasService : IUICanvasService
+    public class UICanvasService : IUICanvasSwitchableService
     {
         [DependsOnService] private ISceneService _sceneService;
-        
+
+        private bool isActive;
+        private GameObject canvas;
         public void LinkButton()
         {
             AddressableHelper.LoadAssetAsyncWithCompletionHandler<GameObject>("UICanvas", GenerateCanvas);
@@ -20,11 +22,30 @@ namespace Service
 
         private void GenerateCanvas(GameObject gameObject)
         {
-            var canvas = Object.Instantiate(gameObject);
-            var linker = canvas.GetComponent<CanvasLinker>();
+           var canvasObject = Object.Instantiate(gameObject);
+            var linker = canvasObject.GetComponent<CanvasLinker>();
+            canvas = linker.mainCanvas;
             linker.button.onClick
                 .AddListener(new UnityAction((() => { _sceneService.LoadScene("ThirdScene");})));
+            linker.toggle.onClick .AddListener(new UnityAction((() => {if(GetIsActiveService())DisabledService(); else EnabledService();})));
+            EnabledService();
             Release(gameObject);
         }
+
+        public void EnabledService()
+        {
+            isActive = true;
+            canvas.SetActive(true);
+            
+        }
+
+        public void DisabledService()
+        {
+            isActive = false;
+            canvas.SetActive(false);
+        }
+
+        public bool GetIsActiveService() => isActive;
+        
     }
 }

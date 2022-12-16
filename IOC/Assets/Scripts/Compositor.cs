@@ -192,7 +192,7 @@ public class Compositor : MonoBehaviour
         AddService<IGameService>(new GameService());
         AddService<IAudioService>(new AudioService());
         AddService<ISceneService>(new SceneService());
-        AddService<IUICanvasService>(new UICanvasService());
+        AddService<IUICanvasSwitchableService>(new UICanvasService());
     }
     
     private void Awake()

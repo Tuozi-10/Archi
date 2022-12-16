@@ -16,6 +16,7 @@ namespace Service
         
         [DependsOnService]
         private IUICanvasService uiCanvasService;
+        
         [ServiceInit]
         private void Initialize()
         {
