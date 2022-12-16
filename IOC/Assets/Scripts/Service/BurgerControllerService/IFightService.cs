@@ -7,8 +7,6 @@ namespace Service
 {
 public interface IFightService : IService
 {
-    void Fight();
-
    GameObject fighter { set; }
 }
 }

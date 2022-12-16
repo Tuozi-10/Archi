@@ -9,7 +9,7 @@ namespace Service
 {
     public class TickService : ITickeableSwitchableService
 {
-    [SerializeField] private float tickRate = 10f;
+    private float tickRate = 10f;
     private float tickTimer;
     private static float tickTime;
     public static event Action tickEvent;

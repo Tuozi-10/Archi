@@ -24,6 +24,7 @@ namespace Service
         [TickServiceFunction]
         public void ListenTick()
         {
+            /*
             if (timer >= time)
             {
                 timer -= time;
@@ -33,10 +34,12 @@ namespace Service
             {
                 timer += TickService.getTickTime;
             }
+            */
         }
         public void Fight()
-        {
+        {/*
             burger.transform.Rotate(Vector3.up, so.rotateSpeed);
+            */
         }
 
         public GameObject fighter {  set => burger = value; }
