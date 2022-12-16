@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using Addressables;
 using Attributes;
 using Cysharp.Threading.Tasks;
+using UnityEditor.SceneManagement;
 using UnityEngine;
 using static UnityEngine.AddressableAssets.Addressables;
 
@@ -10,6 +11,7 @@ public class FightService : IFightService
 {
     private Vector3 spawnPos;
     private float CurrentTime = 3.0f;
+    private GameObject minion;
     
     [ServiceInit]
     public void Init()
@@ -29,12 +31,19 @@ public class FightService : IFightService
 
     public void SpawnMinion(GameObject prefab)
     {
-        GameObject minion = Object.Instantiate(prefab);
+        minion = Object.Instantiate(prefab);
         minion.transform.position = spawnPos;
         spawnPos.x += 1.5f;
-        
+        AddressableHelper.LoadAssetAsyncWithCompletionHandler<EnemySO>("Minion", SetData);
     }
 
+    private void SetData(EnemySO data)
+    {
+        float HP = data.MaxHP;
+        
+        data.GetEntity().MaxHP = HP;
+    }
+    
     public void Switch()
     {
         
@@ -42,12 +51,18 @@ public class FightService : IFightService
 
     public void Enable()
     {
-        AddressableHelper.LoadAssetAsyncWithCompletionHandler<GameObject>("Plane", 
-            ShowMap);
+        AddressableHelper.LoadAssetAsyncWithCompletionHandler<GameObject>("Plane", ShowMap);
         MyUpdate();
     }
     
-    override 
+    protected async void MyUpdate()
+    {
+        while (true)
+        {
+            await UniTask.DelayFrame(0);
+            OnTick(Time.deltaTime);
+        }
+    }
 
     public void Disable()
     {
