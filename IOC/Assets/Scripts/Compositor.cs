@@ -15,6 +15,7 @@ using Service.SceneService;
 public class Compositor : MonoBehaviour
 {
     [SerializeField] private float ticksPerSecond = 60;
+    private double currentTime = 0;
     
     protected struct FieldEntry
     {
@@ -24,7 +25,7 @@ public class Compositor : MonoBehaviour
 
     protected readonly Dictionary<Type, IService> m_services = new Dictionary<Type, IService>();
     protected readonly Dictionary<Type, List<FieldEntry>> m_dependencySlots = new Dictionary<Type, List<FieldEntry>>();
-    protected event Action onTickAction;
+    protected event Action OnTickAction;
 
     private bool ResolveDependencies()
     {
@@ -197,7 +198,7 @@ public class Compositor : MonoBehaviour
                 {
                     if (methodInfo.ReturnType == typeof(void))
                     {
-                        onTickAction += InvokeMethod;
+                        OnTickAction += InvokeMethod;
 
                         void InvokeMethod()
                         {
@@ -236,27 +237,20 @@ public class Compositor : MonoBehaviour
         {
             Debug.LogError($"Composition in {gameObject.name} failed to sort dependencies - systems won't be started!");
         }
-
-        await Tick();
     }
 
-    private async Task Tick()
+    private void Update()
     {
-        double timeSinceLastTick = Time.time;
-        double currentTime = Time.time;
-        
-        while (true)
-        {
-            await UniTask.DelayFrame(0);
-            currentTime += Time.deltaTime;
-            if (currentTime - timeSinceLastTick >= 1 / ticksPerSecond)
-            {
-                timeSinceLastTick = currentTime;
-                onTickAction?.Invoke();
-            }
-        }
+        Tick();
     }
 
+    private void Tick()
+    {
+        currentTime += Time.deltaTime;
+        if (currentTime < 1 / ticksPerSecond) return;
+        currentTime = 0;
+        OnTickAction?.Invoke();
+    }
 
     protected virtual async UniTask<bool> Compose()
     {
