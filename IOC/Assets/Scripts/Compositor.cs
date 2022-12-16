@@ -9,6 +9,7 @@ using UnityEngine;
 using System.Runtime.CompilerServices;
 using Cysharp.Threading.Tasks;
 using Service.AudioService;
+using Service.SceneService;
 
 public class Compositor : MonoBehaviour
 {
@@ -191,6 +192,7 @@ public class Compositor : MonoBehaviour
     {
         AddService<IGameService>(new GameService());
         AddService<IAudioService>(new AudioService());
+        AddService<ISceneService>(new SceneService());
     }
     
     private void Awake()
