@@ -13,6 +13,8 @@ namespace Service
         {
             base.Initialize();
             AddressableHelper.LoadAssetAsyncWithCompletionHandler<GameObject>("LeBurger", GenerateBurger);
+            AddressableHelper.LoadAssetAsyncWithCompletionHandler<PersoSO>("LePerso", GeneratePerso);
+            AddressableHelper.LoadAssetAsyncWithCompletionHandler<PersoSO>("LeChamp", GeneratePerso);
             Enable();
         }
 
@@ -51,6 +53,11 @@ namespace Service
         {
             _burger = Object.Instantiate(burger);
             _burger.SetActive(isActive);
+        }
+        
+        private void GeneratePerso(PersoSO perso)
+        {
+            var persoScriptable = perso;
         }
     }
 }

@@ -25,6 +25,14 @@ MonoBehaviour:
     m_Address: LeCanvas
     m_ReadOnly: 0
     m_SerializedLabels: []
+  - m_GUID: 6c2cb2488f5b70946bb659d2e78cfe05
+    m_Address: LePerso
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+  - m_GUID: a85c5ddcf501ed4408e0839a227e6a2d
+    m_Address: LeChamp
+    m_ReadOnly: 0
+    m_SerializedLabels: []
   m_ReadOnly: 0
   m_Settings: {fileID: 11400000, guid: f85571e7fcd70ac4190d36e8b6377275, type: 2}
   m_SchemaSet:
