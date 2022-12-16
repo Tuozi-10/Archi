@@ -1,3 +1,17 @@
+<<<<<<< HEAD
 ﻿fileFormatVersion: 2
 guid: 98793f5d01bc4497a62d255dc8124694
 timeCreated: 1671184671
+=======
+fileFormatVersion: 2
+guid: 76254c06d58120741b01af86f7ce227c
+MonoImporter:
+  externalObjects: {}
+  serializedVersion: 2
+  defaultReferences: []
+  executionOrder: 0
+  icon: {instanceID: 0}
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+>>>>>>> 3f2ccdb... Gotgot commit

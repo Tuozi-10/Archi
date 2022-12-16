@@ -105,7 +105,11 @@
       "url": "https://packages.unity.com"
     },
     "com.unity.services.core": {
+<<<<<<< HEAD
       "version": "1.5.2",
+=======
+      "version": "1.4.2",
+>>>>>>> 3f2ccdb... Gotgot commit
       "depth": 1,
       "source": "registry",
       "dependencies": {

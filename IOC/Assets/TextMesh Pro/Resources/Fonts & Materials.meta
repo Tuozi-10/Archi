@@ -1,9 +1,16 @@
 fileFormatVersion: 2
+<<<<<<< HEAD
 guid: 731f1baa9d144a9897cb1d341c2092b8
 folderAsset: yes
 timeCreated: 1442040525
 licenseType: Pro
 DefaultImporter:
+=======
+guid: 7bab880b3105e844fa687426ee0f0ac4
+folderAsset: yes
+DefaultImporter:
+  externalObjects: {}
+>>>>>>> 3f2ccdb... Gotgot commit
   userData: 
   assetBundleName: 
   assetBundleVariant: 
