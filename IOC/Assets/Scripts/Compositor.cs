@@ -122,8 +122,7 @@ public class Compositor : MonoBehaviour
         foreach (IService service in uniqueServices)
         {
             Type serviceType = service.GetType();
-            foreach (MethodInfo methodInfo in serviceType.GetMethods(BindingFlags.Instance | BindingFlags.Public |
-                                                                     BindingFlags.NonPublic))
+            foreach (MethodInfo methodInfo in serviceType.GetMethods(BindingFlags.Instance | BindingFlags.Public | BindingFlags.NonPublic))
             {
                 ServiceInitAttribute[] initAttributes =
                     (ServiceInitAttribute[])Attribute.GetCustomAttributes(methodInfo, typeof(ServiceInitAttribute));
@@ -191,6 +190,7 @@ public class Compositor : MonoBehaviour
     {
         AddService<IGameService>(new GameService());
         AddService<IAudioService>(new AudioService());
+        AddService<ISceneService>(new SceneService());
     }
     
     private void Awake()
