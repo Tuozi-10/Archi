@@ -10,10 +10,7 @@ using System.Runtime.CompilerServices;
 using Cysharp.Threading.Tasks;
 using Service.AudioService;
 using Service.SceneService;
-<<<<<<< HEAD
 using Service.UIService;
-=======
->>>>>>> 3f2ccdb... Gotgot commit
 
 public class Compositor : MonoBehaviour
 {
@@ -196,10 +193,7 @@ public class Compositor : MonoBehaviour
         AddService<IGameService>(new GameService());
         AddService<IAudioService>(new AudioService());
         AddService<ISceneService>(new SceneService());
-<<<<<<< HEAD
         AddService<IUIService>(new UIService());
-=======
->>>>>>> 3f2ccdb... Gotgot commit
     }
     
     private void Awake()

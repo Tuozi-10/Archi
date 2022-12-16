@@ -10,8 +10,6 @@ namespace Service.SceneService
 {
     public interface ISceneService : IService
     {
-
->>>>>>> 3f2ccdb... Gotgot commit
         void LoadScene(string key);
         void LoadScene(uint index);
     }
