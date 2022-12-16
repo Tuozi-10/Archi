@@ -1,4 +1,5 @@
-﻿using Addressables;
+﻿using System.Collections.Generic;
+using Addressables;
 using Attributes;
 using Service.AudioService;
 using Service.SceneService;
@@ -14,6 +15,8 @@ namespace Service
         [DependsOnService] 
         private ISceneService m_sceneService;
 
+        private List<GameObject> gameObjectDependency = new List<GameObject>();
+
         [ServiceInit]
         private void Initialize()
         {
@@ -27,14 +30,23 @@ namespace Service
         private void GenerateBurger(GameObject gameObject)
         {
             var burger = Object.Instantiate(gameObject);
+            gameObjectDependency.Add(burger);
             Release(gameObject);
         }
 
         private void CreateUI(GameObject gameObject)
         {
             var UI = Object.Instantiate(gameObject);
-            UI.GetComponent<UIManager>().Setup(m_sceneService);
+            gameObjectDependency.Add(UI);
+            UI.GetComponent<UIManager>().Setup(m_sceneService, this);
         }
-        
+
+        public void SwitchServiceState(bool state)
+        {
+            for (int i = 0; i < gameObjectDependency.Count; i++)
+            {
+                gameObjectDependency[i].SetActive(state);
+            }
+        }
     }
 }

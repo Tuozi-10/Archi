@@ -1,6 +1,6 @@
 ﻿namespace Service
 {
-    public interface IGameService : IService
+    public interface IGameService : ISwitchableService
     {
         
     }
