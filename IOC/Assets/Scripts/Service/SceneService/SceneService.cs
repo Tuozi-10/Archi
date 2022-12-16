@@ -12,18 +12,14 @@ public class SceneService : ISceneService
     [DependsOnService] 
     private IGameService m_gameService;
     
+    GameObject canvas;
+
+    private bool SwitchState;
+    
     [ServiceInit]
     private void Initialize()
     {
-        LoadScene(2);
-        AddressableHelper.LoadAssetAsyncWithCompletionHandler<GameObject>("Canvas", (obj) =>
-        {
-            var canvas = Object.Instantiate(obj);
-            canvas.name = "Canvas";
-            canvas.transform.GetChild(0).GetComponent<Button>().onClick.AddListener(() => m_gameService.ShowBurger()); 
-            canvas.transform.GetChild(0).GetComponent<Button>().onClick.AddListener(() => LoadScene(1)); 
-        });
-
+        SwitchState = false;
     }
     
     public void LoadScene(string sceneName)
@@ -34,5 +30,31 @@ public class SceneService : ISceneService
     public void LoadScene(int sceneIndex)
     {
         SceneManager.LoadScene(sceneIndex);
+    }
+
+    public void Switch()
+    {
+      if (SwitchState)
+          Enable();
+      else
+          Disable();
+      SwitchState = !SwitchState;
+    }
+
+    public void Enable()
+    {
+        LoadScene(2);
+        AddressableHelper.LoadAssetAsyncWithCompletionHandler<GameObject>("Canvas", (obj) =>
+        {
+            GameObject canvas = Object.Instantiate(obj);
+            canvas.name = "Canvas";
+            canvas.transform.GetChild(0).GetComponent<Button>().onClick.AddListener(() => m_gameService.ShowBurger()); 
+            canvas.transform.GetChild(0).GetComponent<Button>().onClick.AddListener(() => LoadScene(1)); 
+        });
+    }
+
+    public void Disable()
+    {
+        Object.Destroy(canvas);
     }
 }
