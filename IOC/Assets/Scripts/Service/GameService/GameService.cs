@@ -18,17 +18,10 @@ namespace Service
         [ServiceInit]
         private void Initialize()
         {
-<<<<<<< HEAD
-           m_audioService.PlaySound(0);
-           AddressableHelper.LoadAssetAsyncWithCompletionHandler<GameObject>("LeBurger", GenerateBurger);
-           AddressableHelper.LoadAssetAsyncWithCompletionHandler<GameObject>("UI", GenerateUI);
-           m_sceneService.LoadScene("UI");
-           
-=======
+
             m_audioService.PlaySound(0);
             AddressableHelper.LoadAssetAsyncWithCompletionHandler<GameObject>("LoadSceneCanvas", GenerateCanvas);
             m_sceneService.LoadScene(1);
->>>>>>> 3f2ccdb... Gotgot commit
         }
 
         private void GenerateCanvas(GameObject canvas)

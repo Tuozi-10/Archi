@@ -1,11 +1,5 @@
-<<<<<<< HEAD
-﻿using Service;
+using Service;
 
-public interface ISceneService : IService
-{
-    public interface ISceneService : IService
-    {
-=======
 namespace Service.SceneService
 {
     public interface ISceneService : IService
