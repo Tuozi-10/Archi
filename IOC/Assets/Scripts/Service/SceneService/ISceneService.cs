@@ -2,10 +2,9 @@
 
 public interface ISceneService : IService
 {
-
-    void LoadScene(int sceneKey);
-
-
-    void LoadScene(string sceneKey);
-
+    public interface ISceneService : IService
+    {
+        void LoadScene(string key);
+        void LoadScene(uint index);
+    }
 }
