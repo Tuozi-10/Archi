@@ -15,18 +15,14 @@ namespace Service
         private void Initialize()
         {
             m_audioService.PlaySound(0);
-           
+           AddressableHelper.LoadAssetAsyncWithCompletionHandler<GameObject>("LeBurger", GenerateBurger);
         }
-        
+
         private void GenerateBurger(GameObject gameObject)
         {
-            Object.Instantiate(gameObject);
+            var burger = Object.Instantiate(gameObject);
+            Release(gameObject);
         }
-
-        public void ShowBurger()
-        {
-            AddressableHelper.LoadAssetAsyncWithCompletionHandler<GameObject>("LeBurger", GenerateBurger);
-
-        }
+        
     }
 }
