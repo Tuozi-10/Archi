@@ -11,18 +11,24 @@ namespace Service
         [DependsOnService] 
         private IAudioService m_audioService;
 
+        private GameObject obj = null;
+
         [ServiceInit]
         private void Initialize()
         {
-            m_audioService.PlaySound(0);
+            //m_audioService.PlaySound(0);
            AddressableHelper.LoadAssetAsyncWithCompletionHandler<GameObject>("LeBurger", GenerateBurger);
         }
-
+        
         private void GenerateBurger(GameObject gameObject)
         {
-            var burger = Object.Instantiate(gameObject);
-            Release(gameObject);
+            obj = gameObject;
         }
-        
+
+        public void ShowBurger()
+        {
+            var burger = Object.Instantiate(obj);
+            Release(obj);
+        }
     }
 }
