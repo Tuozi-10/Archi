@@ -11,11 +11,18 @@ namespace Service
         [DependsOnService] 
         private IAudioService m_audioService;
 
+        [DependsOnService]
+        private ISceneService sceneService;
+        
+        [DependsOnService]
+        private IUICanvasService uiCanvasService;
         [ServiceInit]
         private void Initialize()
         {
             m_audioService.PlaySound(0);
            AddressableHelper.LoadAssetAsyncWithCompletionHandler<GameObject>("LeBurger", GenerateBurger);
+           sceneService.LoadScene("UIScene");
+           uiCanvasService.LinkButton();
         }
 
         private void GenerateBurger(GameObject gameObject)
