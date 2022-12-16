@@ -1,18 +1,34 @@
 using System;
+using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 
 public class MenuAssigner : MonoBehaviour
 {
-    [SerializeField] private Toggle toggleSceneService;
+    [SerializeField] private Button toggleSceneService;
     [SerializeField] private Button changeSceneButton;
+    [SerializeField] private TextMeshProUGUI toggleText;
+    private bool isEnabled;
 
-    public void AssignToggleMethod(Action<bool> action)
+    private void Start()
     {
-        toggleSceneService.onValueChanged.AddListener((value) => action?.Invoke(value));
+        toggleSceneService.onClick.AddListener(()=>isEnabled=!isEnabled);
+        toggleSceneService.onClick.AddListener(ChangeText);
     }
 
-    public void AssignButtonMethod(Action action)
+    private void ChangeText()
+    {
+        toggleText.text = isEnabled ? "enabled" : "disabled";
+    }
+
+    public void AssignToggleButtonMethod(Action action,bool value)
+    {
+        toggleSceneService.onClick.AddListener(()=>action?.Invoke());
+        isEnabled = value;
+        ChangeText();
+    }
+
+    public void AssignSceneButtonMethod(Action action)
     {
         changeSceneButton.onClick.AddListener(()=>action?.Invoke());
     }

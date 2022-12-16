@@ -14,6 +14,9 @@ namespace Service
         
         [DependsOnService] 
         private ISceneService m_sceneService;
+        
+        [DependsOnService] 
+        private IFightService m_fightService;
 
         [ServiceInit]
         private void Initialize()
@@ -26,6 +29,7 @@ namespace Service
         private void GenerateBurger(GameObject gameObject)
         {
             var burger = Object.Instantiate(gameObject);
+            m_fightService.SetFighter(burger);
             Release(gameObject);
         }
 
@@ -33,14 +37,14 @@ namespace Service
         {
             var menu = Object.Instantiate(menuObj).GetComponent<MenuAssigner>();
             
-            menu.AssignToggleMethod(SwitchSceneService);
+            menu.AssignToggleButtonMethod(SwitchSceneService,true);
 
-            void SwitchSceneService(bool value)
+            void SwitchSceneService()
             {
-                m_sceneService.Toggle();
+                m_fightService.Toggle();
             }
             
-            menu.AssignButtonMethod(()=>m_sceneService.LoadScene(0));
+            menu.AssignSceneButtonMethod(()=>m_fightService.Toggle());
             
             Release(menuObj);
         }

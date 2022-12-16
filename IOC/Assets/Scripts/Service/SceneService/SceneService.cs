@@ -6,13 +6,13 @@ namespace Service.SceneService
     {
         public void LoadScene(int sceneIndex)
         {
-            if(!isEnabled) return;
+            if(!enable) return;
             SceneManager.LoadScene(sceneIndex);
         }
 
         public void LoadScene(string sceneName)
         {
-            if(!isEnabled) return;
+            if(!enable) return;
             SceneManager.LoadScene(sceneName);
         }
     }
