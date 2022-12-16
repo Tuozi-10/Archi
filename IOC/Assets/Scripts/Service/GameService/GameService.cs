@@ -18,7 +18,7 @@ namespace Service
         [DependsOnService] 
         private IFightService m_fightService;
 
-        [ServiceInit]
+        //[ServiceInit]
         private void Initialize()
         {
             m_audioService.PlaySound(0);
@@ -48,6 +48,5 @@ namespace Service
             
             Release(menuObj);
         }
-
     }
 }

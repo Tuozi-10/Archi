@@ -7,12 +7,15 @@ using Exception;
 using Service;
 using UnityEngine;
 using System.Runtime.CompilerServices;
+using System.Threading.Tasks;
 using Cysharp.Threading.Tasks;
 using Service.AudioService;
 using Service.SceneService;
 
 public class Compositor : MonoBehaviour
 {
+    [SerializeField] private float ticksPerSecond = 60;
+    
     protected struct FieldEntry
     {
         public object dependant;
@@ -21,6 +24,7 @@ public class Compositor : MonoBehaviour
 
     protected readonly Dictionary<Type, IService> m_services = new Dictionary<Type, IService>();
     protected readonly Dictionary<Type, List<FieldEntry>> m_dependencySlots = new Dictionary<Type, List<FieldEntry>>();
+    protected event Action onTickAction;
 
     private bool ResolveDependencies()
     {
@@ -58,7 +62,7 @@ public class Compositor : MonoBehaviour
     {
         CollectDependenciesOnType(newSystem.GetType(), newSystem);
     }
-    
+
     private void CollectDependenciesOnType(Type type, object @obj)
     {
         // search through the fields for any ones marked [DependsOnService]
@@ -107,10 +111,11 @@ public class Compositor : MonoBehaviour
         {
             throw new DuplicateServiceException(typeof(T), m_services[typeof(T)], service);
         }
+
         CollectDependencies(service);
         m_services[typeof(T)] = service;
     }
-    
+
     /// <summary>
     /// Goes through the list of services calling any void() methods marked with [ServiceInit],
     /// and calls these methods (for initializing message subscriptions and such)
@@ -128,66 +133,82 @@ public class Compositor : MonoBehaviour
             {
                 ServiceInitAttribute[] initAttributes =
                     (ServiceInitAttribute[])Attribute.GetCustomAttributes(methodInfo, typeof(ServiceInitAttribute));
-                if (initAttributes.Length == 0)
-                    continue;
-
-                foreach (ServiceInitAttribute _ in initAttributes)
+                if (initAttributes.Length > 0)
                 {
-                    if (methodInfo.GetParameters().Length > 0)
+                    foreach (ServiceInitAttribute _ in initAttributes)
                     {
-                        throw new ArgumentException(
-                            "[ServiceInit] attribute can only be applied to methods with no arguments");
-                    }
+                        if (methodInfo.GetParameters().Length > 0)
+                        {
+                            throw new ArgumentException(
+                                "[ServiceInit] attribute can only be applied to methods with no arguments");
+                        }
 
+                        if (methodInfo.ReturnType == typeof(void))
+                        {
+                            methodInfo.Invoke(service, null);
+                        }
+                        else if (methodInfo.ReturnType == typeof(UniTaskVoid))
+                        {
+                            if ((AsyncStateMachineAttribute)methodInfo.GetCustomAttribute(
+                                    typeof(AsyncStateMachineAttribute)) != null)
+                            {
+                                // if method is async, let's dispatch a UniTask without observing any return value
+                                ((UniTaskVoid)methodInfo.Invoke(service, null)).Forget();
+                            }
+                            else
+                            {
+                                throw new ArgumentException(
+                                    $"[ServiceInit] UniTaskVoid method {serviceType.Name}::{methodInfo.Name} needs to be tagged as async");
+                            }
+                        }
+                        else if (methodInfo.ReturnType == typeof(UniTask))
+                        {
+                            if ((AsyncStateMachineAttribute)methodInfo.GetCustomAttribute(
+                                    typeof(AsyncStateMachineAttribute)) != null)
+                            {
+                                // if method is async, let's dispatch & await it, in case it has dependencies
+                                var task = (UniTask)methodInfo.Invoke(service, null);
+                                await task;
+                            }
+                            else
+                            {
+                                throw new ArgumentException(
+                                    $"[ServiceInit] UniTask method {serviceType.Name}::{methodInfo.Name} needs to be tagged as async");
+                            }
+                        }
+                        else if (methodInfo.ReturnType == typeof(IEnumerator))
+                        {
+                            var enumerator = (IEnumerator)methodInfo.Invoke(service, null);
+
+                            await UniTask.WaitUntil(() => !enumerator.MoveNext());
+                        }
+                        else
+                        {
+                            throw new ArgumentException(
+                                $"[ServiceInit] attribute can only be applied to methods with return types void, async UniTaskVoid or IEnumerator - {methodInfo.ReturnType.Name} {serviceType.Name}::{methodInfo.Name}(...) was not one of these");
+                        }
+                    }
+                }
+
+
+                OnTickAttribute[] tickAttributes = (OnTickAttribute[])Attribute.GetCustomAttributes(methodInfo, typeof(OnTickAttribute));
+                
+                if (tickAttributes.Length > 0)
+                {
                     if (methodInfo.ReturnType == typeof(void))
                     {
-                        methodInfo.Invoke(service, null);
-                    }
-                    else if (methodInfo.ReturnType == typeof(UniTaskVoid))
-                    {
-                        if ((AsyncStateMachineAttribute)methodInfo.GetCustomAttribute(
-                                typeof(AsyncStateMachineAttribute)) != null)
-                        {
-                            // if method is async, let's dispatch a UniTask without observing any return value
-                            ((UniTaskVoid)methodInfo.Invoke(service, null)).Forget();
-                        }
-                        else
-                        {
-                            throw new ArgumentException(
-                                $"[ServiceInit] UniTaskVoid method {serviceType.Name}::{methodInfo.Name} needs to be tagged as async");
-                        }
-                    }
-                    else if (methodInfo.ReturnType == typeof(UniTask))
-                    {
-                        if ((AsyncStateMachineAttribute)methodInfo.GetCustomAttribute(
-                                typeof(AsyncStateMachineAttribute)) != null)
-                        {
-                            // if method is async, let's dispatch & await it, in case it has dependencies
-                            var task = (UniTask)methodInfo.Invoke(service, null);
-                            await task;
-                        }
-                        else
-                        {
-                            throw new ArgumentException(
-                                $"[ServiceInit] UniTask method {serviceType.Name}::{methodInfo.Name} needs to be tagged as async");
-                        }
-                    }
-                    else if (methodInfo.ReturnType == typeof(IEnumerator))
-                    {
-                        var enumerator = (IEnumerator)methodInfo.Invoke(service, null);
+                        onTickAction += InvokeMethod;
 
-                        await UniTask.WaitUntil(() => !enumerator.MoveNext());
-                    }
-                    else
-                    {
-                        throw new ArgumentException(
-                            $"[ServiceInit] attribute can only be applied to methods with return types void, async UniTaskVoid or IEnumerator - {methodInfo.ReturnType.Name} {serviceType.Name}::{methodInfo.Name}(...) was not one of these");
+                        void InvokeMethod()
+                        {
+                            methodInfo.Invoke(service, null);
+                        }
                     }
                 }
             }
         }
     }
-    
+
     private void CreateAndWireObjects()
     {
         AddService<IGameService>(new GameService());
@@ -195,7 +216,7 @@ public class Compositor : MonoBehaviour
         AddService<ISceneService>(new SceneService());
         AddService<IFightService>(new FightService());
     }
-    
+
     private void Awake()
     {
         InitCompositor().Forget();
@@ -204,7 +225,7 @@ public class Compositor : MonoBehaviour
     private async UniTaskVoid InitCompositor()
     {
         bool composed = await Compose();
-			
+
         // do the composition
         if (composed)
         {
@@ -213,19 +234,39 @@ public class Compositor : MonoBehaviour
         }
         else
         {
-           Debug.LogError($"Composition in {gameObject.name} failed to sort dependencies - systems won't be started!");
+            Debug.LogError($"Composition in {gameObject.name} failed to sort dependencies - systems won't be started!");
+        }
+
+        await Tick();
+    }
+
+    private async Task Tick()
+    {
+        double timeSinceLastTick = Time.time;
+        double currentTime = Time.time;
+        
+        while (true)
+        {
+            await UniTask.DelayFrame(0);
+            currentTime += Time.deltaTime;
+            if (currentTime - timeSinceLastTick >= 1 / ticksPerSecond)
+            {
+                timeSinceLastTick = currentTime;
+                onTickAction?.Invoke();
+            }
         }
     }
-    
+
+
     protected virtual async UniTask<bool> Compose()
     {
         CreateAndWireObjects();
-        
+
         if (!ResolveDependencies())
         {
             throw new System.Exception("Failed to resolve dependencies");
         }
-        
+
         await InitializeServices();
         return true;
     }
