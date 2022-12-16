@@ -1,7 +1,6 @@
 public class SwitchableService : ISwitchableService
 {
-    private bool enable;
-    protected bool isEnabled => enable;
+    public bool enable { get; private set; }
 
     public virtual void Toggle()
     {
