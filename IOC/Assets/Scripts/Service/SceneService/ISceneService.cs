@@ -1,7 +1,7 @@
 using Service;
 using UnityEngine.SceneManagement;
 
-public interface ISceneService : IService
+public interface ISceneService : ISwitchableService
 {
     void LoadScene(string sceneName);
 
