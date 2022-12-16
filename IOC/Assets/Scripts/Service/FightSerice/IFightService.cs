@@ -1,7 +1,9 @@
-﻿namespace Service.FightSerice
+﻿using System;
+
+namespace Service.FightSerice
 {
-    public interface IFightService
+    public interface IFightService : ISwitchableService
     {
-        
+        public Action OnFightAction { get; set; }
     }
 }

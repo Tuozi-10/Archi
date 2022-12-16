@@ -1,52 +1,64 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using Addressables;
 using Attributes;
+using Cysharp.Threading.Tasks;
 using Service.AudioService;
 using Service.SceneService;
+using Service.TickService;
 using UnityEngine;
 using static UnityEngine.AddressableAssets.Addressables;
+using Object = UnityEngine.Object;
 
 namespace Service
 {
     public class GameService : IGameService
     {
+        
+        
         [DependsOnService] 
         private IAudioService m_audioService;
         [DependsOnService] 
         private ISceneService m_sceneService;
+        [DependsOnService] 
+        private ITickService m_tickService;
 
         private List<GameObject> gameObjectDependency = new List<GameObject>();
+        private bool currentServiceState = true;
 
         [ServiceInit]
         private void Initialize()
         {
             m_audioService.PlaySound(0);
            m_sceneService.LoadScene("New Scene");
-           AddressableHelper.LoadAssetAsyncWithCompletionHandler<GameObject>("LeBurger", GenerateBurger); 
-           AddressableHelper.LoadAssetAsyncWithCompletionHandler<GameObject>("UI", CreateUI); 
-           //AddressableHelper.LoadAssetAsyncWithCompletionHandler<GameObject>("Cubator", );
+           AddressableHelper.LoadAssetAsyncWithCompletionHandler<GameObject>("LeBurger", GenerateBurger);
         }
+
+        
 
         private void GenerateBurger(GameObject gameObject)
         {
             var burger = Object.Instantiate(gameObject);
+            var burgerMod = burger.GetComponent<BurgerModifier>();
+            burgerMod.Setup(this, m_tickService);
             gameObjectDependency.Add(burger);
             Release(gameObject);
         }
 
-        private void CreateUI(GameObject gameObject)
-        {
-            var UI = Object.Instantiate(gameObject);
-            gameObjectDependency.Add(UI);
-            UI.GetComponent<UIManager>().Setup(m_sceneService, this);
-        }
+        
 
-        public void SwitchServiceState(bool state)
+        public void SetServiceState(bool state)
         {
+            currentServiceState = state;
             for (int i = 0; i < gameObjectDependency.Count; i++)
             {
                 gameObjectDependency[i].SetActive(state);
             }
+        }
+
+        public void SwitchServiceState()
+        {
+            SetServiceState(!currentServiceState);
         }
     }
 }

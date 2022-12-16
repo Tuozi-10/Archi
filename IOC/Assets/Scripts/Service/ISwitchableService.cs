@@ -4,6 +4,8 @@ namespace Service
 {
     public interface ISwitchableService : IService
     {
-        public void SwitchServiceState(bool state);
+        public void SetServiceState(bool state);
+        public void SwitchServiceState();
+        
     }
 }
