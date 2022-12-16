@@ -7,4 +7,9 @@ public interface ISwitchableService
     void Toggle(bool active);
     void Enable();
     void Disable();
+
+    bool isActive
+    {
+        get;
+    }
 }

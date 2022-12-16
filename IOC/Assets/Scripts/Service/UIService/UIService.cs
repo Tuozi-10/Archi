@@ -4,39 +4,26 @@ using UnityEngine;
 
 namespace Service.UIService
 {
-    public class UIService : IUIService
+    public class UIService : SwitchableService, IUIService
     {
-        private GameObject guiCanvas;
-        
-        [ServiceInit]
-        private void Initialize()
-        {
-            
-        }
-        
-        public void Toggle(bool active)
-        {
-            if (active)
-            {
-                Enable();
-                return;
-            }
-            Disable();
-        }
+    private GameObject guiCanvas;
 
-        public void Enable()
-        {
-            guiCanvas.SetActive(true);
-        }
+    [ServiceInit]
+    private void Initialize() { }
 
-        public void Disable()
-        {
-            guiCanvas.SetActive(false);
-        }
+    public override void Enable()
+    {
+        guiCanvas.SetActive(true);
+    }
 
-        public void SetInGameCanvas(GameObject g)
-        {
-            guiCanvas = g;
-        }
+    public override void Disable()
+    {
+        guiCanvas.SetActive(false);
+    }
+
+    public void SetInGameCanvas(GameObject g)
+    {
+        guiCanvas = g;
+    }
     }
 }
