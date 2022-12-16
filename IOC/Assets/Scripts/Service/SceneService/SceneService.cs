@@ -2,7 +2,7 @@ using UnityEngine.SceneManagement;
 
 namespace Service
 {
-    public class SceneService : ISceneService
+    public class SceneService : SwitchableService, ISceneService
     {
         public void LoadScene(int sceneIndex)
         {
@@ -12,6 +12,21 @@ namespace Service
         public void LoadScene(string sceneName)
         {
             SceneManager.LoadScene(sceneName);
+        }
+        
+        void Switch()
+        {
+            
+        }
+
+        void Enable()
+        {
+            base.Enable();
+        }
+
+        void Disable()
+        {
+            base.Disable();
         }
     }
 }
