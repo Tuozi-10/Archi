@@ -2,7 +2,6 @@
 using Attributes;
 using Service.AudioService;
 using Service.SceneService;
-using Unity.VisualScripting;
 using UnityEngine;
 using static UnityEngine.AddressableAssets.Addressables;
 
@@ -38,14 +37,7 @@ namespace Service
 
             void SwitchSceneService(bool value)
             {
-                if (value)
-                {
-                    m_sceneService.Enable();
-                }
-                else
-                {
-                    m_sceneService.Disable();
-                }
+                m_sceneService.Toggle();
             }
             
             menu.AssignButtonMethod(()=>m_sceneService.LoadScene(0));
