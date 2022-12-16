@@ -21,6 +21,14 @@ MonoBehaviour:
     m_Address: LeBurger
     m_ReadOnly: 0
     m_SerializedLabels: []
+  - m_GUID: 783e4a133e2db714c88f4e5eab5ba5c4
+    m_Address: Canvas
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+  - m_GUID: 08d11e7e9dee58647871886f54a83b19
+    m_Address: Minion
+    m_ReadOnly: 0
+    m_SerializedLabels: []
   m_ReadOnly: 0
   m_Settings: {fileID: 11400000, guid: f85571e7fcd70ac4190d36e8b6377275, type: 2}
   m_SchemaSet:

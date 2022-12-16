@@ -4,19 +4,24 @@ using UnityEngine;
 
 public class SwitchableService : ISwitchableService
 {
-    bool Switchable = false;
+    protected bool Switchable = false;
     
-    public void Switch()
+    public virtual void Switch()
     {
         Switchable = !Switchable;
     }
 
-    public void Enable()
+    public virtual void Enable()
     {
-        
+        Switchable = true;
+    }
+    
+    public virtual void Disable()
+    {
+        Switchable = false;
     }
 
-    public void Disable()
+    public virtual void OnTick(float deltaTime)
     {
         
     }

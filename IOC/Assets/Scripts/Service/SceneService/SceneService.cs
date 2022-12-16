@@ -10,7 +10,7 @@ using UnityEngine.UI;
 public class SceneService : ISceneService
 {
     [DependsOnService] 
-    private IGameService m_gameService;
+    private IFightService m_fightService;
     
     GameObject canvas;
 
@@ -19,7 +19,8 @@ public class SceneService : ISceneService
     [ServiceInit]
     private void Initialize()
     {
-        SwitchState = false;
+        SwitchState = true;
+        Switch();
     }
     
     public void LoadScene(string sceneName)
@@ -48,13 +49,18 @@ public class SceneService : ISceneService
         {
             GameObject canvas = Object.Instantiate(obj);
             canvas.name = "Canvas";
-            canvas.transform.GetChild(0).GetComponent<Button>().onClick.AddListener(() => m_gameService.ShowBurger()); 
-            canvas.transform.GetChild(0).GetComponent<Button>().onClick.AddListener(() => LoadScene(1)); 
+            canvas.transform.GetChild(0).GetComponent<Button>().onClick.AddListener(() => m_fightService.Enable());
+            canvas.transform.GetChild(0).GetComponent<Button>().onClick.AddListener(() => LoadScene(1));
         });
     }
 
     public void Disable()
     {
         Object.Destroy(canvas);
+    }
+
+    public void OnTick(float deltaTime)
+    {
+        
     }
 }

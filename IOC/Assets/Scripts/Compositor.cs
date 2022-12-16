@@ -192,6 +192,7 @@ public class Compositor : MonoBehaviour
         AddService<IGameService>(new GameService());
         AddService<IAudioService>(new AudioService());
         AddService<ISceneService>(new SceneService());
+        AddService<IFightService>(new FightService());
     }
     
     private void Awake()
