@@ -16,7 +16,15 @@ MonoBehaviour:
   m_Data:
     m_SerializedData: []
   m_GUID: cfc773dd76c0f3a48977eb26cd7b6137
-  m_SerializeEntries: []
+  m_SerializeEntries:
+  - m_GUID: b2a2d4226c5af8445b13546e1bb7251c
+    m_Address: LeBurger
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+  - m_GUID: 15e3685347ec63442817858e71e533b6
+    m_Address: Menu
+    m_ReadOnly: 0
+    m_SerializedLabels: []
   m_ReadOnly: 0
   m_Settings: {fileID: 11400000, guid: f85571e7fcd70ac4190d36e8b6377275, type: 2}
   m_SchemaSet:
