@@ -8,15 +8,15 @@ using UnityEngine;
 
 public class LoadSceneCanvasManager : MonoBehaviour
 {
-    [DependsOnService] private ISceneService m_sceneService;
+    [DependsOnService] private IGameService m_gameService;
 
-    public void AssignService(ISceneService service)
+    public void AssignService(IGameService gs)
     {
-        m_sceneService = service;
+        m_gameService = gs;
     }
     
     public void OnPlay()
     {
-        m_sceneService.LoadScene(2);
+        m_gameService.InitializeInGameScene();
     }
 }
