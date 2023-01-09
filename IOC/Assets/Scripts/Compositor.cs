@@ -25,7 +25,8 @@ public class Compositor : MonoBehaviour
     protected readonly Dictionary<Type, IService> m_services = new Dictionary<Type, IService>();
     protected readonly Dictionary<Type, List<FieldEntry>> m_dependencySlots = new Dictionary<Type, List<FieldEntry>>();
 
-    private bool ResolveDependencies()
+    // 5
+    private bool  ResolveDependencies()
     {
         foreach (KeyValuePair<Type, List<FieldEntry>> slotsForType in m_dependencySlots)
         {
@@ -80,9 +81,7 @@ public class Compositor : MonoBehaviour
                 if (field.FieldType.IsInterface && typeof(IService).IsAssignableFrom(field.FieldType) &&
                     field.FieldType != typeof(IService))
                 {
-                    List<FieldEntry> dependentFields = m_dependencySlots.ContainsKey(field.FieldType)
-                        ? m_dependencySlots[field.FieldType]
-                        : new List<FieldEntry>();
+                    List<FieldEntry> dependentFields = m_dependencySlots.ContainsKey(field.FieldType) ? m_dependencySlots[field.FieldType] : new List<FieldEntry>();
                     dependentFields.Add(new FieldEntry
                     {
                         dependant = @obj,
@@ -191,6 +190,7 @@ public class Compositor : MonoBehaviour
         }
     }
     
+    // 4
     private void CreateAndWireObjects()
     {
         AddService<IGameService>(new GameService());
@@ -201,11 +201,13 @@ public class Compositor : MonoBehaviour
         AddService<IFightService>(new FightService());
     }
     
+    // 1
     private void Awake()
     {
         InitCompositor().Forget();
     }
 
+    // 2
     private async UniTaskVoid InitCompositor()
     {
         bool composed = await Compose();
@@ -222,6 +224,7 @@ public class Compositor : MonoBehaviour
         }
     }
     
+    // 3
     protected virtual async UniTask<bool> Compose()
     {
         CreateAndWireObjects();

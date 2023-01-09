@@ -25,6 +25,22 @@ MonoBehaviour:
     m_Address: Assets/Prefabs/Cubator.prefab
     m_ReadOnly: 0
     m_SerializedLabels: []
+  - m_GUID: c86d37998a99fe64794e61301ac77c13
+    m_Address: UI
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+  - m_GUID: 9731c9993a0524e4e87c5fbe7fa30a2c
+    m_Address: Assets/Art/Prefabs/Enemy Spawner.prefab
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+  - m_GUID: e6595207779be3943a79b62793f02761
+    m_Address: MainPlayerSO
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+  - m_GUID: 7f3213cbb60c8574c81d39ec9c6bf4ae
+    m_Address: Player
+    m_ReadOnly: 0
+    m_SerializedLabels: []
   m_ReadOnly: 0
   m_Settings: {fileID: 11400000, guid: f85571e7fcd70ac4190d36e8b6377275, type: 2}
   m_SchemaSet:
