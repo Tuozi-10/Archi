@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using Addressables;
 using Attributes;
 using HelperPSR.Pool;
+using HelperPSR.UI;
 using Service.AudioService;
 using UnityEngine;
 using UnityEngine.Events;
@@ -40,7 +41,13 @@ namespace Service
 
         private void InitPopUpPool(GameObject gameObject)
         {
-            popUpPool = new Pool<PopUp>(gameObject.GetComponent<PopUp>(), 10, popUpCanvas.gameObject.transform);
+            popUpPool = new Pool<PopUp>(gameObject.GetComponent<PopUp>(), 10,
+                (element) =>
+                {
+                    element.transform.SetParent(popUpCanvas.gameObject.transform);
+                    RectTransform rectTransform = element.GetComponent<RectTransform>(); 
+                    rectTransform.anchoredPosition = Vector2.zero;
+                });
             for (int i = 0; i < 10; i++)
             {
                 EnqueuePopUpData(new PopUpData("Test", "Description", Random.ColorHSV()));
@@ -65,16 +72,15 @@ namespace Service
         {
             currentPopUpPrinted = popUpPool.GetFromPool().GetComponent<PopUp>();
             currentPopUpPrinted.InitPopUp(popUpsNeededToPrint.Dequeue(), EndPopUp);
-            popUpsNeededToPrint.Dequeue();
         }
 
         private void EndPopUp(PopUp popUp)
         {
             popUpPool.AddToPool(popUp);
             currentPopUpPrinted = null;
-            if(popUpsNeededToPrint.Count != 0) DequeuePopUpData();
+            if (popUpsNeededToPrint.Count != 0) DequeuePopUpData();
         }
-        
+
         private void GenerateMainMenu(GameObject gameObject)
         {
             var canvasObject = Object.Instantiate(gameObject);

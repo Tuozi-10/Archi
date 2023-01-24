@@ -34,7 +34,7 @@ public class PopUp : MonoBehaviour
    async void Stay(Action<PopUp> endPopUp)
    {
        await UniTask.Delay(stayPopUpTime, DelayType.Realtime); 
-       transform.DOScale(0, exitPopUpTime).SetEase(Ease.Linear).OnComplete(()=>endPopUp(this));
+       transform.DOScale(0, exitPopUpTime).SetEase(Ease.OutBack).OnComplete(()=>endPopUp(this));
    }
 
    void ResetPopUp()
