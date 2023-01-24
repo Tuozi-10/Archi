@@ -29,6 +29,10 @@ MonoBehaviour:
     m_Address: InGameCanvas
     m_ReadOnly: 0
     m_SerializedLabels: []
+  - m_GUID: 0595bb214cb6af94184206383d29d25e
+    m_Address: Entity01
+    m_ReadOnly: 0
+    m_SerializedLabels: []
   m_ReadOnly: 0
   m_Settings: {fileID: 11400000, guid: f85571e7fcd70ac4190d36e8b6377275, type: 2}
   m_SchemaSet:

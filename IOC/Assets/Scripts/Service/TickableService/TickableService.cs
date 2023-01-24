@@ -1,9 +1,5 @@
-using System.Collections;
-using System.Collections.Generic;
-using Addressables;
 using Attributes;
 using Cysharp.Threading.Tasks;
-using Cysharp.Threading.Tasks.Triggers;
 using Service;
 using Service.FightService;
 using Service.TickableService;
@@ -38,7 +34,6 @@ public class TickableService : SwitchableService, ITickableService
 
     protected virtual void OnUpdate()
     {
-        Debug.Log(deltaTime);
         m_fightService.RotateFighter();
 
         if (timer >= duration)

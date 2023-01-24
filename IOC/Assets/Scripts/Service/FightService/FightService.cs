@@ -20,13 +20,20 @@ public class FightService : SwitchableService, IFightService
     void GenerateEntity(GameObject go)
     {
         var obj = Object.Instantiate(go);
+        
         obj.SetActive(isActive);
+        
         var pos = Random.insideUnitSphere * 15;
         pos.y = 1;
         obj.transform.position = pos;
+        
         entities.Add(obj);
+        
+        obj.GetComponent<EntityData>().Initialization();
+
         Release(go);
     }
+
 
     public override void Enable()
     {
