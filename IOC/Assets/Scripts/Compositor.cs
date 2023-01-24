@@ -12,7 +12,7 @@ using Cysharp.Threading.Tasks;
 using Service.AudioService;
 using Service.SceneService;
 
-public class Compositor : MonoBehaviour
+public class Compositor : MonoSingleton<Compositor>
 {
     [SerializeField] private float ticksPerSecond = 60;
     private double currentTime = 0;
@@ -216,6 +216,7 @@ public class Compositor : MonoBehaviour
         AddService<IAudioService>(new AudioService());
         AddService<ISceneService>(new SceneService());
         AddService<IFightService>(new FightService());
+        AddService<IUIService>(new UIService());
     }
 
     private void Awake()

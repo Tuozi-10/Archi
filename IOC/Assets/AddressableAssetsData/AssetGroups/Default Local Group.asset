@@ -29,6 +29,30 @@ MonoBehaviour:
     m_Address: Enemy
     m_ReadOnly: 0
     m_SerializedLabels: []
+  - m_GUID: ac0cfc950efc35f4b9f54f5c2fc8a6b8
+    m_Address: UIMenu
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+  - m_GUID: cb8ee96ba0f746e42bbaf945bfcfa83e
+    m_Address: Averell
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+  - m_GUID: 6ca2069d5acfe8449ad3c97dec911ede
+    m_Address: Jack
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+  - m_GUID: 9d2abf355bc69944b9bdd25c094a8d36
+    m_Address: Joe
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+  - m_GUID: 6f672f336429a1a45a1677e0f1de2333
+    m_Address: William
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+  - m_GUID: ff756249e4d15724db434aa0b4724e5d
+    m_Address: PopUp
+    m_ReadOnly: 0
+    m_SerializedLabels: []
   m_ReadOnly: 0
   m_Settings: {fileID: 11400000, guid: f85571e7fcd70ac4190d36e8b6377275, type: 2}
   m_SchemaSet:

@@ -46,7 +46,7 @@ public class FightService : SwitchableService,IFightService
     {
         timeSinceLastTime = Time.time;
         currentTickTime = timeSinceLastTime;
-        m_sceneService.LoadScene(0);
+        m_sceneService.LoadScene(1);
         AddressableHelper.LoadAssetAsyncWithCompletionHandler<GameObject>("Enemy", LoadEnemyPrefab);
         scriptableEnemies.Clear();
         foreach (var t in enemyNames)
