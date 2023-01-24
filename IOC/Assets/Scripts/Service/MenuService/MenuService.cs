@@ -1,12 +1,19 @@
 using Addressables;
+using Attributes;
+using Service.SceneService;
+using UI;
 using UnityEngine;
 using static UnityEngine.AddressableAssets.Addressables;
 
-namespace Service.MenuService
+namespace Service
 {
     public class MenuService : IMenuService
     {
+        [DependsOnService]
+        private ISceneService sceneService;
+        
         private GameObject menuGo;
+        private UIMenu uiMenu;
         
         public void LoadMenu()
         {
@@ -16,7 +23,10 @@ namespace Service.MenuService
         private void LoadMenuPrefab(GameObject prefab)
         {
             menuGo = prefab;
-            Object.Instantiate(menuGo);
+            uiMenu = Object.Instantiate(menuGo).GetComponent<UIMenu>();
+
+            //uiMenu.playButton.onClick.AddListener(() => sceneService.LoadScene(1));
+            
             Release(prefab);
         }
     }

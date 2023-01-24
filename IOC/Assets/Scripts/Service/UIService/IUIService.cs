@@ -1,6 +1,14 @@
-using Service;
+using UnityEngine;
 
-public interface IUIService : IService
+namespace Service.UIService
 {
-    public void LoadUI();
+    public interface IUIService : IService
+    {
+        public Transform staticCanvas { get;}
+        public Transform updateCanvas { get;}
+        
+        public void LoadUI();
+    }
 }
+
+

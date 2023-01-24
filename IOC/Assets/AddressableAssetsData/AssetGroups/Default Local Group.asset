@@ -49,6 +49,14 @@ MonoBehaviour:
     m_Address: MenuUI
     m_ReadOnly: 0
     m_SerializedLabels: []
+  - m_GUID: 0b1496a171ba7ce4cbc10459a46fe185
+    m_Address: Canvas
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+  - m_GUID: b90ca6e4f83b645499a8c399a2d62399
+    m_Address: PopUp
+    m_ReadOnly: 0
+    m_SerializedLabels: []
   m_ReadOnly: 0
   m_Settings: {fileID: 11400000, guid: f85571e7fcd70ac4190d36e8b6377275, type: 2}
   m_SchemaSet:

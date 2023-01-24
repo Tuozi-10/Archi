@@ -1,9 +1,7 @@
 ﻿using Addressables;
 using Attributes;
 using Service.AudioService;
-using Service.SceneService;
-using UnityEngine;
-using static UnityEngine.AddressableAssets.Addressables;
+using Service.UIService;
 
 namespace Service
 {

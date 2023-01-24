@@ -1,13 +1,38 @@
+using Addressables;
 using Attributes;
+using Service.PopUpService;
+using UnityEngine;
+using static UnityEngine.AddressableAssets.Addressables;
 
-public class UIService : IUIService
+namespace Service.UIService
 {
-    [DependsOnService]
-    private IMenuService menuService;
-    
-    
-    public void LoadUI()
+    public class UIService : IUIService
     {
-        menuService.LoadMenu();
+        //[DependsOnService]
+        //private IMenuService menuService;
+
+        [DependsOnService]
+        private IPopUpService popUpService;
+        
+        public Transform staticCanvas { get; private set; }
+        public Transform updateCanvas { get; private set; }
+
+        public void LoadUI()
+        {
+            //menuService.LoadMenu();
+            //AddressableHelper.LoadAssetAsyncWithCompletionHandler<GameObject>("MenuUI", LoadCanvas);
+            AddressableHelper.LoadAssetAsyncWithCompletionHandler<GameObject>("Canvas", LoadCanvas);
+        }
+
+        private void LoadCanvas(GameObject asset)
+        {
+            staticCanvas = Object.Instantiate(asset).transform;
+            updateCanvas = Object.Instantiate(asset).transform;
+            Release(asset);
+            
+            popUpService.LoadPopUp();
+        }
     }
 }
+
+

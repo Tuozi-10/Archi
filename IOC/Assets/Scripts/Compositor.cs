@@ -9,7 +9,9 @@ using UnityEngine;
 using System.Runtime.CompilerServices;
 using Cysharp.Threading.Tasks;
 using Service.AudioService;
-using Service.MenuService;
+using Service.PopUpService;
+using Service.SceneService;
+using Service.UIService;
 
 public class Compositor : MonoBehaviour
 {
@@ -215,11 +217,14 @@ public class Compositor : MonoBehaviour
         
         AddService<IAudioService>(new AudioService());
         
-        AddService<IMenuService>(new MenuService());
+        //AddService<IMenuService>(new MenuService());
         
         AddService<IUIService>(new UIService());
         
-        //AddService<ISceneService>(new SceneService());
+        AddService<ISceneService>(new SceneService());
+        
+        AddService<IPopUpService>(new PopUpService());
+        
         //AddService<IFightService>(new FightService());
     }
 

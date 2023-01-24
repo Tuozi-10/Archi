@@ -6,6 +6,9 @@ EditorBuildSettings:
   serializedVersion: 2
   m_Scenes:
   - enabled: 1
+    path: Assets/Scenes/Yoink.unity
+    guid: 39bb0492f0217da41808febbf7066970
+  - enabled: 1
     path: Assets/Scenes/SuperScene.unity
     guid: 27dfd03820be59c448f9927931a97d9e
   m_configObjects:
