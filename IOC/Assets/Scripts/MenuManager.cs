@@ -10,6 +10,7 @@ public class MenuManager : MonoBehaviour
     [SerializeField] private Button buttonHide;
     [SerializeField] private Button buttonToggle;
     [SerializeField] private Button buttonHideMenu;
+    [SerializeField] private Button popupButton;
     [SerializeField] private Image imageMenu;
     
     [DependsOnService]
@@ -27,6 +28,7 @@ public class MenuManager : MonoBehaviour
         buttonHide.onClick.AddListener(() => m_fightService.Toggle());
         buttonToggle.onClick.AddListener(OpenLeftMenu);
         buttonHideMenu.onClick.AddListener(HideLeftMenu);
+        popupButton.onClick.AddListener(CreateError);
     }
 
     private void HideLeftMenu()
@@ -35,13 +37,21 @@ public class MenuManager : MonoBehaviour
         buttonHideMenu.transform.DOScale(0.75f, 0.25f).SetEase(Ease.OutBack).OnComplete(() => buttonHideMenu.transform.DOScale(1f, 0.25f));
         buttonToggle.transform.DOKill();
         buttonToggle.transform.DOScale(1f, 0.25f).SetEase(Ease.OutBack);
-        imageMenu.transform.DOMoveX(-500f, 0.25f).SetEase(Ease.OutBack);
+        imageMenu.rectTransform.DOMoveX(-800f, 0.25f).SetEase(Ease.OutBack);
     }
 
     private void OpenLeftMenu()
     {
         buttonToggle.transform.DOKill();
         buttonToggle.transform.DOScale(0f, 0.25f).SetEase(Ease.OutBack);
-        imageMenu.transform.DOMoveX(50, 0.25f).SetEase(Ease.OutBack);
+        imageMenu.rectTransform.DOMoveX(0f, 0.25f).SetEase(Ease.OutBack);
     }
+
+    private void CreateError()
+    {
+        OnErrorFound?.Invoke();
+    }
+    
+    public delegate void NoParameterDelegate();
+    public static event NoParameterDelegate OnErrorFound;
 }

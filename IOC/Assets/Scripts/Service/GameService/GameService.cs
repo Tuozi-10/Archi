@@ -26,6 +26,7 @@ namespace Service
             m_audioService.PlaySound(0);
             m_sceneService.LoadScene("FirstScene");
             m_uiService.DisplayMainMenu();
+            m_uiService.CallPopup();
             // AddressableHelper.LoadAssetAsyncWithCompletionHandler<GameObject>("LeBurger", GenerateBurger);
             // AddressableHelper.LoadAssetAsyncWithCompletionHandler<GameObject>("LeCanvas", GenerateCanvas);
         }
