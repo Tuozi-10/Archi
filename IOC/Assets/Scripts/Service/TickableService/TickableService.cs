@@ -34,7 +34,7 @@ public class TickableService : SwitchableService, ITickableService
 
     protected virtual void OnUpdate()
     {
-        m_fightService.RotateFighter();
+        //m_fightService.RotateFighter();
 
         if (timer >= duration)
         {

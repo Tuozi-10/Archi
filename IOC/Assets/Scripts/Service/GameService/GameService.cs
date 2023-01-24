@@ -26,6 +26,7 @@ namespace Service
             m_audioService.PlaySound(0);
             AddressableHelper.LoadAssetAsyncWithCompletionHandler<GameObject>("LoadSceneCanvas", GenerateCanvas);
             m_sceneService.LoadScene(1);
+            Logs.Log("Yo");
         }
 
         private void GenerateCanvas(GameObject canvas)
@@ -37,17 +38,10 @@ namespace Service
 
         public void InitializeInGameScene()
         {
-            AddressableHelper.LoadAssetAsyncWithCompletionHandler<GameObject>("InGameCanvas", GenerateInGameCanvas);
             m_sceneService.LoadScene(2);
+            m_uiService.Enable();
             m_fightService.Enable();
             m_tickableService.Enable();
-        }
-        
-        private void GenerateInGameCanvas(GameObject canvas)
-        {
-            var inGameCanvas = Object.Instantiate(canvas);
-            inGameCanvas.GetComponent<InGameCanvas>().AssignService(m_uiService);
-            Release(canvas);
         }
     }
 }

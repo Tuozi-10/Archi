@@ -1,29 +1,41 @@
 using Addressables;
 using Attributes;
+using Service.AudioService;
+using Service.FightService;
+using Service.SceneService;
+using Service.TickableService;
+using Service.UIService;
+using UI;
 using UnityEngine;
+using UnityEngine.Assertions.Must;
+using static UnityEngine.AddressableAssets.Addressables;
 
 namespace Service.UIService
 {
     public class UIService : SwitchableService, IUIService
     {
-    private GameObject guiCanvas;
+        private MainMenuManager mainMenuManager;
 
-    [ServiceInit]
-    private void Initialize() { }
+        [ServiceInit]
+        private void Initialize() { }
 
-    public override void Enable()
-    {
-        guiCanvas.SetActive(true);
-    }
+        private void GenerateInGameCanvas(GameObject canvas)
+        {
+            var inGameCanvas = Object.Instantiate(canvas);
+            mainMenuManager = inGameCanvas.GetComponent<MainMenuManager>();
+            mainMenuManager.AssignService(this);
+            Release(canvas);
+        }
 
-    public override void Disable()
-    {
-        guiCanvas.SetActive(false);
-    }
+        public override void Enable()
+        {
+            if(mainMenuManager) mainMenuManager.Enable();
+            else AddressableHelper.LoadAssetAsyncWithCompletionHandler<GameObject>("InGameCanvas", GenerateInGameCanvas);
+        }
 
-    public void SetInGameCanvas(GameObject g)
-    {
-        guiCanvas = g;
-    }
+        public override void Disable()
+        {
+            if(mainMenuManager) mainMenuManager.Disable();
+        }
     }
 }
