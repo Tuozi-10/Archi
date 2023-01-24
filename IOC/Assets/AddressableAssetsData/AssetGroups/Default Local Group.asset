@@ -22,11 +22,19 @@ MonoBehaviour:
     m_ReadOnly: 0
     m_SerializedLabels: []
   - m_GUID: 288eb8d4a365bd74295bf66f28f1a937
-    m_Address: UICanvas
+    m_Address: MainMenu
     m_ReadOnly: 0
     m_SerializedLabels: []
   - m_GUID: 9957a800e5043dd43b01c5f2b849721c
     m_Address: BurgerFighterSO
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+  - m_GUID: a0bed51445dd5f0429e3afa5bc7adb78
+    m_Address: PopUp
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+  - m_GUID: 11e0a81f4c2a8b34899382f3bac1401c
+    m_Address: PopUpCanvas
     m_ReadOnly: 0
     m_SerializedLabels: []
   m_ReadOnly: 0

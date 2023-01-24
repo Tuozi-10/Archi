@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using Addressables;
 using Attributes;
+using HelperPSR.Pool;
 using Service.AudioService;
 using UnityEngine;
 using UnityEngine.Events;
@@ -13,49 +14,87 @@ namespace Service
     {
         [DependsOnService] private ISceneService _sceneService;
 
-        [DependsOnService] private ITickeableSwitchableService tickeableService;
+        [DependsOnService] public ITickeableSwitchableService tickeableService;
+
+        Queue<PopUpData> popUpsNeededToPrint = new Queue<PopUpData>();
+
+        PopUp currentPopUpPrinted;
+
         private bool isActive;
-        private GameObject canvas;
-        public void LinkButton()
+
+        private Pool<PopUp> popUpPool;
+
+        private GameObject popUpCanvas;
+
+        private GameObject popUpPrefab;
+
+        public void LoadMainMenu()
         {
-            AddressableHelper.LoadAssetAsyncWithCompletionHandler<GameObject>("UICanvas", GenerateCanvas);
+            AddressableHelper.LoadAssetAsyncWithCompletionHandler<GameObject>("MainMenu", GenerateMainMenu);
         }
 
-        private void GenerateCanvas(GameObject gameObject)
+        public void LoadPopUpCanvas()
         {
-           var canvasObject = Object.Instantiate(gameObject);
-            var linker = canvasObject.GetComponent<CanvasLinker>();
-            canvas = linker.mainCanvas;
-            linker.midTopButton.onClick
-                .AddListener(new UnityAction((() => { _sceneService.LoadScene("ThirdScene"); })));
-            linker.toggle.onClick .AddListener(new UnityAction((() =>
+            AddressableHelper.LoadAssetAsyncWithCompletionHandler<GameObject>("PopUpCanvas", InitPopUpCanvas);
+        }
+
+        private void InitPopUpPool(GameObject gameObject)
+        {
+            popUpPool = new Pool<PopUp>(gameObject.GetComponent<PopUp>(), 10, popUpCanvas.gameObject.transform);
+            for (int i = 0; i < 10; i++)
             {
-                if (GetIsActiveService)
-                {
-                    DisabledService();
-                    tickeableService.DisabledService();
-                }
-                else
-                {
-                    EnabledService();
-                    tickeableService.EnabledService();
-                }
-            })));
+                EnqueuePopUpData(new PopUpData("Test", "Description", Random.ColorHSV()));
+            }
+            DequeuePopUpData();
+        }
+
+
+        private void InitPopUpCanvas(GameObject gameObject)
+        {
+            popUpCanvas = Object.Instantiate(gameObject);
+            Object.DontDestroyOnLoad(popUpCanvas);
+            AddressableHelper.LoadAssetAsyncWithCompletionHandler<GameObject>("PopUp", InitPopUpPool);
+        }
+
+        public void EnqueuePopUpData(PopUpData popUpData)
+        {
+            popUpsNeededToPrint.Enqueue(popUpData);
+        }
+
+        private void DequeuePopUpData()
+        {
+            currentPopUpPrinted = popUpPool.GetFromPool().GetComponent<PopUp>();
+            currentPopUpPrinted.InitPopUp(popUpsNeededToPrint.Dequeue(), EndPopUp);
+            popUpsNeededToPrint.Dequeue();
+        }
+
+        private void EndPopUp(PopUp popUp)
+        {
+            popUpPool.AddToPool(popUp);
+            currentPopUpPrinted = null;
+            if(popUpsNeededToPrint.Count != 0) DequeuePopUpData();
+        }
+        
+        private void GenerateMainMenu(GameObject gameObject)
+        {
+            var canvasObject = Object.Instantiate(gameObject);
+            var mainMenuManager = canvasObject.GetComponent<MainMenuManager>();
+            mainMenuManager.Init(this, _sceneService);
             EnabledService();
             Release(gameObject);
         }
 
+
         public void EnabledService()
         {
             isActive = true;
-            canvas.SetActive(true);
         }
+
         public void DisabledService()
         {
             isActive = false;
-            canvas.SetActive(false);
         }
+
         public bool GetIsActiveService => isActive;
-        
     }
 }

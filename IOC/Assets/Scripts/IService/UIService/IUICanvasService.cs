@@ -6,7 +6,10 @@ namespace Service
 {
 public interface  IUICanvasService : IService
 {
-    void LinkButton();
+    void LoadMainMenu();
+
+    void LoadPopUpCanvas();
+    
 }
     
 }

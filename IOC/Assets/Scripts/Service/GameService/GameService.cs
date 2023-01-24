@@ -22,9 +22,9 @@ namespace Service
         private void Initialize()
         {
             m_audioService.PlaySound(0);
-        //    AddressableHelper.LoadAssetAsyncWithCompletionHandler<GameObject>("LeBurger", GenerateBurger);
             sceneService.LoadScene("UIScene");
-            uiCanvasService.LinkButton();
+            uiCanvasService.LoadMainMenu();
+            uiCanvasService.LoadPopUpCanvas();
         }
 
         /*
