@@ -5,7 +5,10 @@ using UnityEngine.UI;
 
 public class CanvasLinker : MonoBehaviour
 {
-    public Button button;
+    public Button midTopButton;
+    public Button midMidbutton;
+    public Button midDownbutton;
     public Button toggle;
     public GameObject mainCanvas;
+    
 }

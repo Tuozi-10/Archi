@@ -26,7 +26,7 @@ namespace Service
            var canvasObject = Object.Instantiate(gameObject);
             var linker = canvasObject.GetComponent<CanvasLinker>();
             canvas = linker.mainCanvas;
-            linker.button.onClick
+            linker.midTopButton.onClick
                 .AddListener(new UnityAction((() => { _sceneService.LoadScene("ThirdScene"); })));
             linker.toggle.onClick .AddListener(new UnityAction((() =>
             {
