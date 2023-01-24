@@ -14,16 +14,20 @@ namespace Service
         private ISceneService m_sceneService;
         [DependsOnService]
         private IFightService m_fightService;
+        [DependsOnService] 
+        private IUIService m_uiService;
 
         private bool isEnabled;
         
         [ServiceInit]
         private void Initialize()
         {
+            Logs.Log("GameService initialized");
             m_audioService.PlaySound(0);
             m_sceneService.LoadScene("FirstScene");
+            m_uiService.DisplayMainMenu();
             // AddressableHelper.LoadAssetAsyncWithCompletionHandler<GameObject>("LeBurger", GenerateBurger);
-            AddressableHelper.LoadAssetAsyncWithCompletionHandler<GameObject>("LeCanvas", GenerateCanvas);
+            // AddressableHelper.LoadAssetAsyncWithCompletionHandler<GameObject>("LeCanvas", GenerateCanvas);
         }
 
         private void GenerateBurger(GameObject gameObject)
@@ -32,12 +36,12 @@ namespace Service
             Release(gameObject);
         }
         
-        private void GenerateCanvas(GameObject gameObject)
-        {
-            var canvas = Object.Instantiate(gameObject);
-            canvas.GetComponent<ChangeScene>().Setup(m_sceneService, m_fightService);
-            Release(gameObject);
-        }
+        // private void GenerateCanvas(GameObject gameObject)
+        // {
+        //     var canvas = Object.Instantiate(gameObject);
+        //     canvas.GetComponent<ChangeScene>().Setup(m_sceneService, m_fightService);
+        //     Release(gameObject);
+        // }
 
         void Switch()
         {

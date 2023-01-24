@@ -21,7 +21,7 @@ namespace Service
         public override void OnUpdate()
         {
             base.OnUpdate();
-            if (_burger is not null)
+            if (_burger != null)
             {
                 _burger.transform.Rotate(Vector3.up, 1f);
             }

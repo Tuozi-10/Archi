@@ -13,18 +13,18 @@ namespace Service
         {
             SceneManager.LoadScene(sceneName);
         }
-        
-        void Switch()
+
+        private void Switch()
         {
             
         }
 
-        void Enable()
+        private void Enable()
         {
             base.Enable();
         }
 
-        void Disable()
+        private void Disable()
         {
             base.Disable();
         }
