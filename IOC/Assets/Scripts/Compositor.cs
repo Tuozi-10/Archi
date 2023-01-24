@@ -7,10 +7,9 @@ using Exception;
 using Service;
 using UnityEngine;
 using System.Runtime.CompilerServices;
-using System.Threading.Tasks;
 using Cysharp.Threading.Tasks;
 using Service.AudioService;
-using Service.SceneService;
+using Service.MenuService;
 
 public class Compositor : MonoBehaviour
 {
@@ -213,9 +212,15 @@ public class Compositor : MonoBehaviour
     private void CreateAndWireObjects()
     {
         AddService<IGameService>(new GameService());
+        
         AddService<IAudioService>(new AudioService());
-        AddService<ISceneService>(new SceneService());
-        AddService<IFightService>(new FightService());
+        
+        AddService<IMenuService>(new MenuService());
+        
+        AddService<IUIService>(new UIService());
+        
+        //AddService<ISceneService>(new SceneService());
+        //AddService<IFightService>(new FightService());
     }
 
     private void Awake()

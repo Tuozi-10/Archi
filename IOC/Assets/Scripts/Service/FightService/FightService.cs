@@ -1,4 +1,3 @@
-using System;
 using System.Collections.Generic;
 using Addressables;
 using Attributes;
@@ -88,5 +87,6 @@ public class FightService : SwitchableService,IFightService
     {
         var enemyComponent = Object.Instantiate(enemyPrefab,Random.onUnitSphere*5,Quaternion.identity).GetComponent<EnemyComponent>();
         enemyComponent.enemy = scriptableEnemies[Random.Range(0, scriptableEnemies.Count)].CreateEnemy();
+        Logs.Log($"Spawned {enemyComponent.enemy}");
     }
 }

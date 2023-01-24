@@ -12,20 +12,28 @@ namespace Service
         [DependsOnService] 
         private IAudioService m_audioService;
         
-        [DependsOnService] 
-        private ISceneService m_sceneService;
+        [DependsOnService]
+        private IUIService uiService;
         
-        [DependsOnService] 
-        private IFightService m_fightService;
+        //[DependsOnService] 
+        //private ISceneService m_sceneService;
+        
+        //[DependsOnService] 
+        //private IFightService m_fightService;
 
-        //[ServiceInit]
+        [ServiceInit]
         private void Initialize()
         {
             m_audioService.PlaySound(0);
+            
+            uiService.LoadUI();
+            /*
             AddressableHelper.LoadAssetAsyncWithCompletionHandler<GameObject>("LeBurger", GenerateBurger);
             AddressableHelper.LoadAssetAsyncWithCompletionHandler<GameObject>("Menu", LoadMenu);
+            */
         }
 
+        /*
         private void GenerateBurger(GameObject gameObject)
         {
             var burger = Object.Instantiate(gameObject);
@@ -48,5 +56,6 @@ namespace Service
             
             Release(menuObj);
         }
+        */
     }
 }

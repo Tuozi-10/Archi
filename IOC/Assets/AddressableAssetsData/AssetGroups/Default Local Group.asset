@@ -29,6 +29,26 @@ MonoBehaviour:
     m_Address: Enemy
     m_ReadOnly: 0
     m_SerializedLabels: []
+  - m_GUID: ee457ce477dad404f86d9ae93bba4e87
+    m_Address: Averell
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+  - m_GUID: 35e5b1f08bfd3e4439435cba8756f5f7
+    m_Address: Jack
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+  - m_GUID: dc48e3dbee2b2af4bbf4d8658418a488
+    m_Address: Joe
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+  - m_GUID: f1c8544148a2424449f2f0365b1ef7d2
+    m_Address: William
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+  - m_GUID: 1a0aa0f257015e047bb385dc1b87409b
+    m_Address: MenuUI
+    m_ReadOnly: 0
+    m_SerializedLabels: []
   m_ReadOnly: 0
   m_Settings: {fileID: 11400000, guid: f85571e7fcd70ac4190d36e8b6377275, type: 2}
   m_SchemaSet:
