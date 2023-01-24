@@ -29,9 +29,10 @@ namespace Service
         [ServiceInit]
         private void Initialize()
         {
+            Logs.Log("HE");
             m_audioService.PlaySound(0);
            m_sceneService.LoadScene("New Scene");
-           AddressableHelper.LoadAssetAsyncWithCompletionHandler<GameObject>("LeBurger", GenerateBurger);
+           //AddressableHelper.LoadAssetAsyncWithCompletionHandler<GameObject>("LeBurger", GenerateBurger);
         }
 
         

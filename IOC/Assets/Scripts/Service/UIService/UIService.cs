@@ -18,12 +18,18 @@ namespace Service.UIService
         private void Initialize()
         {
             AddressableHelper.LoadAssetAsyncWithCompletionHandler<GameObject>("UI", CreateUI); 
+            AddressableHelper.LoadAssetAsyncWithCompletionHandler<GameObject>("PopUps", LoadPopUps); 
         }
 
         private void CreateUI(GameObject gameObject)
         {
             var UI = Object.Instantiate(gameObject);
             UI.GetComponent<UIManager>().Setup(m_sceneService, this, m_gameService);
+        }
+
+        void LoadPopUps(GameObject gameObject)
+        {
+            Object.Instantiate(gameObject);
         }
     }
 }

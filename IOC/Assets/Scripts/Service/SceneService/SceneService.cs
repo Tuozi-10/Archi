@@ -12,14 +12,14 @@ namespace Service.SceneService
         
         public void LoadScene()
         {
-            SceneManager.LoadScene("New Scene");
+            //SceneManager.LoadScene("New Scene");
             
 
         }
 
         public void LoadScene(string name)
         {
-            SceneManager.LoadScene(name);
+           // SceneManager.LoadScene(name);
         }
 
         public ISceneService SetDependency(Object obj)

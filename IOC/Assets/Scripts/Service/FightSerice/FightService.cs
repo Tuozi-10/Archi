@@ -19,8 +19,8 @@ namespace Service.FightSerice
         [ServiceInit]
         void Initialize()
         {
-            AddressableHelper.LoadAssetAsyncWithCompletionHandler<GameObject>("EnemySpawner", GenerateSpawner);
-            AddressableHelper.LoadAssetAsyncWithCompletionHandler<GameObject>("Player", GeneratePlayer);
+            //AddressableHelper.LoadAssetAsyncWithCompletionHandler<GameObject>("EnemySpawner", GenerateSpawner);
+            //AddressableHelper.LoadAssetAsyncWithCompletionHandler<GameObject>("Player", GeneratePlayer);
             m_tickService.OnUpdate += OnFightUpdate;
         }
 
