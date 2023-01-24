@@ -22,11 +22,19 @@ MonoBehaviour:
     m_ReadOnly: 0
     m_SerializedLabels: []
   - m_GUID: 783e4a133e2db714c88f4e5eab5ba5c4
-    m_Address: Canvas
+    m_Address: UIMenu
     m_ReadOnly: 0
     m_SerializedLabels: []
   - m_GUID: 08d11e7e9dee58647871886f54a83b19
     m_Address: Minion
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+  - m_GUID: 72a300e5b5c3228459caecedfa2ef984
+    m_Address: PopUp
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+  - m_GUID: 0b5528f7065585347a52df4797e21120
+    m_Address: Pop
     m_ReadOnly: 0
     m_SerializedLabels: []
   m_ReadOnly: 0
