@@ -1,3 +1,4 @@
+using System.Linq.Expressions;
 using Addressables;
 using Attributes;
 using UnityEngine;
@@ -6,37 +7,34 @@ namespace Service.UIService
 {
     public class UIService : IUIService
     {
-        private GameObject guiCanvas;
+        private GameObject mainMenu;
+        private bool isLoading;
+        private GameObject PopUp;
+        private bool isLoading2;
+        public void DisplayMainMenu()
+        {
+            if (isLoading) return;
+            if (mainMenu != null) mainMenu.SetActive(true);
+            else AddressableHelper.LoadAssetAsyncWithCompletionHandler<GameObject>("MainMenu", AssignMainMenu);
+        }
+
+        private void AssignMainMenu(GameObject gameObject)
+        {
+            isLoading = false;
+            mainMenu = GameObject.Instantiate(gameObject);
+        }
         
-        [ServiceInit]
-        private void Initialize()
+        public void DisplayPopUp()
         {
-            
-        }
-        
-        public void Toggle(bool active)
-        {
-            if (active)
-            {
-                Enable();
-                return;
-            }
-            Disable();
+            if (isLoading2) return;
+            if (PopUp != null) PopUp.SetActive(true);
+            else AddressableHelper.LoadAssetAsyncWithCompletionHandler<GameObject>("CanvasPopUp", AssignPopUp);
         }
 
-        public void Enable()
+        private void AssignPopUp(GameObject gameObject)
         {
-            guiCanvas.SetActive(true);
-        }
-
-        public void Disable()
-        {
-            guiCanvas.SetActive(false);
-        }
-
-        public void SetInGameCanvas(GameObject g)
-        {
-            guiCanvas = g;
+            isLoading2 = false;
+            PopUp = GameObject.Instantiate(gameObject);
         }
     }
 }

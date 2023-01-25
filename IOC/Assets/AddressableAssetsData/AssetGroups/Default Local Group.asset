@@ -25,6 +25,26 @@ MonoBehaviour:
     m_Address: LoadSceneCanvas
     m_ReadOnly: 0
     m_SerializedLabels: []
+  - m_GUID: 79cd9a032c7162a468d633fc3b36d05c
+    m_Address: InGameCanvas
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+  - m_GUID: dc68b1150f642924c8ccf10ad17cd62a
+    m_Address: alaiiid
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+  - m_GUID: 16103cadd61b0c74db08f2f64c49f556
+    m_Address: LePerso
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+  - m_GUID: 0b2e5f7e0f5b4094e8ad6e6902a9903e
+    m_Address: MainMenu
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+  - m_GUID: e2c6d191ef4e11e4488286827e0dcd0e
+    m_Address: CanvasPopUp
+    m_ReadOnly: 0
+    m_SerializedLabels: []
   m_ReadOnly: 0
   m_Settings: {fileID: 11400000, guid: f85571e7fcd70ac4190d36e8b6377275, type: 2}
   m_SchemaSet:

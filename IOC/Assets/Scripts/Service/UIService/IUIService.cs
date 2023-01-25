@@ -2,8 +2,9 @@ using UnityEngine;
 
 namespace Service.UIService
 {
-    public interface IUIService : IService, ISwitchableService
+    public interface IUIService : IService
     {
-        void SetInGameCanvas(GameObject g);
+        void DisplayMainMenu();
+        void DisplayPopUp();
     }
 }

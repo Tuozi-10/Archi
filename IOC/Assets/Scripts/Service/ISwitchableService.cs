@@ -4,6 +4,7 @@ using UnityEngine;
 
 public interface ISwitchableService
 {
+    bool Active { get; set; }
     void Toggle(bool active);
     void Enable();
     void Disable();
