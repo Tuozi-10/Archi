@@ -8,10 +8,10 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/Bug Scenes/SampleScene.unity
     guid: 9fc0d4010bbf28b4594072e72b8655ab
-  - enabled: 1
+  - enabled: 0
     path: Assets/Scenes/Bug Scenes/PommeScene.unity
     guid: 13708e1503d2f7b439e86c5e9a3b03db
-  - enabled: 1
+  - enabled: 0
     path: Assets/Scenes/Bug Scenes/Menu.unity
     guid: 37d6c829d47a12b4784d57c3797282ca
   m_configObjects:

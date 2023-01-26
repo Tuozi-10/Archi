@@ -43,15 +43,15 @@ namespace Service
             log.Log(pool.Count.ToString());
             GameObject go = (obj as GameObject);
             Button btn = go.transform.GetChild(0).GetChild(0).GetComponent<Button>();
-            btn.onClick.AddListener(() => { root.SetActive(false); GetFromPool(); });
+            btn.onClick.AddListener(() => { Reshow(); GetFromPool(); });
             pool.Enqueue(obj as GameObject);
             if (obj is GameObject t)
                 t.SetActive(false);
         }
 
-        private void Reshow(GameObject item)
+        private void Reshow()
         {
-            item.transform.parent.parent.gameObject.SetActive(false);
+            root.SetActive(false);
         }
         
         public GameObject GetFromPool()
