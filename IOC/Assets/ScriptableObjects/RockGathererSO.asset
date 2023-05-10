@@ -16,5 +16,5 @@ MonoBehaviour:
   <MoveSpeed>k__BackingField: 4
   <WorkTime>k__BackingField: 1
   <WorkRange>k__BackingField: 2.5
-  <TargetResources>k__BackingField: 020000000000000003000000
+  <TargetResources>k__BackingField: 02000000000000000100000000000000
   <MaxResource>k__BackingField: 1

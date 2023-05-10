@@ -69,7 +69,31 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8320076101255789176, guid: 9e654eddec4ef5d4db59f019eaedbd28, type: 3}
       propertyPath: m_Name
-      value: Forest
+      value: Forest Variant
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 9e654eddec4ef5d4db59f019eaedbd28, type: 3}
+--- !u!1 &4242533233871762490 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 8320076101255789176, guid: 9e654eddec4ef5d4db59f019eaedbd28, type: 3}
+  m_PrefabInstance: {fileID: 5302522774024506946}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &-2520095018305093952
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4242533233871762490}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ced505c6320524147b2957e64af8478e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  entranceOffset: {fileID: 5081225915098437614}
+  <AssociatedResource>k__BackingField: 0
+--- !u!4 &5081225915098437614 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 1086067152514308524, guid: 9e654eddec4ef5d4db59f019eaedbd28, type: 3}
+  m_PrefabInstance: {fileID: 5302522774024506946}
+  m_PrefabAsset: {fileID: 0}

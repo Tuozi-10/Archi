@@ -5,8 +5,6 @@ public abstract class Structure : Entity
 {
     [SerializeField] private Transform entranceOffset;
     public Vector3 EntrancePosition => entranceOffset.position;
-
-    [field: SerializeField] public int AssociatedResource { get; private set; }
     public bool Working => WorkingUnit != null;
     public Unit WorkingUnit { get; private set; }
     public event Action<Unit> OnWorkEnded;

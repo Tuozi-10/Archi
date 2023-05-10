@@ -73,6 +73,18 @@ namespace Service
         private void LinkStructures()
         {
             
+            ((ResourceStructure)GetStructure(1)).AssignContainer(new ResourceContainer(0,100));
+            ((ResourceStructure)GetStructure(2)).AssignContainer(new ResourceContainer(1,100));
+            ((ResourceStructure)GetStructure(4)).AssignContainer(new ResourceContainer(2,100));
+
+            GetStructure(0).OnWorkEnded += GiveResource;
+
+            void GiveResource(Unit unit)
+            {
+                var container = unit.Container;
+                IncreaseResources(container.associatedResource,container.amount);
+                container.amount = 0;
+            }
         }
 
         private void InitResources()

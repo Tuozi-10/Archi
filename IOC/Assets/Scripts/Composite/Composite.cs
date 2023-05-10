@@ -22,9 +22,9 @@ public class Composite : MonoBehaviour
         return component;
     }
 
-    public new IComponent GetComponent<T>() where T : IComponent
+    public new T GetComponent<T>() where T : IComponent
     {
-        return components.FirstOrDefault(component => component is T);
+        return (T)components.FirstOrDefault(component => component is T);
     }
 
     public void RemoveComponent(IComponent component)
