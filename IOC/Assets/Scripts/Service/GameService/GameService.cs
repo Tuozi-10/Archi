@@ -1,42 +1,30 @@
-﻿using Addressables;
-using Attributes;
+﻿using Attributes;
 using Service.AudioService;
-using UnityEngine;
-using static UnityEngine.AddressableAssets.Addressables;
 
 namespace Service
 {
     public class GameService : SwitchableService, IGameService
     {
-        [DependsOnService] 
-        private IAudioService m_audioService;
-        [DependsOnService]
-        private ISceneService m_sceneService;
-        [DependsOnService]
-        private IFightService m_fightService;
-        [DependsOnService] 
-        private IUIService m_uiService;
+        [DependsOnService] private IAudioService _audioService;
+        [DependsOnService] private ISceneService _sceneService;
+        [DependsOnService] private IFightService _fightService;
+        [DependsOnService] private IUIService _uiService;
+        [DependsOnService] private IEntitiesFactoryService _entitiesFactoryService;
 
         private bool isEnabled;
         
         [ServiceInit]
         private void Initialize()
         {
-            Logs.Log("GameService initialized");
-            m_audioService.PlaySound(0);
-            m_sceneService.LoadScene("FirstScene");
-            m_uiService.DisplayMainMenu();
-            m_uiService.CallPopup();
+            // _audioService.PlaySound(0);
+            _sceneService.LoadScene("FirstScene");
+            _uiService.DisplayMainMenu();
+            // _uiService.CallPopup();
+            _entitiesFactoryService.Initialize();
             // AddressableHelper.LoadAssetAsyncWithCompletionHandler<GameObject>("LeBurger", GenerateBurger);
             // AddressableHelper.LoadAssetAsyncWithCompletionHandler<GameObject>("LeCanvas", GenerateCanvas);
         }
 
-        private void GenerateBurger(GameObject gameObject)
-        {
-            var burger = Object.Instantiate(gameObject);
-            Release(gameObject);
-        }
-        
         // private void GenerateCanvas(GameObject gameObject)
         // {
         //     var canvas = Object.Instantiate(gameObject);
@@ -44,17 +32,17 @@ namespace Service
         //     Release(gameObject);
         // }
 
-        void Switch()
+        private void Switch()
         {
             
         }
 
-        void Enable()
+        private void Enable()
         {
             base.Enable();
         }
 
-        void Disable()
+        private void Disable()
         {
             base.Disable();
         }

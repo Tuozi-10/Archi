@@ -7,15 +7,15 @@
       "dependencies": {},
       "hash": "b992a061fbf68ff1eb475d0837065b0549ed31ba"
     },
-    "com.mduflot.utility": {
-      "version": "https://github.com/duflosky/Utility.git?path=/Assets/Sources",
+    "com.mduflot.utilities": {
+      "version": "https://github.com/duflosky/Utilities.git?path=/Assets/Sources",
       "depth": 0,
       "source": "git",
       "dependencies": {
         "com.unity.addressables": "1.19.19",
         "com.unity.collections": "1.2.4"
       },
-      "hash": "417220a8af22099ed60c9a0d43454ece806f6ccb"
+      "hash": "91cb4f4c60c37d59d6eca9fb7d694450eb435e37"
     },
     "com.unity.addressables": {
       "version": "1.19.19",

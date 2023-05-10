@@ -194,6 +194,7 @@ public class Compositor : MonoBehaviour
         AddService<ISceneService>(new SceneService());
         AddService<IFightService>(new FightService());
         AddService<IUIService>(new UIService());
+        AddService<IEntitiesFactoryService>(new EntitiesFactoryService());
     }
     
     private void Awake()

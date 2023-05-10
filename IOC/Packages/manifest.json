@@ -1,7 +1,7 @@
 {
   "dependencies": {
     "com.cysharp.unitask": "https://github.com/Cysharp/UniTask.git?path=src/UniTask/Assets/Plugins/UniTask#2.3.3",
-    "com.mduflot.utility": "https://github.com/duflosky/Utility.git?path=/Assets/Sources",
+    "com.mduflot.utilities": "https://github.com/duflosky/Utilities.git?path=/Assets/Sources",
     "com.unity.addressables": "1.19.19",
     "com.unity.collab-proxy": "1.17.7",
     "com.unity.feature.development": "1.0.1",

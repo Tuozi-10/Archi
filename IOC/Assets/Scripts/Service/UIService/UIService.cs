@@ -1,23 +1,26 @@
 ﻿using Addressables;
 using Attributes;
+using UI;
 using UnityEngine;
+using static UnityEngine.AddressableAssets.Addressables;
 
 namespace Service
 {
     public class UIService : IUIService
     {
-        private GameObject mainMenu;
-        private GameObject popupMenu; 
+        [DependsOnService] private ISceneService _sceneService;
+        [DependsOnService] private IFightService _fightService;
+        [DependsOnService] private IEntitiesFactoryService _entitiesFactoryService;
+
+        private GameObject _mainMenu;
+        private GameObject _popupMenu;
+        private GameObject _inGameMenu;
         private bool isLoading;
-        [DependsOnService]
-        private ISceneService m_sceneService;
-        [DependsOnService]
-        private IFightService m_fightService;
-        
+
         public void DisplayMainMenu()
         {
             if (isLoading) return;
-            if (mainMenu != null) mainMenu.SetActive(true);
+            if (_mainMenu != null) _mainMenu.SetActive(true);
             else AddressableHelper.LoadAssetAsyncWithCompletionHandler<GameObject>("LeCanvas", AssignMainMenu);
         }
 
@@ -26,18 +29,31 @@ namespace Service
             AddressableHelper.LoadAssetAsyncWithCompletionHandler<GameObject>("LePopup", AssignPopupMenu);
         }
 
+        public void DisplayInGameMenu()
+        {
+            AddressableHelper.LoadAssetAsyncWithCompletionHandler<GameObject>("InGameMenu", AssignInGameMenu);
+        }
+
         private void AssignPopupMenu(GameObject gameObject)
         {
             isLoading = false;
-            popupMenu = Object.Instantiate(gameObject);
-            popupMenu.GetComponent<PopupManager>().Setup();
+            _popupMenu = Object.Instantiate(gameObject);
+            _popupMenu.GetComponent<PopupManager>().Setup();
         }
 
         private void AssignMainMenu(GameObject gameObject)
         {
             isLoading = false;
-            mainMenu = Object.Instantiate(gameObject);
-            mainMenu.GetComponent<MenuManager>().Setup(m_sceneService, m_fightService);
+            _mainMenu = Object.Instantiate(gameObject);
+            _mainMenu.GetComponent<MenuManager>().Setup(_sceneService, _fightService, this);
+        }
+
+        private void AssignInGameMenu(GameObject gameObject)
+        {
+            isLoading = false;
+            _inGameMenu = Object.Instantiate(gameObject);
+            _inGameMenu.GetComponent<InGameMenuManager>().Setup(_entitiesFactoryService);
+            Release(gameObject);
         }
     }
 }

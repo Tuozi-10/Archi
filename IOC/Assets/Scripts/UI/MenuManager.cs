@@ -1,4 +1,3 @@
-using Attributes;
 using DG.Tweening;
 using Service;
 using UnityEngine;
@@ -13,19 +12,17 @@ public class MenuManager : MonoBehaviour
     [SerializeField] private Button popupButton;
     [SerializeField] private Image imageMenu;
     
-    [DependsOnService]
-    private ISceneService m_sceneService;
-    [DependsOnService]
-    private IFightService m_fightService;
-    [DependsOnService] 
-    private IUIService m_uiService;
+    private ISceneService _sceneService;
+    private IFightService _fightService;
+    private IUIService _uiService;
     
-    public void Setup(ISceneService sceneService, IFightService fightService)
+    public void Setup(ISceneService sceneService, IFightService fightService, IUIService uiService)
     {
-        m_sceneService = sceneService;
-        button.onClick.AddListener(() => m_sceneService.LoadScene("SecondScene"));
-        m_fightService = fightService;
-        buttonHide.onClick.AddListener(() => m_fightService.Toggle());
+        _sceneService = sceneService;
+        _fightService = fightService;
+        _uiService = uiService;
+        button.onClick.AddListener(() => _fightService.InitializeGame());
+        buttonHide.onClick.AddListener(() => _fightService.Toggle());
         buttonToggle.onClick.AddListener(OpenLeftMenu);
         buttonHideMenu.onClick.AddListener(HideLeftMenu);
         popupButton.onClick.AddListener(CreateError);

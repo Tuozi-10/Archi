@@ -38,7 +38,7 @@ RectTransform:
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}
   m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: 460, y: 120}
+  m_SizeDelta: {x: 520, y: 120}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &5805271632147232121
 CanvasRenderer:
@@ -405,7 +405,7 @@ RectTransform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 3518281391747645947}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
@@ -417,7 +417,7 @@ RectTransform:
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}
   m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: 460, y: 120}
+  m_SizeDelta: {x: 520, y: 120}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &3263449141701080703
 CanvasRenderer:
@@ -604,7 +604,7 @@ RectTransform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 4177382874928604393}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
@@ -1069,7 +1069,7 @@ RectTransform:
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}
   m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: 460, y: 120}
+  m_SizeDelta: {x: 520, y: 120}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &6933505015288734666
 CanvasRenderer:
@@ -1309,7 +1309,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 531806091118301971}
-  - component: {fileID: 6050655464596553414}
+  - component: {fileID: 1300313821656852149}
   m_Layer: 5
   m_Name: Menu
   m_TagString: Untagged
@@ -1341,7 +1341,7 @@ RectTransform:
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
---- !u!114 &6050655464596553414
+--- !u!114 &1300313821656852149
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -1356,8 +1356,8 @@ MonoBehaviour:
   m_Padding:
     m_Left: 0
     m_Right: 0
-    m_Top: 1000
-    m_Bottom: 1000
+    m_Top: 0
+    m_Bottom: 0
   m_ChildAlignment: 4
   m_Spacing: 0
   m_ChildForceExpandWidth: 1
@@ -1366,7 +1366,7 @@ MonoBehaviour:
   m_ChildControlHeight: 0
   m_ChildScaleWidth: 0
   m_ChildScaleHeight: 0
-  m_ReverseArrangement: 1
+  m_ReverseArrangement: 0
 --- !u!1 &8212794861821487912
 GameObject:
   m_ObjectHideFlags: 0

@@ -37,6 +37,30 @@ MonoBehaviour:
     m_Address: LePopup
     m_ReadOnly: 0
     m_SerializedLabels: []
+  - m_GUID: b89673e4b9918034fb98726488f362b4
+    m_Address: InGameMenu
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+  - m_GUID: 9da2647e47d7fac4291a95d4fe61740a
+    m_Address: Plane
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+  - m_GUID: 89674d808ceb16348b3458d185b98e1e
+    m_Address: Harvester
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+  - m_GUID: e2fcf01c23a97544fb753c3112f6d7ff
+    m_Address: Lumberjack
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+  - m_GUID: 5b6f88d8096cb0b40bd85492c76e2d8c
+    m_Address: Tree
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+  - m_GUID: 5feced89c08416143a8190c3da661c62
+    m_Address: Stone
+    m_ReadOnly: 0
+    m_SerializedLabels: []
   m_ReadOnly: 0
   m_Settings: {fileID: 11400000, guid: f85571e7fcd70ac4190d36e8b6377275, type: 2}
   m_SchemaSet:
