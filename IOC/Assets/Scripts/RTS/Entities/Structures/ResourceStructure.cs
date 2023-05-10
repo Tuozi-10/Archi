@@ -12,6 +12,5 @@ public class ResourceStructure : Structure
         if(container.amount <= 0) return;
         WorkingUnit.Container.amount++;
         container.amount--;
-        print(container.amount);
     }
 }
