@@ -16,7 +16,6 @@ public class LumberjackBehaviour : StateMachineComponent
 
     protected override void DoIdle()
     {
-        
     }
 
     protected override void DoWander()
@@ -60,6 +59,7 @@ public class LumberjackBehaviour : StateMachineComponent
 public class BlackSmithBehaviour : StateMachineComponent
 {
     float timer = 5f;
+    MoveToTargetComponent moveComponent = null;
 
     public BlackSmithBehaviour(Entity owner) : base(owner)
     {
@@ -68,7 +68,6 @@ public class BlackSmithBehaviour : StateMachineComponent
     public override void Init()
     {
         ChangeState(states.idle);
-       
     }
 
     private void OnReceiveInfoRessource(bool state)
@@ -79,10 +78,9 @@ public class BlackSmithBehaviour : StateMachineComponent
             ChangeState(states.wander);
         }
     }
-    
+
     protected override void DoIdle()
     {
-        //checkRessource
         m_entity.OnIdle?.Invoke(m_entity);
         m_entity.OnReceiveInfo = OnReceiveInfoRessource;
     }
@@ -91,7 +89,8 @@ public class BlackSmithBehaviour : StateMachineComponent
     {
         if (m_entity)
         {
-            MoveToTargetComponent moveComponent = m_entity.myGetComponent<MoveToTargetComponent>();
+            if (moveComponent == null)
+                moveComponent = m_entity.myGetComponent<MoveToTargetComponent>();
             if (Vector3.Distance(m_entity.GetWoodTarget(), m_entity.currentPos) > 1f)
                 moveComponent.SetTarget(m_entity.GetWoodTarget());
             else
@@ -113,7 +112,6 @@ public class BlackSmithBehaviour : StateMachineComponent
     {
         if (m_entity)
         {
-            MoveToTargetComponent moveComponent = m_entity.myGetComponent<MoveToTargetComponent>();
             if (Vector3.Distance(Vector3.zero, m_entity.currentPos) > 1f)
                 moveComponent.SetTarget(Vector3.zero);
             else

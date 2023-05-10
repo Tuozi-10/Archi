@@ -22,6 +22,7 @@ namespace FactoryWarcraft
         private Vector3 TreePos = new Vector3(-42, -2, -12);
         private Vector3 RockPos = new Vector3(35, -2, 15);
         private Vector3 ForgePos = new Vector3(16, -2, -35);
+        private GameObject PeonPrefab = null;
 
         [ServiceInit]
         private void InitService()
@@ -32,6 +33,7 @@ namespace FactoryWarcraft
             BtnSet = false;
 
             m_UIService.ShowUIMainMenu();
+            AddressableHelper.LoadAssetAsyncWithCompletionHandler<GameObject>("Minion", GeneratePeon);
 
             OnUpdate();
         }
@@ -60,6 +62,11 @@ namespace FactoryWarcraft
         private void CheckRessource(Entity entity)
         {
             entity.OnReceiveInfo?.Invoke((m_lumber >= 20 && m_rock >= 20));
+        }
+
+        private void GeneratePeon(GameObject obj)
+        {
+            PeonPrefab = obj;
         }
 
         private void GenerateMinion(GameObject obj)
@@ -115,19 +122,19 @@ namespace FactoryWarcraft
             }
         }
 
-        private void OnCreatePeon()
+        private void OnCreateLumber()
         {
-            AddressableHelper.LoadAssetAsyncWithCompletionHandler<GameObject>("Minion", GenerateMinion);
+            GenerateMinion(PeonPrefab);
         }
         
         private void OnCreatePeonMiner()
         {
-            AddressableHelper.LoadAssetAsyncWithCompletionHandler<GameObject>("Minion", GenerateMinionMiner);
+            GenerateMinionMiner(PeonPrefab);
         }
         
         private void OnCreatePeonBlackSmith()
         {
-            AddressableHelper.LoadAssetAsyncWithCompletionHandler<GameObject>("Minion", GenerateMinionBlackSmith);
+            GenerateMinionBlackSmith(PeonPrefab);
         }
 
         private async void OnUpdate()
@@ -146,7 +153,7 @@ namespace FactoryWarcraft
                     UI = ((WarcraftHUD)m_UIService).GetTextManager();
                     if (UI)
                     {
-                        UI.btnPeon.onClick.AddListener(OnCreatePeon);
+                        UI.btnPeon.onClick.AddListener(OnCreateLumber);
                         UI.btnPeonMiner.onClick.AddListener(OnCreatePeonMiner);
                         UI.btnPeonBlacksmith.onClick.AddListener(OnCreatePeonBlackSmith);
                         BtnSet = true;
