@@ -45,6 +45,18 @@ MonoBehaviour:
     m_Address: CanvasPopUp
     m_ReadOnly: 0
     m_SerializedLabels: []
+  - m_GUID: c14011b7cdae23b4cba67a0976d53933
+    m_Address: Prefabs/Lumberjack
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+  - m_GUID: e99005da2ac48cd4aabf8663815013fc
+    m_Address: Prefabs/Digger
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+  - m_GUID: deebd27a0a024cb42822b5657deeba92
+    m_Address: Assets/Prefabs/2/Oui 1.prefab
+    m_ReadOnly: 0
+    m_SerializedLabels: []
   m_ReadOnly: 0
   m_Settings: {fileID: 11400000, guid: f85571e7fcd70ac4190d36e8b6377275, type: 2}
   m_SchemaSet:
