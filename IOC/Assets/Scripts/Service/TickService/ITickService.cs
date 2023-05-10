@@ -1,5 +1,4 @@
 ﻿using System;
-using UnityEngine.PlayerLoop;
 
 namespace Service.TickService
 {
@@ -7,5 +6,6 @@ namespace Service.TickService
     {
         void Update();
         public event Action OnUpdate;
+        
     }
 }

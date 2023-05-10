@@ -1,6 +1,7 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.IO;
 using DG.Tweening;
 using TMPro;
 using UnityEngine;
@@ -31,6 +32,7 @@ public class PopupManager : MonoBehaviour
             popupQueue.Enqueue(popup);
         }
         UpdatePopup();
+        
     }
 
     void UpdatePopup()
