@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using Addressables;
@@ -8,12 +9,13 @@ using Service.AudioService;
 using UnityEngine;
 using UnityEngine.Events;
 using static UnityEngine.AddressableAssets.Addressables;
+using Object = UnityEngine.Object;
 
 namespace Service
 {
     public class UICanvasService : IUICanvasSwitchableService
     {
-        [DependsOnService] private ISceneService _sceneService;
+        [DependsOnService] private IGameService _gameService;
 
         [DependsOnService] public ITickeableSwitchableService tickeableService;
 
@@ -48,11 +50,7 @@ namespace Service
                     RectTransform rectTransform = element.GetComponent<RectTransform>(); 
                     rectTransform.anchoredPosition = Vector2.zero;
                 });
-            for (int i = 0; i < 10; i++)
-            {
-                EnqueuePopUpData(new PopUpData("Test", "Description", Random.ColorHSV()));
-            }
-            DequeuePopUpData();
+           
         }
 
 
@@ -85,21 +83,23 @@ namespace Service
         {
             var canvasObject = Object.Instantiate(gameObject);
             var mainMenuManager = canvasObject.GetComponent<MainMenuManager>();
-            mainMenuManager.Init(this, _sceneService);
+            mainMenuManager.Init(this, _gameService);
             EnabledService();
             Release(gameObject);
         }
 
 
-        public void EnabledService()
+        public void EnabledService(Action callback = null)
         {
             isActive = true;
         }
 
-        public void DisabledService()
+        public void DisabledService(Action callback = null)
         {
             isActive = false;
         }
+
+     
 
         public bool GetIsActiveService => isActive;
     }

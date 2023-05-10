@@ -37,6 +37,42 @@ MonoBehaviour:
     m_Address: PopUpCanvas
     m_ReadOnly: 0
     m_SerializedLabels: []
+  - m_GUID: a1a1dd06f0761944f8670d6e305351d1
+    m_Address: Ground
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+  - m_GUID: 1c43b884230f49e46961601f85fd428a
+    m_Address: GameCamera
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+  - m_GUID: 8acdf4cb20d2ddb48a8cd8693669fd45
+    m_Address: Stock
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+  - m_GUID: 73236f4b0a71c8349afe06adccd8d223
+    m_Address: Hub
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+  - m_GUID: 20513f0cabcde654e8c1245c9a20ef63
+    m_Address: Forge
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+  - m_GUID: 41c37845cf78ae249bcd395729fd423e
+    m_Address: Rock
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+  - m_GUID: 8f5ab170d54a84e49befb42515aef0fd
+    m_Address: Tree
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+  - m_GUID: 04fcba39dbc919b488e6fb47161bd896
+    m_Address: HubSO
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+  - m_GUID: 6157357ae15a3c74d9e1991e4f822a62
+    m_Address: TreeSO
+    m_ReadOnly: 0
+    m_SerializedLabels: []
   m_ReadOnly: 0
   m_Settings: {fileID: 11400000, guid: f85571e7fcd70ac4190d36e8b6377275, type: 2}
   m_SchemaSet:

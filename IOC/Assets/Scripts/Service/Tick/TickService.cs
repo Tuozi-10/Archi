@@ -50,12 +50,12 @@ namespace Service
         return GetIsActiveService;
     }
 
-    public void EnabledService()
+    public void EnabledService(Action callback = null)
     {
         isActive = true;
     }
 
-    public void DisabledService()
+    public void DisabledService(Action callback = null)
     {
         isActive = false;
     }

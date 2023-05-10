@@ -209,6 +209,9 @@ public class Compositor : MonoBehaviour
         AddService<ISceneService>(new SceneService());
         AddService<IUICanvasSwitchableService>(new UICanvasService());
         AddService<IFightService>(new FightService());
+        AddService<IBuildingFactoryService>(new BuildingFactoryService());
+        AddService<IAgentFactoryService>(new AgentFactoryService());
+        AddService<IRessourceFactoryService>(new RessourceFactoryService());
     }
 
     private void Awake()

@@ -26,15 +26,11 @@ namespace Service
             uiCanvasService.LoadMainMenu();
             uiCanvasService.LoadPopUpCanvas();
         }
-
-        /*
-        private void GenerateBurger(GameObject gameObject)
+        
+        public void LoadGame()
         {
-            burger = Object.Instantiate(gameObject);
-            fightService.fighter = burger;
-            Release(gameObject);
-            
+            sceneService.LoadScene("GameScene");
+            fightService.StartFight();
         }
-        */
     }
 }

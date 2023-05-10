@@ -20,9 +20,9 @@ public class MainMenuManager : MonoBehaviour
     [SerializeField]
     private Button leftButton;
     
-    public void Init(IUICanvasSwitchableService uiCanvasService,  ISceneService sceneService)
+    public void Init(IUICanvasSwitchableService uiCanvasService,  IGameService sceneService)
     {
-        midTopButton.onClick.AddListener(()=>sceneService.LoadScene("ThirdScene")); 
+        midTopButton.onClick.AddListener(sceneService.LoadGame); 
         
         toggle.onClick .AddListener(new UnityAction((() =>
         {

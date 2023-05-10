@@ -2,6 +2,7 @@
 {
     public interface IGameService : IService
     {
-        
+        void LoadGame();
+
     }
 }
