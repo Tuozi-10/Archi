@@ -1,18 +1,27 @@
 using System.Collections;
 using System.Collections.Generic;
+using _2;
+using Unity.VisualScripting;
 using UnityEngine;
 
-public class LumberJackBehaviour : MonoBehaviour
+public class LumberjackBehaviour : StateMachineComponent
 {
-    // Start is called before the first frame update
-    void Start()
-    {
         
+    public LumberjackBehaviour(Entity owner) : base(owner)
+    {
+    }
+        
+    public override void Init()
+    {
+        ChangeState(States.harvest);
     }
 
-    // Update is called once per frame
-    void Update()
+    protected override void DoHarvest()
     {
-        
+        base.DoHarvest();
+        if (m_entity) // is full, for example, todo true logic
+        {
+            // todo go deposit
+        }
     }
 }
