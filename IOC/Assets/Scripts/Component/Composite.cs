@@ -33,7 +33,7 @@ namespace Components
         {
             foreach (var component in m_components)
             {
-                component.Update();
+                component.TryUpdate();
             }
         }
     }

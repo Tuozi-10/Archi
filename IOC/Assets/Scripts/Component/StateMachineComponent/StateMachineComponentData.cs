@@ -1,8 +1,11 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class StateMachineComponentData : MonoBehaviour
+[Serializable]
+public struct StateMachineComponentData 
 {
-
+    public int StartState;
+    
 }

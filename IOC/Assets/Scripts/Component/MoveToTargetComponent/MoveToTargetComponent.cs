@@ -5,19 +5,26 @@ namespace Components
 {
     public class MoveToTargetComponent : Component
     {
-        private NavMeshAgent agent;
-        
+        private NavMeshAgent _agent;
+        private Transform _destination;
+        private float _speed;
         public override void Init(Entity entity, params object[] args)
         {
             base.Init(entity, args);
-            agent = (NavMeshAgent)entity.AllMonoComponents[EntityMonoComponentEnum.Agent];
-            agent.speed = ((MoveToTargetComponentData)args[0]).Speed;
-          
+            _agent = (NavMeshAgent)entity.AllMonoComponents[EntityMonoComponentEnum.Agent];
+            _speed = ((MoveToTargetComponentData)args[0]).Speed;
+            _destination = (Transform)((Entity)args[1]).AllMonoComponents[EntityMonoComponentEnum.Transform];
         }
 
-        public void MoveToTarget(Vector3 dest)
+        protected override void Enable()
         {
-            agent.SetDestination(dest);
+            base.Enable();
+            _agent.speed = _speed;
+        }
+
+        public void MoveToTarget()
+        {
+            _agent.SetDestination(_destination.position);
         }
     }
     

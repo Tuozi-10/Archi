@@ -6,6 +6,11 @@ namespace Components
 {
 public class StateComponent : Component
 {
-    
+    protected StateMachineComponent _stateMachine;
+    public override void Init(Entity entity, params object[] args)
+    {
+        base.Init(entity, args);
+        _stateMachine = (StateMachineComponent)args[0];
+    }
 } 
 }

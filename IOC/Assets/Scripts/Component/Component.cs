@@ -22,7 +22,7 @@ namespace  Components
             }
         }
 
-        private bool _enabled;
+        private bool _enabled = true;
 
         protected virtual void Enable()
         {
@@ -43,14 +43,20 @@ namespace  Components
 
         public virtual void Init(Entity entity, params object[] args)
         {
-            _enabled = true;
             _entity = entity;
         }
 
-        public virtual void Update()
+        public  bool TryUpdate()
         {
-            if(!Enabled) return;
-         }
+            if(!Enabled) return false;
+            Update();
+            return true;
+        }
+        
+        protected virtual void Update()
+        {
+           
+        }
    
     }
 }

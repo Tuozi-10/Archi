@@ -29,9 +29,6 @@ public class RessourceComponent : Component
         _ressource -= amount;
     }
 
-    public override void Update()
-    {
-     
-    }
+    
     
 }
