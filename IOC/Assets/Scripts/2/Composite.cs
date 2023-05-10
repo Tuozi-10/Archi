@@ -1,12 +1,13 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 
 namespace _2
 {
     public class Composite : MonoBehaviour
     {
-        private List<IComponent> m_components = new List<IComponent>();
+        private List<IComponent> m_components = new();
 
         private void Awake()
         {
@@ -27,12 +28,15 @@ namespace _2
             component.Init();
         }
 
-        public IComponent GetComponent(IComponent type)
+        public T GetComponent<T>()
         {
-            // TODO
-            return null;
+            foreach (var component in m_components.OfType<T>())
+            {
+                return component;
+            }
+
+            return default;
         }
-        
         public void Update()
         {
             UpdateComponents();

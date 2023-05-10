@@ -3,7 +3,7 @@
     public class Entity : Composite
     {
         // data for our entity, hp, gold, stone, wood, speed ... 
-        private entitySO data;
+        public entitySO data;
 
         public Entity(entitySO data)
         {

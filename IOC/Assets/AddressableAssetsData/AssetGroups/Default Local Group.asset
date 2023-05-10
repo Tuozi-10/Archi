@@ -46,15 +46,27 @@ MonoBehaviour:
     m_ReadOnly: 0
     m_SerializedLabels: []
   - m_GUID: c14011b7cdae23b4cba67a0976d53933
-    m_Address: Prefabs/Lumberjack
+    m_Address: Lumberjack
     m_ReadOnly: 0
     m_SerializedLabels: []
   - m_GUID: e99005da2ac48cd4aabf8663815013fc
-    m_Address: Prefabs/Digger
+    m_Address: Digger
     m_ReadOnly: 0
     m_SerializedLabels: []
   - m_GUID: deebd27a0a024cb42822b5657deeba92
-    m_Address: Assets/Prefabs/2/Oui 1.prefab
+    m_Address: Forger
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+  - m_GUID: 1894867de2a6c854f92bd446bfc74b9f
+    m_Address: DiggerSO
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+  - m_GUID: 89187a7ed9a3bfc4ab7d24c5bae88799
+    m_Address: ForgerSO
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+  - m_GUID: 6543dbb30eae45d4aa434a37ead3e553
+    m_Address: LumberjackSO
     m_ReadOnly: 0
     m_SerializedLabels: []
   m_ReadOnly: 0

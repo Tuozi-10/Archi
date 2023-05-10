@@ -5,5 +5,7 @@ using UnityEngine;
 [CreateAssetMenu(fileName = "new Entity", menuName = "SO/Entity")]  
 public class SOEntity : ScriptableObject
 {
-    public int Health;
+    public int speed;
+    public int actionSpeed;
+    public GameObject prefab;
 }

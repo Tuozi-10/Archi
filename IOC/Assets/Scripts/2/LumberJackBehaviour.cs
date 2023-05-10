@@ -1,11 +1,10 @@
-using System.Collections;
-using System.Collections.Generic;
 using _2;
-using Unity.VisualScripting;
 using UnityEngine;
 
 public class LumberjackBehaviour : StateMachineComponent
 {
+    private GameObject hub;
+    private GameObject treeParent;
         
     public LumberjackBehaviour(Entity owner) : base(owner)
     {

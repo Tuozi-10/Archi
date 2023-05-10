@@ -1,18 +1,28 @@
-using System.Collections;
-using System.Collections.Generic;
+using _2;
 using UnityEngine;
+using UnityEngine.AI;
 
-public class DiggerBehaviour : MonoBehaviour
+public class DiggerBehaviour : StateMachineComponent
 {
-    // Start is called before the first frame update
-    void Start()
+    private GameObject hub;
+    private GameObject stoneParent;
+    
+    public DiggerBehaviour(Entity owner) : base(owner)
     {
-        
     }
-
-    // Update is called once per frame
-    void Update()
+   
+    
+    public override void Init()
     {
-        
+        ChangeState(States.harvest);
+    }
+    
+    protected override void DoHarvest()
+    {
+        base.DoHarvest();
+        if (m_entity) // is full, for example, todo true logic
+        {
+            m_entity.GetComponent<NavMeshAgent>().SetDestination(hub.transform.position);
+        }
     }
 }

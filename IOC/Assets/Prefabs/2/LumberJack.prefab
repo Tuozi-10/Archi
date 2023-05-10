@@ -13,7 +13,7 @@ GameObject:
   - component: {fileID: 3426814847610315783}
   - component: {fileID: 112979145180445700}
   - component: {fileID: -2093646313637194347}
-  - component: {fileID: 3121973003564315945}
+  - component: {fileID: 8453981726118177307}
   m_Layer: 0
   m_Name: LumberJack
   m_TagString: Untagged
@@ -122,7 +122,7 @@ NavMeshAgent:
   m_BaseOffset: 1
   m_WalkableMask: 4294967295
   m_ObstacleAvoidanceType: 4
---- !u!114 &3121973003564315945
+--- !u!114 &8453981726118177307
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -131,6 +131,6 @@ MonoBehaviour:
   m_GameObject: {fileID: 59739350425076037}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 1b34a66fe46483f49845474c78eb413e, type: 3}
+  m_Script: {fileID: 11500000, guid: a0f0e6b4fa8e450dbaf580415afcf8aa, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 

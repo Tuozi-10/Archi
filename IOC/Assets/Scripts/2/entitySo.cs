@@ -4,7 +4,8 @@ namespace _2
 {
     public class entitySO : ScriptableObject
     {
-        public int hp { get; private set; }
+        public int speed { get; private set; }
+        public int actionSpeed { get; private set; }
 
         entity GetEntity()
         {
@@ -14,11 +15,13 @@ namespace _2
     
     public class entity
     {
-        public int hp;
+        public int speed;
+        public int actionSpeed;
         
         public entity(entitySO so)
         {
-            hp = so.hp;
+            speed = so.speed;
+            actionSpeed = so.actionSpeed;
         }
     }
 }

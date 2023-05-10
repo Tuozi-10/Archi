@@ -1,18 +1,25 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
-public class ForgerBehaviour : MonoBehaviour
+namespace _2
 {
-    // Start is called before the first frame update
-    void Start()
+    public class ForgerBehaviour : StateMachineComponent
     {
+        private GameObject hub;
+        private GameObject forgeParent;
+        public ForgerBehaviour(Entity owner) : base(owner) { }
         
-    }
+        public override void Init()
+        {
+            ChangeState(States.harvest);
+        }
 
-    // Update is called once per frame
-    void Update()
-    {
-        
+        protected override void DoHarvest()
+        {
+            base.DoHarvest();
+            if (m_entity) // is full, for example, todo true logic
+            {
+                // todo go deposit
+            }
+        }
     }
 }
