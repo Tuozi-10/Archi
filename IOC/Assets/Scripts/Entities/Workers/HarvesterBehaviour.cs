@@ -83,6 +83,8 @@ namespace Entities
                     case "Stone" : gameService.AddStone(inventoryComponent.inventory[m_entity.data.targetResources]);
                         break;
                 }
+
+                inventoryComponent.inventory[m_entity.data.targetResources] = 0;
                 
                 ChangeState(States.Wander);
             }
