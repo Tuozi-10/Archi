@@ -4,6 +4,6 @@ namespace Service
 {
     public interface IGameService : ISwitchableService
     {
-        void ShowBurger();
+        //void ShowBurger();
     }
 }
