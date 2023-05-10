@@ -25,7 +25,7 @@ public class Compositor : MonoSingleton<Compositor>
 
     protected readonly Dictionary<Type, IService> m_services = new Dictionary<Type, IService>();
     protected readonly Dictionary<Type, List<FieldEntry>> m_dependencySlots = new Dictionary<Type, List<FieldEntry>>();
-    protected event Action OnTickAction;
+    public static event Action OnTickAction;
 
     private bool ResolveDependencies()
     {
@@ -213,10 +213,11 @@ public class Compositor : MonoSingleton<Compositor>
     private void CreateAndWireObjects()
     {
         AddService<IGameService>(new GameService());
-        AddService<IAudioService>(new AudioService());
-        AddService<ISceneService>(new SceneService());
-        AddService<IFightService>(new FightService());
+       // AddService<IAudioService>(new AudioService());
+      //  AddService<ISceneService>(new SceneService());
+      //  AddService<IFightService>(new FightService());
         AddService<IUIService>(new UIService());
+        AddService<IEntitiesFactoryService>(new EntitiesFactoryService());
     }
 
     private void Awake()

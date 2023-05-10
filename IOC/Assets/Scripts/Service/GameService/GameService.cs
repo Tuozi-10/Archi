@@ -1,7 +1,5 @@
 ﻿using Addressables;
 using Attributes;
-using Service.AudioService;
-using Service.SceneService;
 using UnityEngine;
 using static UnityEngine.AddressableAssets.Addressables;
 
@@ -9,44 +7,29 @@ namespace Service
 {
     public class GameService : IGameService
     {
-        [DependsOnService] 
-        private IAudioService m_audioService;
+        public LevelAssigner level;
         
-        [DependsOnService] 
-        private ISceneService m_sceneService;
-        
-        [DependsOnService] 
-        private IFightService m_fightService;
-
-        //[ServiceInit]
+        [ServiceInit]
         private void Initialize()
         {
-            m_audioService.PlaySound(0);
-            AddressableHelper.LoadAssetAsyncWithCompletionHandler<GameObject>("LeBurger", GenerateBurger);
-            AddressableHelper.LoadAssetAsyncWithCompletionHandler<GameObject>("Menu", LoadMenu);
+            AddressableHelper.LoadAssetAsyncWithCompletionHandler<GameObject>("Level", GenerateLevel);
         }
 
-        private void GenerateBurger(GameObject gameObject)
+        private void GenerateLevel(GameObject gameObject)
         {
-            var burger = Object.Instantiate(gameObject);
-            m_fightService.SetFighter(burger);
+            var levelObj = Object.Instantiate(gameObject);
+            level = levelObj.GetComponent<LevelAssigner>();
             Release(gameObject);
         }
 
-        private void LoadMenu(GameObject menuObj)
+        public Transform GetWorkerSpawnPosition()
         {
-            var menu = Object.Instantiate(menuObj).GetComponent<MenuAssigner>();
-            
-            menu.AssignToggleButtonMethod(SwitchSceneService,true);
+            return level.workerSpawnPosition;
+        }
 
-            void SwitchSceneService()
-            {
-                m_fightService.Toggle();
-            }
-            
-            menu.AssignSceneButtonMethod(()=>m_fightService.Toggle());
-            
-            Release(menuObj);
+        public Transform GetFreeWorkPlace()
+        {
+            return level.GetResourcePoint();
         }
     }
 }

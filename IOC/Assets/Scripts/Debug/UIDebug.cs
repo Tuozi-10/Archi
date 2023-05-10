@@ -22,8 +22,7 @@ public class UIDebug : MonoSingleton<UIDebug>
             return;
         }
         
-        popUpQueue.Dequeue();
-        popUpText.text = popUpQueue.Peek();
+        popUpText.text = popUpQueue.Dequeue();
         
         if(popUpQueue.Count <= 0) popUpObj.SetActive(false);
     }

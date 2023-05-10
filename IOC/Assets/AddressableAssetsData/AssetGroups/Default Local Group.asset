@@ -53,6 +53,38 @@ MonoBehaviour:
     m_Address: PopUp
     m_ReadOnly: 0
     m_SerializedLabels: []
+  - m_GUID: 24dec0a81b2a35245a30b14bdd65b093
+    m_Address: HarvesterData
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+  - m_GUID: 655d4bbeba0b70749bbaa25b21e3cb3d
+    m_Address: Harvester
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+  - m_GUID: b4fcacf5fd5b284489a6d5a11eb08fb9
+    m_Address: HUD
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+  - m_GUID: ca018ae66fb8a8741b3cfbc8188fc137
+    m_Address: Blacksmith
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+  - m_GUID: 2b5c870575480dc4c9a1ff84d8557cb0
+    m_Address: Lumberjack
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+  - m_GUID: 7480f4164a51675479c8899dfd47cb1d
+    m_Address: BlacksmithData
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+  - m_GUID: bfea7f1c9ba3a2d46bce05a0d8ae00d3
+    m_Address: LumberjackData
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+  - m_GUID: b464fe0bfb58fc74e9360f8898522e30
+    m_Address: Level
+    m_ReadOnly: 0
+    m_SerializedLabels: []
   m_ReadOnly: 0
   m_Settings: {fileID: 11400000, guid: f85571e7fcd70ac4190d36e8b6377275, type: 2}
   m_SchemaSet:

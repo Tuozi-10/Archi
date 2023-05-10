@@ -1,6 +1,7 @@
 using System.Collections.Generic;
 using Addressables;
 using Attributes;
+using DefaultNamespace;
 using TMPro;
 using UnityEngine;
 
@@ -9,22 +10,38 @@ namespace Service
     public class UIService : IUIService
     {
         private GameObject mainMenu;
+        private HUDAssigner hud;
         private bool isLoading;
-       
+        
         private Transform uiMenu;
 
-      [ServiceInit]
-        public void DisplayMainMenu()
+        [DependsOnService] private IEntitiesFactoryService entitiesFactoryService;
+        
+
+      [ServiceInit] public void Init()
         {
-            if(isLoading) return;
-            if(mainMenu != null) mainMenu.SetActive(true);
-            else
-            {
-                AddressableHelper.LoadAssetAsyncWithCompletionHandler<GameObject>("UIMenu",GenerateUIMenu);
-            }
-            
+            AddressableHelper.LoadAssetAsyncWithCompletionHandler<GameObject>("HUD", GenerateHUD);
         }
 
+        private void GenerateHUD(GameObject obj)
+        {
+            var hudObj = Object.Instantiate(obj);
+            hud = hudObj.GetComponent<HUDAssigner>();
+            
+            hud.AssignHarvesterButton(entitiesFactoryService.CreateHarvester);
+            hud.AssignLumberjackButton(entitiesFactoryService.CreateLumberjack);
+            hud.AssignBlacksmithButton(entitiesFactoryService.CreateBlacksmith);
+        }
+
+        public void UpdateResourcesUI(ResourcesSO so, int count)
+        {
+            switch (so.resourceName)
+            {
+                case "Wood": hud.UpdateWoodText($"{count}"); break;
+                case "Stone" : hud.UpdateStoneText($"{count}"); break;
+            }
+        }
+        
         private void GenerateUIMenu(GameObject gameObject)
         {
             var uiMenu = Object.Instantiate(gameObject);
