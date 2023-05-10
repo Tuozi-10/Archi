@@ -29,12 +29,28 @@ MonoBehaviour:
     m_Address: InGameCanvas
     m_ReadOnly: 0
     m_SerializedLabels: []
-  - m_GUID: 0595bb214cb6af94184206383d29d25e
-    m_Address: Entity01
-    m_ReadOnly: 0
-    m_SerializedLabels: []
   - m_GUID: 1139202601dc496459eaf7cabe376e84
     m_Address: PopUp
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+  - m_GUID: 818e4d33c4e49db43b731e775c3eb50a
+    m_Address: HarvesterSO
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+  - m_GUID: da9f705f5f47551498c6300f10273555
+    m_Address: LumberjackSO
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+  - m_GUID: d43629dbdd4c4ae4a9f1698b16579259
+    m_Address: Harvester
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+  - m_GUID: 774980467325bf04584e9b24fc8c2844
+    m_Address: Lumberjack
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+  - m_GUID: e07286dcbb0ee314aa9178d5a354b096
+    m_Address: SceneSetup
     m_ReadOnly: 0
     m_SerializedLabels: []
   m_ReadOnly: 0

@@ -33,8 +33,7 @@ public class FightService : SwitchableService, IFightService
 
         Release(go);
     }
-
-
+    
     public override void Enable()
     {
         base.Enable();

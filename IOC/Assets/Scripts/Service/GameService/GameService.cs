@@ -19,6 +19,7 @@ namespace Service
         [DependsOnService] private IUIService m_uiService;
         [DependsOnService] private ITickableService m_tickableService;
         [DependsOnService] private IFightService m_fightService;
+        [DependsOnService] private IEntitiesFactoryService m_factoryService;
 
         [ServiceInit]
         private void Initialize()
@@ -40,8 +41,7 @@ namespace Service
         {
             m_sceneService.LoadScene(2);
             m_uiService.Enable();
-            m_fightService.Enable();
-            m_tickableService.Enable();
+            m_factoryService.Enable();
         }
     }
 }

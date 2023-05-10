@@ -1,9 +1,10 @@
 using Attributes;
-using Cysharp.Threading.Tasks;
 using Service;
 using Service.FightService;
 using Service.TickableService;
+using UnityEditor.VersionControl;
 using UnityEngine;
+using Task = System.Threading.Tasks.Task;
 
 public class TickableService : SwitchableService, ITickableService
 {
@@ -26,7 +27,7 @@ public class TickableService : SwitchableService, ITickableService
         {
             if (!isActive) return;
             deltaTime = Time.time - time;
-            await UniTask.DelayFrame(0);
+            await Task.Yield();
             time += deltaTime;
             OnUpdate();
         }
@@ -36,6 +37,7 @@ public class TickableService : SwitchableService, ITickableService
     {
         //m_fightService.RotateFighter();
 
+        return;
         if (timer >= duration)
         {
             m_fightService.CreateFighter();
@@ -53,6 +55,5 @@ public class TickableService : SwitchableService, ITickableService
     public override void Disable()
     {
         base.Disable();
-        
     }
 }

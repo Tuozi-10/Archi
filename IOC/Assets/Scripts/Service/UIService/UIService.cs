@@ -48,8 +48,6 @@ namespace Service.UIService
 
         public void DisplayNextPopUp()
         {
-            Debug.Log(popUps.Count);
-
             if (popUps.Count == 0)
             {
                 Debug.LogWarning("There's no pop-up to display!");
