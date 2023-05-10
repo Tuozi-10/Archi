@@ -24,7 +24,7 @@ namespace Service
         private RectTransform panel = null;
 
         private Queue<GameObject> pool = new Queue<GameObject>();
-        
+
         private GameObject root = null;
 
         public void LoadUI()
@@ -43,7 +43,11 @@ namespace Service
             log.Log(pool.Count.ToString());
             GameObject go = (obj as GameObject);
             Button btn = go.transform.GetChild(0).GetChild(0).GetComponent<Button>();
-            btn.onClick.AddListener(() => { Reshow(); GetFromPool(); });
+            btn.onClick.AddListener(() =>
+            {
+                Reshow();
+                GetFromPool();
+            });
             pool.Enqueue(obj as GameObject);
             if (obj is GameObject t)
                 t.SetActive(false);
@@ -53,7 +57,7 @@ namespace Service
         {
             root.SetActive(false);
         }
-        
+
         public GameObject GetFromPool()
         {
             if (pool.Count > 0)
@@ -103,7 +107,7 @@ namespace Service
             else
             {
                 panel.DOMoveX(100f, 0.5f).SetEase(Ease.OutBack);
-                //nullBut.GetComponent<RectTransform>().DoAnchorPosX(20f, 0.5f).SetEase(Ease.OutBack);
+                nullBut.GetComponent<RectTransform>().DOMoveX(20f, 0.5f).SetEase(Ease.OutBack);
                 PrintBtn(true);
             }
         }
@@ -119,7 +123,7 @@ namespace Service
         {
             if (!mainMenu) return;
             panel.DOMoveX(-305f, 0.5f).SetEase(Ease.InBack);
-            //nullBut.GetComponent<RectTransform>().DoAnchorPosX(0f, 0.5f).SetEase(Ease.OutBack);
+            nullBut.GetComponent<RectTransform>().DOMoveX(0f, 0.5f).SetEase(Ease.OutBack);
             PrintBtn(false);
         }
     }
