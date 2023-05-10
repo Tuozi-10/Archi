@@ -57,6 +57,30 @@ MonoBehaviour:
     m_Address: PopUp
     m_ReadOnly: 0
     m_SerializedLabels: []
+  - m_GUID: fd6174a997e3cd44c9dbf87590604bbd
+    m_Address: RTSMap
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+  - m_GUID: 62a322828f969994396985c9273b0578
+    m_Address: RTSCanvas
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+  - m_GUID: 4978488948e0d054b8f3b087307a8aad
+    m_Address: RTSUnit
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+  - m_GUID: 6b5ec1a4aaa00904787b690129a557d6
+    m_Address: ForgerSO
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+  - m_GUID: d6e31fa50a7cf954c9e31059ad380ede
+    m_Address: RockGathererSO
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+  - m_GUID: fc9c10aef3eb32e41aa17907aa85e933
+    m_Address: WoodGathererSO
+    m_ReadOnly: 0
+    m_SerializedLabels: []
   m_ReadOnly: 0
   m_Settings: {fileID: 11400000, guid: f85571e7fcd70ac4190d36e8b6377275, type: 2}
   m_SchemaSet:

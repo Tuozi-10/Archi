@@ -213,19 +213,11 @@ public class Compositor : MonoBehaviour
 
     private void CreateAndWireObjects()
     {
-        AddService<IGameService>(new GameService());
+        AddService<IGameService>(new RTSService());
         
-        AddService<IAudioService>(new AudioService());
+        AddService<IEntitiesFactoryService>(new EntitiesFactoryService());
         
-        //AddService<IMenuService>(new MenuService());
-        
-        AddService<IUIService>(new UIService());
-        
-        AddService<ISceneService>(new SceneService());
-        
-        AddService<IPopUpService>(new PopUpService());
-        
-        //AddService<IFightService>(new FightService());
+        AddService<IUIService>(new RTSUIService());
     }
 
     private void Awake()
