@@ -12,4 +12,5 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c5074fdeb7794ae29d96105f94993300, type: 3}
   m_Name: Wood
   m_EditorClassIdentifier: 
+  resourceName: Wood
   maxStack: 40

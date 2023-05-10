@@ -6,5 +6,8 @@ namespace Service
     {
         public Transform GetWorkerSpawnPosition();
         public Transform GetFreeWorkPlace();
+
+        public void AddWood(int amount);
+        public void AddStone(int amount);
     }
 }

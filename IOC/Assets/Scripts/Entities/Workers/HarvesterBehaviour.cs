@@ -75,6 +75,15 @@ namespace Entities
             
             if (distance < 0.5f)
             {
+                switch (m_entity.data.targetResources.resourceName)
+                {
+                    case "Wood": gameService.AddWood(inventoryComponent.inventory[m_entity.data.targetResources]);
+                        break;
+                    
+                    case "Stone" : gameService.AddStone(inventoryComponent.inventory[m_entity.data.targetResources]);
+                        break;
+                }
+                
                 ChangeState(States.Wander);
             }
         }

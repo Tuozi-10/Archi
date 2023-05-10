@@ -33,9 +33,6 @@ namespace Component
                 inventory[rs] = rs.maxStack;
             }
             
-            Debug.Log(inventory[rs]);
-            
-            uiService.UpdateResourcesUI(rs, inventory[rs]);
             return false;
         }
         

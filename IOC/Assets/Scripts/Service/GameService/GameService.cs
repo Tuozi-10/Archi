@@ -8,6 +8,10 @@ namespace Service
     public class GameService : IGameService
     {
         public LevelAssigner level;
+
+        [DependsOnService] private IUIService uiService;
+        private int woodAmount;
+        private int stoneAmount;
         
         [ServiceInit]
         private void Initialize()
@@ -31,5 +35,18 @@ namespace Service
         {
             return level.GetResourcePoint();
         }
+
+        public void AddWood(int amount)
+        {
+            woodAmount += amount;
+            
+            uiService.UpdateResourcesUI("Wood", woodAmount);
+        }
+
+        public void AddStone(int amount)
+        {
+            stoneAmount += amount;
+            
+            uiService.UpdateResourcesUI("Stone", stoneAmount);        }
     }
 }

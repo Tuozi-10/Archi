@@ -4,7 +4,7 @@ namespace Service
 {
     public interface IUIService : IService
     {
-        public void UpdateResourcesUI(ResourcesSO so, int count);
+        public void UpdateResourcesUI(string resource, int count);
     }
 }
 

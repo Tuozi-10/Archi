@@ -1,7 +1,5 @@
-using System.Collections.Generic;
 using Addressables;
 using Attributes;
-using DefaultNamespace;
 using TMPro;
 using UnityEngine;
 
@@ -31,11 +29,15 @@ namespace Service
             hud.AssignHarvesterButton(entitiesFactoryService.CreateHarvester);
             hud.AssignLumberjackButton(entitiesFactoryService.CreateLumberjack);
             hud.AssignBlacksmithButton(entitiesFactoryService.CreateBlacksmith);
+            
+            
+            UpdateResourcesUI("Wood", 0);
+            UpdateResourcesUI("Stone", 0);
         }
 
-        public void UpdateResourcesUI(ResourcesSO so, int count)
+        public void UpdateResourcesUI(string resource, int count)
         {
-            switch (so.resourceName)
+            switch (resource)
             {
                 case "Wood": hud.UpdateWoodText($"{count}"); break;
                 case "Stone" : hud.UpdateStoneText($"{count}"); break;
