@@ -22,7 +22,7 @@ namespace  Components
             }
         }
 
-        private bool _enabled = true;
+        private bool _enabled;
 
         protected virtual void Enable()
         {

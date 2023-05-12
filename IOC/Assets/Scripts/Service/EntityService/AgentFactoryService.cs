@@ -10,7 +10,6 @@ using Object = UnityEngine.Object;
 
 namespace Service
 {
-    
     public class AgentFactoryService : IAgentFactoryService
     {
         private AgentSO _lumberjackSO;
@@ -67,21 +66,51 @@ namespace Service
         {
             var lumberjack = Object.Instantiate(_agentPrefab, pos, Quaternion.identity);
             lumberjack.Init();
-            var agentBehaviour = lumberjack.AddComponent(new StateMachineComponent());
-            agentBehaviour.Init(lumberjack);
+
             var dropTimeComponent = lumberjack.AddComponent(new TimerComponent());
             dropTimeComponent.Init(lumberjack, _lumberjackSO.DropTimeComponentData);
+
             var harvestTimeComponent = lumberjack.AddComponent(new TimerComponent());
             harvestTimeComponent.Init(lumberjack, _lumberjackSO.HarvestTimeComponentData);
+
             var ressourceComponent = lumberjack.AddComponent(new RessourceComponent());
             ressourceComponent.Init(lumberjack, _lumberjackSO.RessourceComponentData);
+
             var steelRessourceComponent = lumberjack.AddComponent(new SteelRessourceComponent());
             steelRessourceComponent.Init(lumberjack,
                 _lumberjackSO.SteelRessourceComponentData, ressourceComponent);
+
             var dropRessourceComponent = lumberjack.AddComponent(new DropRessourceComponent());
-                dropRessourceComponent.Init(lumberjack, ressourceComponent);
-                var moveToTargetComponent = lumberjack.AddComponent(new MoveToTargetComponent());
-               moveToTargetComponent.Init(lumberjack, _lumberjackSO.MoveToTargetComponentData);
+            dropRessourceComponent.Init(lumberjack, ressourceComponent);
+            var moveToRessourceComponent = lumberjack.AddComponent(new MoveToTargetComponent());
+            moveToRessourceComponent.Init(lumberjack, _lumberjackSO.MoveToTargetComponentData);
+
+            var moveToDropComponent = lumberjack.AddComponent(new MoveToTargetComponent());
+            moveToDropComponent.Init(lumberjack, _lumberjackSO.MoveToTargetComponentData);
+            
+            
+            var compareDistanceComponent = lumberjack.AddComponent(new CompareDistanceComponent());
+         //  compareDistanceComponent.Init(lumberjack, );
+            
+            var agentBehaviour = lumberjack.AddComponent(new StateMachineComponent());
+            var idle = new AgentIdleStateComponent();
+            idle.Init(lumberjack, ressourceComponent);
+            var harvest = new AgentHarvestStateComponent();
+            harvest.Init(lumberjack, harvestTimeComponent, steelRessourceComponent);
+            
+            var drop = new AgentDropStateComponent();
+            drop.Init(lumberjack, dropTimeComponent, dropRessourceComponent);
+            /*
+            var goToRessource = new AgentGoToRessourceStateComponent();
+            goToRessource.Init(lumberjack, moveToTargetComponent, compareDistanceComponent );
+            var goToDrop = new AgentGoToDropStateComponent(lumberjack, goto, compareDistanceComponent);
+            agentBehaviour.Init(lumberjack, new StateComponent[]
+                {
+
+                }
+            );
+            lumberjack.AddComponent(new AgentDropStateComponent());
+            */
             return lumberjack;
         }
     }

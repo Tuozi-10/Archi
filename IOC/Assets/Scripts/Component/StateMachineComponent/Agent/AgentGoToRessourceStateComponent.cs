@@ -9,6 +9,8 @@ namespace Components
         private MoveToTargetComponent _moveToTargetComponent;
         private CompareDistanceComponent _compareDistanceComponent;
 
+
+        /// <param name="args"> stateMachine, moveToTargetComponent, compareDistanceComponent</param>
         public override void Init(Entity entity, params object[] args)
         {
             base.Init(entity, args);

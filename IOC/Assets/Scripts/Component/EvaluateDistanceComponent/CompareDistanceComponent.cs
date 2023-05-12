@@ -11,6 +11,9 @@ namespace Components
         private Transform _secondPosition;
         private float ValueToCompare;
         private event Func<float, bool> _compareFunction;
+        
+
+        /// <param name="args"> compareDistanceComponentData, firstPosition, secondPosition</param>
         public override void Init(Entity entity, params object[] args)
         {
             base.Init(entity, args);

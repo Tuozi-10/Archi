@@ -8,6 +8,7 @@ namespace Components
     {
         private RessourceComponent _ressourceComponent;
 
+        /// <param name="args"> stateMachine, ressourceComponent </param>
         public override void Init(Entity entity, params object[] args)
         {
             base.Init(entity, args);

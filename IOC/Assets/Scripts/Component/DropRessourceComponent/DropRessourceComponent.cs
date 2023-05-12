@@ -8,7 +8,7 @@ namespace Components
 public class DropRessourceComponent : Component
 {
     private RessourceComponent _ressourceComponentOwner;
-  
+    private RessourceComponent _ressourceComponent;
 
     public override void Init(Entity entity, params object[] args)
     {
@@ -16,9 +16,9 @@ public class DropRessourceComponent : Component
         _ressourceComponentOwner = (RessourceComponent)args[0];
     }
 
-    public void Drop(RessourceComponent ressourceComponent)
+    public void Drop()
     {
-        ressourceComponent.IncreaseRessource(_ressourceComponentOwner.Ressource);
+        _ressourceComponent.IncreaseRessource(_ressourceComponentOwner.Ressource);
         _ressourceComponentOwner.DecreaseRessource(_ressourceComponentOwner.Ressource);
     }
     
