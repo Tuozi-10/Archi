@@ -6,23 +6,23 @@ namespace Components
 {
     public class AgentHarvestStateComponent :StateComponent
     {
-        private TimerComponent timerComponent;
-        private SteelRessourceComponent steelRessourceComponent;
+        private TimerComponent _timerComponent;
+        private SteelRessourceComponent _steelRessourceComponent;
         
         
-        /// <param name="args"> stateMachine, timerComponent, steelRessourceComponent</param>
-        public override void Init(Entity entity, params object[] args)
+       
+        public void Init(Entity entity,StateMachineComponent stateMachineComponent, TimerComponent timerComponent, SteelRessourceComponent steelRessourceComponent)
         {
-            base.Init(entity, args);
-            timerComponent =(TimerComponent) args[1];
-            steelRessourceComponent = (SteelRessourceComponent)args[2];
+            Init(entity, stateMachineComponent);
+            _timerComponent = timerComponent;
+            _steelRessourceComponent = steelRessourceComponent;
         }
         
         protected override void Enable()
         {
             base.Enable();
-            steelRessourceComponent.SteelRessource();
-            timerComponent.LaunchTimer();
+            _steelRessourceComponent.SteelRessource();
+            _timerComponent.LaunchTimer();
         }
 
         public void EndHarvest()

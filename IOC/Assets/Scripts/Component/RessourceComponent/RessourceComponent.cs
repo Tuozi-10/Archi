@@ -13,15 +13,15 @@ public class RessourceComponent : Component
     private int _ressource;
 
 
-    public override void Init(Entity entity, params object[] args)
+    public void Init(Entity entity, RessourceComponentData data)
     {
-        base.Init(entity);
-     _ressource = ((RessourceComponentData)args[0]).StartRessourceCount;
+        Init(entity);
+     _ressource = data.StartRessourceCount;
     }
 
     public void IncreaseRessource(int amount)
     {
-        _ressource += amount; 
+        _ressource += amount;
     }
 
     public void DecreaseRessource(int amount)

@@ -8,18 +8,17 @@ namespace Components
     {
         private RessourceComponent _ressourceComponent;
 
-        /// <param name="args"> stateMachine, ressourceComponent </param>
-        public override void Init(Entity entity, params object[] args)
+        public  void Init(Entity entity, StateMachineComponent stateMachineComponent, RessourceComponent ressourceComponent)
         {
-            base.Init(entity, args);
-            _ressourceComponent = (RessourceComponent)args[1];
+            Init(entity, stateMachineComponent);
+            _ressourceComponent = ressourceComponent;
         }
 
         protected override void Enable()
         {
             base.Enable();
             if (_ressourceComponent.Ressource > 0)
-                _stateMachine.ChangeState((int)AgentStateEnum.GoToDrop);
+                _stateMachine.ChangeState((int)AgentStateEnum.GoToRessource);
         }
     }
 }

@@ -7,10 +7,12 @@ namespace Components
 public class StateComponent : Component
 {
     protected StateMachineComponent _stateMachine;
-    public override void Init(Entity entity, params object[] args)
+     protected void Init(Entity entity, StateMachineComponent stateMachine)
     {
-        base.Init(entity, args);
-        _stateMachine = (StateMachineComponent)args[0];
+       Init(entity, false);
+       _stateMachine = stateMachine;
     }
+     
+     
 } 
 }

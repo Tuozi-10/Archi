@@ -7,24 +7,24 @@ namespace Components
 {
 public class SteelRessourceComponent : Component
 {
-    private RessourceComponent ressourceComponentOwner;
-    private RessourceComponent ressourceComponent;
+    private RessourceComponent _ressourceComponentOwner;
+    private RessourceComponent _ressourceComponent;
     private int steelAmount;
     
-    public override void Init(Entity entity, params object[] args)
+    public void Init(Entity entity, SteelRessourceComponentData data, RessourceComponent owner, RessourceComponent ressourceComponent)
     {
-        base.Init(entity, args);
-        steelAmount =((SteelRessourceComponentData) args[0]).SteelAmount;
-        ressourceComponentOwner =(RessourceComponent) args[1];
-        ressourceComponent = (RessourceComponent)args[2];
+        Init(entity);
+        steelAmount =(data).SteelAmount;
+        _ressourceComponentOwner =owner;
+        _ressourceComponent = ressourceComponent;
     }
  
 
     public void SteelRessource()
     {
-        var currentRessource = ressourceComponent.Ressource;
-        ressourceComponent.DecreaseRessource(steelAmount);
-        ressourceComponentOwner.IncreaseRessource(currentRessource-ressourceComponent.Ressource);
+        var currentRessource = _ressourceComponent.Ressource;
+        _ressourceComponent.DecreaseRessource(steelAmount);
+        _ressourceComponentOwner.IncreaseRessource(currentRessource-_ressourceComponent.Ressource);
     }
     
 }

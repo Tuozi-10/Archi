@@ -73,6 +73,14 @@ MonoBehaviour:
     m_Address: TreeSO
     m_ReadOnly: 0
     m_SerializedLabels: []
+  - m_GUID: 6a44369061dcd0040b70d4b4a4c201b2
+    m_Address: LumberJackSO
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+  - m_GUID: dff8a9e07f6367746841472703096913
+    m_Address: Agent
+    m_ReadOnly: 0
+    m_SerializedLabels: []
   m_ReadOnly: 0
   m_Settings: {fileID: 11400000, guid: f85571e7fcd70ac4190d36e8b6377275, type: 2}
   m_SchemaSet:

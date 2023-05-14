@@ -60,6 +60,7 @@ namespace Service
         public Entity CreateTree(Vector3 pos)
         {
             var tree = Object.Instantiate(_treePrefab, pos, Quaternion.identity);
+            tree.Init();
             tree.AddComponent(new RessourceComponent()).Init(tree, _treeSO.RessourceComponentData);
             return tree;
         }

@@ -5,6 +5,7 @@ using Addressables;
 using Attributes;
 using Components;
 using UnityEngine;
+using UnityEngine.AI;
 using static UnityEngine.AddressableAssets.Addressables;
 using Object = UnityEngine.Object;
 
@@ -21,6 +22,8 @@ namespace Service
         private const string _lumberjackSOAdressableName = "LumberJackSO";
 
 
+        [DependsOnService] private IFightService _fightService;
+        
         [ServiceInit]
         void Init()
         {
@@ -44,6 +47,7 @@ namespace Service
 
         private void SetAgentPrefab(GameObject entity)
         {
+            
             _agentPrefab = entity.GetComponent<Entity>();
             loaderAdressable.CheckAmountLoad();
         }
@@ -62,55 +66,68 @@ namespace Service
             throw new NotImplementedException();
         }
 
+   
+
         public Entity CreateLumberjack(Vector3 pos)
         {
             var lumberjack = Object.Instantiate(_agentPrefab, pos, Quaternion.identity);
             lumberjack.Init();
 
             var dropTimeComponent = lumberjack.AddComponent(new TimerComponent());
-            dropTimeComponent.Init(lumberjack, _lumberjackSO.DropTimeComponentData);
-
             var harvestTimeComponent = lumberjack.AddComponent(new TimerComponent());
-            harvestTimeComponent.Init(lumberjack, _lumberjackSO.HarvestTimeComponentData);
-
             var ressourceComponent = lumberjack.AddComponent(new RessourceComponent());
             ressourceComponent.Init(lumberjack, _lumberjackSO.RessourceComponentData);
-
+            
             var steelRessourceComponent = lumberjack.AddComponent(new SteelRessourceComponent());
+            RessourceComponent ressourceComponentOfTree = _fightService.GetClosestRessource().GetComponent<RessourceComponent>();
             steelRessourceComponent.Init(lumberjack,
-                _lumberjackSO.SteelRessourceComponentData, ressourceComponent);
+                _lumberjackSO.SteelRessourceComponentData, ressourceComponent,
+                ressourceComponentOfTree);
 
             var dropRessourceComponent = lumberjack.AddComponent(new DropRessourceComponent());
-            dropRessourceComponent.Init(lumberjack, ressourceComponent);
+            dropRessourceComponent.Init(lumberjack, ressourceComponent, _fightService.GetHub().GetComponent<RessourceComponent>());
             var moveToRessourceComponent = lumberjack.AddComponent(new MoveToTargetComponent());
-            moveToRessourceComponent.Init(lumberjack, _lumberjackSO.MoveToTargetComponentData);
+            moveToRessourceComponent.Init(lumberjack, _lumberjackSO.MoveToTargetComponentData,
+                _fightService.GetClosestRessource());
 
             var moveToDropComponent = lumberjack.AddComponent(new MoveToTargetComponent());
-            moveToDropComponent.Init(lumberjack, _lumberjackSO.MoveToTargetComponentData);
+            moveToDropComponent.Init(lumberjack, _lumberjackSO.MoveToTargetComponentData,
+                _fightService.GetHub());
             
+            var compareDistanceRessource = lumberjack.AddComponent(new CompareDistanceComponent());
+            compareDistanceRessource.Init(lumberjack, _lumberjackSO.DistanceComponentData,
+                (Transform)lumberjack.AllMonoComponents[EntityMonoComponentEnum.Transform],
+                (Transform)_fightService.GetClosestRessource().AllMonoComponents[EntityMonoComponentEnum.Transform]);
             
-            var compareDistanceComponent = lumberjack.AddComponent(new CompareDistanceComponent());
-         //  compareDistanceComponent.Init(lumberjack, );
+            var compareDistanceDrop = lumberjack.AddComponent(new CompareDistanceComponent());
+            compareDistanceDrop.Init(lumberjack, _lumberjackSO.DistanceComponentData,
+                (Transform)lumberjack.AllMonoComponents[EntityMonoComponentEnum.Transform],
+                (Transform)_fightService.GetHub().AllMonoComponents[EntityMonoComponentEnum.Transform]);
+
             
             var agentBehaviour = lumberjack.AddComponent(new StateMachineComponent());
-            var idle = new AgentIdleStateComponent();
-            idle.Init(lumberjack, ressourceComponent);
-            var harvest = new AgentHarvestStateComponent();
-            harvest.Init(lumberjack, harvestTimeComponent, steelRessourceComponent);
+            var idle =  lumberjack.AddComponent(new AgentIdleStateComponent());
+            idle.Init(lumberjack, agentBehaviour,ressourceComponentOfTree);
+            var harvest =   lumberjack.AddComponent(new AgentHarvestStateComponent());
+            harvest.Init(lumberjack,agentBehaviour, harvestTimeComponent, steelRessourceComponent);
+
+            var drop =  lumberjack.AddComponent( new AgentDropStateComponent());
+            drop.Init(lumberjack, agentBehaviour, dropTimeComponent, dropRessourceComponent);
+
+            dropTimeComponent.Init(lumberjack, _lumberjackSO.DropTimeComponentData, drop.EndDrop);
+
+            harvestTimeComponent.Init(lumberjack, _lumberjackSO.HarvestTimeComponentData,harvest.EndHarvest);
             
-            var drop = new AgentDropStateComponent();
-            drop.Init(lumberjack, dropTimeComponent, dropRessourceComponent);
-            /*
-            var goToRessource = new AgentGoToRessourceStateComponent();
-            goToRessource.Init(lumberjack, moveToTargetComponent, compareDistanceComponent );
-            var goToDrop = new AgentGoToDropStateComponent(lumberjack, goto, compareDistanceComponent);
+            var goToRessource =  lumberjack.AddComponent(new AgentGoToRessourceStateComponent());
+            goToRessource.Init(lumberjack,agentBehaviour, moveToRessourceComponent,  compareDistanceRessource);
+            var goToDrop =  lumberjack.AddComponent(new AgentGoToDropStateComponent());
+            goToDrop.Init(lumberjack, agentBehaviour, moveToDropComponent,  compareDistanceDrop);
             agentBehaviour.Init(lumberjack, new StateComponent[]
                 {
-
-                }
+                    idle, harvest, drop, goToRessource, goToDrop
+                }, _lumberjackSO.StateMachineComponentData
             );
             lumberjack.AddComponent(new AgentDropStateComponent());
-            */
             return lumberjack;
         }
     }

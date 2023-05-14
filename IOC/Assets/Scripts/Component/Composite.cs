@@ -8,19 +8,25 @@ namespace Components
     public class Composite : MonoBehaviour
     {
         
-        private List<Component> m_components = new List<Component>();
+        private List<Component> _allComponents = new List<Component>();
 
-        public Component AddComponent(Component component)
+        public T AddComponent<T>(T component) where T : Component
         {
-            m_components.Add(component);
+            _allComponents.Add(component);
             return component;
 
         }
         
 
-        public Component GetComponent(Component type)
+        public T GetComponent<T>() where T : Component
         {
-            // TODO
+            for (int i = 0; i < _allComponents.Count; i++)
+            {
+                if (_allComponents[i] is T componentValided)
+                {
+                    return componentValided;
+                }
+            }
             return null;
         }
         
@@ -31,7 +37,7 @@ namespace Components
 
         private void UpdateComponents()
         {
-            foreach (var component in m_components)
+            foreach (var component in _allComponents)
             {
                 component.TryUpdate();
             }

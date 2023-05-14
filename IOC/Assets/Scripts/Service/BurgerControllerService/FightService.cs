@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using Addressables;
 using Attributes;
+using Components;
 using UnityEngine;
 using UnityEngine.AI;
 
@@ -11,10 +12,13 @@ namespace Service
     {
         [DependsOnService] private IBuildingFactoryService _buildingFactoryService;
         [DependsOnService] private IRessourceFactoryService _ressourceFactoryService;
+        [DependsOnService] private IAgentFactoryService _agentFactoryService;
         private const string _mainCameraAdressableName = "GameCamera";
         private const string _groundAdressableName = "Ground";
         private Camera mainCamera;
         private GameObject ground;
+        private Entity _hub;
+        private Entity _tree;
 
         public void StartFight()
         {
@@ -22,9 +26,24 @@ namespace Service
          
         }
 
+        public Entity GetHub()
+        {
+            return _hub;
+        }
+
+        public Entity GetClosestRessource()
+        {
+            return _tree;
+        }
+
         void LoadBuildingFactoryService()
         {
-            _buildingFactoryService.EnabledService(LoadCamera);
+            _buildingFactoryService.EnabledService(LoadAgentFactoryService);
+        }
+
+        void LoadAgentFactoryService()
+        {
+            _agentFactoryService.EnabledService(LoadCamera);
         }
         void LoadCamera()
         {
@@ -40,9 +59,11 @@ namespace Service
         void InitGround(GameObject groundPrefab)
         {
             ground = Object.Instantiate(groundPrefab);
-            _buildingFactoryService.CreateHub(Vector3.zero);
-            _ressourceFactoryService.CreateTree(Vector3.left * 20);
-            
+           _hub=  _buildingFactoryService.CreateHub(Vector3.zero);
+           _tree= _ressourceFactoryService.CreateTree(Vector3.left * 20);
+           _agentFactoryService.CreateLumberjack(Vector3.back * 10);
+
+
         }
     }
 }

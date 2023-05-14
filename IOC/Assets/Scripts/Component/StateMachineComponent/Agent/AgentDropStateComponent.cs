@@ -6,28 +6,30 @@ namespace Components
 {
     public class AgentDropStateComponent : StateComponent
     {
-        private TimerComponent timerComponent;
-        private DropRessourceComponent dropRessourceComponent;
+        private TimerComponent _timerComponent;
+        private DropRessourceComponent _dropRessourceComponent;
 
 
-        /// <param name="args">timerComponent, dropRessourceComponent</param>
-        public override void Init(Entity entity, params object[] args)
+
+        public void Init(Entity entity, StateMachineComponent stateMachineComponent, TimerComponent timerComponent, DropRessourceComponent dropRessourceComponent)
         {
-            base.Init(entity, args);
-            timerComponent =(TimerComponent) args[1];
-            dropRessourceComponent = (DropRessourceComponent)args[2];
+            Init(entity, stateMachineComponent);
+            _timerComponent = timerComponent;
+            _dropRessourceComponent = dropRessourceComponent;
         }
         
         protected override void Enable()
-        {
+        { 
             base.Enable();
-            dropRessourceComponent.Drop();
-            timerComponent.LaunchTimer();
+            _dropRessourceComponent.Drop();
+            _timerComponent.LaunchTimer();
         }
 
-        public void EndHarvest()
+      
+
+        public void EndDrop()
         {
-            _stateMachine.ChangeState((int)AgentStateEnum.GoToDrop);
+            _stateMachine.ChangeState((int)AgentStateEnum.GoToRessource);
         }
     }
 }

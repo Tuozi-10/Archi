@@ -13,13 +13,12 @@ namespace Components
         private bool inTimer;
     
 
-
-        /// <param name="args"> time, callback</param>
-        public override void Init(Entity entity, params object[] args)
+        
+        public  void Init(Entity entity, TimerComponentData data, Action callback)
         {
             base.Init(entity);
-            _time = ((TimerComponentData)args[0]).Time;
-            _callback = (Action)args[1];
+            _time = (data).Time;
+            _callback = callback;
         }
 
 
@@ -27,7 +26,7 @@ namespace Components
         {
             if (inTimer) return;
             inTimer = true; 
-            UniTask.Delay(_time);
+           await UniTask.Delay(_time);
             inTimer = false; 
             _callback?.Invoke();
         }

@@ -10,22 +10,24 @@ namespace Components
         private CompareDistanceComponent _compareDistanceComponent;
 
 
-        /// <param name="args"> stateMachine, moveToTargetComponent, compareDistanceComponent</param>
-        public override void Init(Entity entity, params object[] args)
+
+        public void Init(Entity entity , StateMachineComponent stateMachineComponent, MoveToTargetComponent moveToTargetComponent, CompareDistanceComponent compareDistanceComponent)
         {
-            base.Init(entity, args);
-            _moveToTargetComponent = (MoveToTargetComponent)args[1];
-            _compareDistanceComponent = (CompareDistanceComponent)args[2];
+            Init(entity, stateMachineComponent);
+            _moveToTargetComponent = moveToTargetComponent;
+            _compareDistanceComponent = compareDistanceComponent;
         }
 
         protected override void Enable()
         {
             base.Enable();
             _moveToTargetComponent.MoveToTarget();
+
         }
 
         protected override void Update()
         {
+            base.Update();
             if (_compareDistanceComponent.CheckDistance())
             {
                 _stateMachine.ChangeState((int)AgentStateEnum.Harvest);

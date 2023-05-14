@@ -12,4 +12,5 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 61c271262047b6347b5ebe9828273ebd, type: 3}
   m_Name: HubSO
   m_EditorClassIdentifier: 
-  <StartRessourceCount>k__BackingField: 4
+  RessourceComponentData:
+    <StartRessourceCount>k__BackingField: 0

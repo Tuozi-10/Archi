@@ -11,13 +11,10 @@ namespace Components
         private Transform _secondPosition;
         private float ValueToCompare;
         private event Func<float, bool> _compareFunction;
-        
-
-        /// <param name="args"> compareDistanceComponentData, firstPosition, secondPosition</param>
-        public override void Init(Entity entity, params object[] args)
+        public  void Init(Entity entity, CompareDistanceComponentData distanceData, Transform firstPosition, Transform secondPosition)
         {
-            base.Init(entity, args);
-            var data = (CompareDistanceComponentData)args[0];
+            Init(entity);
+            var data = distanceData;
             ValueToCompare = data.Distance;
             switch (data.TypeComparaison)
             {
@@ -38,8 +35,8 @@ namespace Components
                 }
             }
 
-            _firstPosition = (Transform)args[1];
-            _secondPosition = (Transform)args[2];
+            _firstPosition = firstPosition;
+            _secondPosition = secondPosition;
         }
 
         public float GetDistance()
@@ -55,7 +52,7 @@ namespace Components
 
         public bool CheckShorterThanDistance(float distance)
         {
-            if (distance >= ValueToCompare)
+            if (distance <= ValueToCompare)
             {
                 return true;
             }
@@ -65,7 +62,7 @@ namespace Components
 
         public bool CheckLongerThanDistance(float distance)
         {
-            if (distance <= ValueToCompare)
+            if (distance >= ValueToCompare)
             {
                 return true;
             }

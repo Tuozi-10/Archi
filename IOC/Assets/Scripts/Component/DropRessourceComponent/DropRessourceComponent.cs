@@ -10,10 +10,11 @@ public class DropRessourceComponent : Component
     private RessourceComponent _ressourceComponentOwner;
     private RessourceComponent _ressourceComponent;
 
-    public override void Init(Entity entity, params object[] args)
+    public void Init(Entity entity, RessourceComponent ressourceOwner,  RessourceComponent ressourceComponent)
     {
-        base.Init(entity, args);
-        _ressourceComponentOwner = (RessourceComponent)args[0];
+        base.Init(entity);
+        _ressourceComponentOwner = ressourceOwner;
+        _ressourceComponent = ressourceComponent;
     }
 
     public void Drop()

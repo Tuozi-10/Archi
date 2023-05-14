@@ -25,6 +25,7 @@ namespace Service
         {
             var hub = Object.Instantiate(_hubPrefab, pos, Quaternion.identity);
             hub.AddComponent(new RessourceComponent()).Init(hub, _hubSO.RessourceComponentData);
+            hub.Init();
             return hub;
         }
 

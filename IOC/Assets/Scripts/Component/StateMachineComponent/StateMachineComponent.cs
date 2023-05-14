@@ -1,4 +1,5 @@
 ﻿using System;
+using UnityEngine;
 
 
 namespace Components
@@ -9,15 +10,15 @@ namespace Components
         private StateComponent[] _allStates;
         private int startState;
 
-        public override void Init(Entity entity, params object[] args)
+        public  void Init(Entity entity, StateComponent[] allStates, StateMachineComponentData data)
         {
-            base.Init(entity, args);
-            _allStates = (StateComponent[])args[0];
+            base.Init(entity);
+            _allStates = allStates;
             for (int i = 0; i < _allStates.Length; i++)
             {
                 _allStates[i].Enabled = false;
             }
-            startState = ((StateMachineComponentData)args[1]).StartState;
+            startState = (data).StartState;
             _allStates[this.startState].Enabled = true;
         }
         public void ChangeState(int newState)
@@ -25,9 +26,10 @@ namespace Components
             _allStates[CurrentState].Enabled = false;
             CurrentState = newState;
             _allStates[newState].Enabled = true;
+      
         }
 
-
+  
     }
 }
 

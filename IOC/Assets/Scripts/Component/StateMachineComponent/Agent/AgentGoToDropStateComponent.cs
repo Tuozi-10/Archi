@@ -9,11 +9,11 @@ namespace Components
         private MoveToTargetComponent _moveToTargetComponent;
         private CompareDistanceComponent _compareDistanceComponent;
 
-        public override void Init(Entity entity, params object[] args)
+        public  void Init(Entity entity, StateMachineComponent stateMachineComponent, MoveToTargetComponent moveToTargetComponent, CompareDistanceComponent compareDistanceComponent)
         {
-            base.Init(entity, args);
-            _moveToTargetComponent = (MoveToTargetComponent)args[1];
-            _compareDistanceComponent = (CompareDistanceComponent)args[2];
+            Init(entity, stateMachineComponent);
+            _moveToTargetComponent = moveToTargetComponent;
+            _compareDistanceComponent = compareDistanceComponent;
         }
 
         protected override void Enable()

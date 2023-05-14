@@ -1,30 +1,34 @@
-﻿using UnityEngine;
+﻿using DG.Tweening;
+using UnityEngine;
 using UnityEngine.AI;
 
 namespace Components
 {
     public class MoveToTargetComponent : Component
     {
-        private NavMeshAgent _agent;
-        private Transform _destination;
-        private float _speed;
-        public override void Init(Entity entity, params object[] args)
+        private Transform currentTransform;
+        
+        public Transform Destination { private get; set; }
+        public float Time { private get;  set; }
+        public void Init(Entity entity, MoveToTargetComponentData moveToTargetComponentData, Entity target)
         {
-            base.Init(entity, args);
-            _agent = (NavMeshAgent)entity.AllMonoComponents[EntityMonoComponentEnum.Agent];
-            _speed = ((MoveToTargetComponentData)args[0]).Speed;
-            _destination = (Transform)((Entity)args[1]).AllMonoComponents[EntityMonoComponentEnum.Transform];
+            Init(entity);
+            currentTransform =(Transform) entity.AllMonoComponents[EntityMonoComponentEnum.Transform];
+            Time = moveToTargetComponentData.Time;
+            Destination = (Transform)target.AllMonoComponents[EntityMonoComponentEnum.Transform];
         }
+        
+        
 
         protected override void Enable()
         {
             base.Enable();
-            _agent.speed = _speed;
+            
         }
 
         public void MoveToTarget()
         {
-            _agent.SetDestination(_destination.position);
+            currentTransform.DOMove( Destination.position, Time);
         }
     }
     
