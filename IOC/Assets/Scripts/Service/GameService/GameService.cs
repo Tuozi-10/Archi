@@ -1,9 +1,10 @@
 ﻿using Dp;
 using Attributes;
-using Cysharp.Threading.Tasks;
+//using Cysharp.Threading.Tasks;
+using DesignPatterns;
 using Service.AudioService;
 using UnityEngine;
-using static UnityEngine.AddressableAssets.Addressables;
+//using static UnityEngine.AddressableAssets.Addressables;
 
 namespace Service
 {
@@ -22,8 +23,9 @@ namespace Service
         private void GenerateBurger(GameObject gameObject)
         {
             var burger = Object.Instantiate(gameObject);
-            Release(gameObject);
+            //Release(gameObject);
         }
+
 
     }
 }

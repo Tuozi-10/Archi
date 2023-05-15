@@ -7,7 +7,8 @@ using Exception;
 using Service;
 using UnityEngine;
 using System.Runtime.CompilerServices;
-using Cysharp.Threading.Tasks;
+using DesignPatterns;
+// using Cysharp.Threading.Tasks;
 using Service.AudioService;
 
 public class Compositor : MonoBehaviour
@@ -114,7 +115,7 @@ public class Compositor : MonoBehaviour
     /// Goes through the list of services calling any void() methods marked with [ServiceInit],
     /// and calls these methods (for initializing message subscriptions and such)
     /// </summary>
-    protected async UniTask InitializeServices()
+  /*  protected async UniTask InitializeServices()
     {
         // some services (e.g. EntitiesLooksService are registered to multiple service interfaces - make sure they only get visited & initialized once)
         var uniqueServices = new HashSet<IService>(m_services.Values);
@@ -186,7 +187,7 @@ public class Compositor : MonoBehaviour
             }
         }
     }
-    
+    */
     private void CreateAndWireObjects()
     {
         AddService<IGameService>(new GameService());
@@ -195,10 +196,30 @@ public class Compositor : MonoBehaviour
     
     private void Awake()
     {
-        InitCompositor().Forget();
+        //InitCompositor().Forget();
+        ManageEvent();
+    }
+    
+    private void ManageEvent()
+    {
+        EventManager.AddListener<CacaEvent>(CallbackCacaEvent);
+        EventManager.AddListener<CacaEvent>(CallbackCacaEvent2);
+        
+        EventManager.Trigger(new CacaEvent(17));
     }
 
-    private async UniTaskVoid InitCompositor()
+    private void CallbackCacaEvent(CacaEvent cacaEvent)
+    {
+        Debug.Log($"caca1 : {cacaEvent.caca}");
+    }
+
+    private void CallbackCacaEvent2(CacaEvent cacaEvent)
+    {
+        Debug.Log($"caca2 : {cacaEvent.caca}");
+    }
+    
+
+  /*  private async UniTaskVoid InitCompositor()
     {
         bool composed = await Compose();
 			
@@ -212,9 +233,9 @@ public class Compositor : MonoBehaviour
         {
            Debug.LogError($"Composition in {gameObject.name} failed to sort dependencies - systems won't be started!");
         }
-    }
+    }*/
     
-    protected virtual async UniTask<bool> Compose()
+    /*protected virtual async UniTask<bool> Compose()
     {
         CreateAndWireObjects();
         
@@ -225,5 +246,5 @@ public class Compositor : MonoBehaviour
         
         await InitializeServices();
         return true;
-    }
+    }*/
 }
