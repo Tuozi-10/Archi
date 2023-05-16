@@ -8,6 +8,7 @@ using Service;
 using UnityEngine;
 using System.Runtime.CompilerServices;
 using Cysharp.Threading.Tasks;
+using DesignPatterns;
 using Dp.DesignPatterns;
 using Service.AudioService;
 using Service.FightService;
@@ -201,6 +202,7 @@ public class Compositor : MonoBehaviour
         AddService<IFightService>(new FightService());
         AddService<ITickableService>(new TickableService());
         AddService<IEntitiesFactoryService>(new EntitiesFactoryService());
+        AddService<IEventManagerService>(new EventManagerService());
     }
     
     private void Awake()

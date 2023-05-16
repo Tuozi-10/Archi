@@ -11,6 +11,7 @@ namespace Service.UIService
     {
         private MainMenuManager mainMenuManager;
         private Queue<PopUp> popUps;
+        [DependsOnService] private IEventManagerService m_eventService;
 
         [ServiceInit]
         private void Initialize()
@@ -22,7 +23,7 @@ namespace Service.UIService
         {
             var inGameCanvas = Object.Instantiate(canvas);
             mainMenuManager = inGameCanvas.GetComponent<MainMenuManager>();
-            mainMenuManager.AssignService(this);
+            mainMenuManager.AssignService(this, m_eventService);
             mainMenuManager.GeneratePopUps();
             Release(canvas);
         }

@@ -11,6 +11,7 @@ namespace UI
     public class MainMenuManager : MonoBehaviour
     {
         private IUIService m_uiService;
+        private IEventManagerService m_eventService;
         [SerializeField] private RectTransform sideMenu;
         private bool isOpened;
         public Vector2 minMaxSideMenuPosX;
@@ -32,9 +33,12 @@ namespace UI
             }
         }
 
-        public void AssignService(IUIService service)
+        public void AssignService(IUIService uiService, IEventManagerService eventService)
         {
-            m_uiService = service;
+            m_uiService = uiService;
+            m_eventService = eventService;
+            
+            m_eventService.AddListener();
         }
 
         public void Enable()
@@ -111,6 +115,16 @@ namespace UI
             currentPopUp.gameObject.SetActive(true);
             currentPopUp.transform.localScale = Vector3.zero;
             currentPopUp.transform.DOScale(1, .1f).SetEase(Ease.InBack);
+        }
+
+        public void OnCreateHarvester()
+        {
+            
+        }
+
+        public void OnCreateLumberjack()
+        {
+            
         }
     }
 }
