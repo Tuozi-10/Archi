@@ -2,7 +2,7 @@
 
 namespace Entities.Resources
 {
-    [CreateAssetMenu(menuName = "EntitySO", fileName = "new EntitySO")]
+    [CreateAssetMenu(menuName = "ResourceSO", fileName = "new ResourceSO")]
     public class ResourceSO : ScriptableObject
     {
         public int Quantity;
@@ -10,7 +10,7 @@ namespace Entities.Resources
         
         Resource GetResource()
         {
-            return new Resource(this);
+            return new Resource(Quantity, this);
         }
     }
 }

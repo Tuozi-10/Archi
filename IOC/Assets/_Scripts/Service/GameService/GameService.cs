@@ -1,6 +1,5 @@
 ﻿using Attributes;
 using Service.AudioService;
-using UnityEngine;
 
 namespace Service
 {
@@ -18,11 +17,12 @@ namespace Service
         [ServiceInit]
         private void Initialize()
         {
-            // _audioService.PlaySound(0);
             _sceneService.LoadScene("FirstScene");
             _uiService.DisplayMainMenu();
+            _eventService.Initialize();
+
+            // _audioService.PlaySound(0);
             // _uiService.CallPopup();
-            _entitiesFactoryService.Initialize();
             // AddressableHelper.LoadAssetAsyncWithCompletionHandler<GameObject>("LeBurger", GenerateBurger);
             // AddressableHelper.LoadAssetAsyncWithCompletionHandler<GameObject>("LeCanvas", GenerateCanvas);
         }

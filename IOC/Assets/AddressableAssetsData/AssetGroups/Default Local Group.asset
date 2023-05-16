@@ -53,11 +53,11 @@ MonoBehaviour:
     m_Address: Lumberjack
     m_ReadOnly: 0
     m_SerializedLabels: []
-  - m_GUID: 5b6f88d8096cb0b40bd85492c76e2d8c
+  - m_GUID: c7e7c6e8c2bd119489de6b83fcc5cd84
     m_Address: Tree
     m_ReadOnly: 0
     m_SerializedLabels: []
-  - m_GUID: 5feced89c08416143a8190c3da661c62
+  - m_GUID: b28d2307e5abf3046b5e0a2e62cf6f8c
     m_Address: Stone
     m_ReadOnly: 0
     m_SerializedLabels: []

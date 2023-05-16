@@ -1,5 +1,6 @@
 using Addressables;
 using Attributes;
+using UnityEditor.AI;
 using UnityEngine;
 using static UnityEngine.AddressableAssets.Addressables;
 
@@ -9,6 +10,7 @@ namespace Service
     {
         [DependsOnService] private ISceneService _sceneService;
         [DependsOnService] private IUIService _uiService;
+        [DependsOnService] private IEntitiesFactoryService _entitiesFactoryService;
 
         // private GameObject _burger;
 
@@ -57,6 +59,7 @@ namespace Service
         public void InitializeGame()
         {
             _sceneService.LoadScene("SecondScene");
+            _entitiesFactoryService.Initialize();
             AddressableHelper.LoadAssetAsyncWithCompletionHandler<GameObject>("Plane", GeneratePlane);
         }
 
@@ -65,6 +68,7 @@ namespace Service
             var plane = Object.Instantiate(gameObject);
             plane.transform.position += new Vector3(0, -0.5f, 0);
             _uiService.DisplayInGameMenu();
+            NavMeshBuilder.BuildNavMesh();
             
             Release(gameObject);
         }

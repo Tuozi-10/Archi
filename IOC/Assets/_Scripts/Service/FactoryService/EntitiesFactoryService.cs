@@ -7,7 +7,6 @@ using Entities.Workers;
 using UnityEngine;
 using UnityEngine.AI;
 using static UnityEngine.AddressableAssets.Addressables;
-using NavMeshBuilder = UnityEditor.AI.NavMeshBuilder;
 
 namespace Service
 {
@@ -43,9 +42,10 @@ namespace Service
             harvester.AddComponent<NavMeshAgent>();
             var agent = harvester.GetComponent<NavMeshAgent>();
             var entity = harvester.GetComponent<Worker>();
+            entity.Data = _harvester;
             entity.AddComponent(
                 new MoveToTargetComponent(harvester.transform, agent, this, TypeResource.Stone));
-            entity.AddComponent(new LumberjackBehaviour(entity));
+            entity.AddComponent(new HarvesterBehaviour(entity));
         }
 
         public void CreateLumberjack()
@@ -54,6 +54,7 @@ namespace Service
             lumberjack.AddComponent<NavMeshAgent>();
             var agent = lumberjack.GetComponent<NavMeshAgent>();
             var entity = lumberjack.GetComponent<Worker>();
+            entity.Data = _lumberjack;
             entity.AddComponent(
                 new MoveToTargetComponent(lumberjack.transform, agent, this, TypeResource.Tree));
             entity.AddComponent(new LumberjackBehaviour(entity));
@@ -67,6 +68,10 @@ namespace Service
                 var x = Random.Range(-50, 50);
                 var z = Random.Range(-50, 50);
                 var tree = _poolTree.GetFromPool();
+                var entity = tree.GetComponent<Resource>();
+                entity.TypeResource = TypeResource.Tree;
+                entity.Quantity = _tree.Quantity;
+                entity.Data = _tree;
                 tree.transform.position = new Vector3(x, 0, z);
                 Trees.Add(tree);
             }
@@ -80,10 +85,13 @@ namespace Service
                 var x = Random.Range(-50, 50);
                 var z = Random.Range(-50, 50);
                 var stone = _poolStone.GetFromPool();
+                var entity = stone.GetComponent<Resource>();
+                entity.TypeResource = TypeResource.Stone;
+                entity.Quantity = _stone.Quantity;
+                entity.Data = _stone;
                 stone.transform.position = new Vector3(x, 0, z);
                 Stones.Add(stone);
             }
-            NavMeshBuilder.BuildNavMesh();
         }
         
         public Transform GetClosestTree(Vector3 pos)
