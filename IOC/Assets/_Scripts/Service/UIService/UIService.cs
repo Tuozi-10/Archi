@@ -11,6 +11,7 @@ namespace Service
         [DependsOnService] private ISceneService _sceneService;
         [DependsOnService] private IFightService _fightService;
         [DependsOnService] private IEntitiesFactoryService _entitiesFactoryService;
+        [DependsOnService] private IEventService _eventService;
 
         private GameObject _mainMenu;
         private GameObject _popupMenu;
@@ -52,7 +53,7 @@ namespace Service
         {
             isLoading = false;
             _inGameMenu = Object.Instantiate(gameObject);
-            _inGameMenu.GetComponent<InGameMenuManager>().Setup(_entitiesFactoryService);
+            _inGameMenu.GetComponent<InGameMenuManager>().Setup(_entitiesFactoryService, _eventService);
             Release(gameObject);
         }
     }

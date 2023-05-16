@@ -16,12 +16,6 @@ namespace DesignPattern
             ChangeState(States.IDLE);
         }
 
-        protected override void ChangeToIdle()
-        {
-            base.ChangeToIdle();
-            ChangeState(States.WANDER);
-        }
-
         protected override void DoIdle()
         {
             base.DoIdle();

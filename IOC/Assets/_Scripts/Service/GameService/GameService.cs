@@ -1,5 +1,6 @@
 ﻿using Attributes;
 using Service.AudioService;
+using UnityEngine;
 
 namespace Service
 {
@@ -10,6 +11,7 @@ namespace Service
         [DependsOnService] private IFightService _fightService;
         [DependsOnService] private IUIService _uiService;
         [DependsOnService] private IEntitiesFactoryService _entitiesFactoryService;
+        [DependsOnService] private IEventService _eventService;
 
         private bool isEnabled;
         

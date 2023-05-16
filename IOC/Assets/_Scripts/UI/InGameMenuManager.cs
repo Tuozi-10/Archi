@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+﻿using Service;
+using UnityEngine;
 using UnityEngine.UI;
 
 namespace UI
@@ -8,10 +9,10 @@ namespace UI
         [SerializeField] private Button _harvesterButton;
         [SerializeField] private Button _lumberjackButton;
 
-        public void Setup(IEntitiesFactoryService entityFactoryService)
+        public void Setup(IEntitiesFactoryService entityFactoryService, IEventService eventService)
         {
-            _harvesterButton.onClick.AddListener(() => entityFactoryService.CreateHarvester());
-            _lumberjackButton.onClick.AddListener(() => entityFactoryService.CreateLumberjack());
+            _harvesterButton.onClick.AddListener(() => eventService.Trigger(new CreateEvent(TypeWorker.HARVESTER)));
+            _lumberjackButton.onClick.AddListener(() => eventService.Trigger(new CreateEvent(TypeWorker.LUMBERJACK)));
         }
     }
 }

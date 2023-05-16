@@ -1,8 +1,10 @@
-using Service;
-
-public interface IEntitiesFactoryService : IService
+namespace Service
 {
-    void Initialize();
-    void CreateHarvester();
-    void CreateLumberjack();
+    public interface IEntitiesFactoryService : IService
+    {
+        void Initialize();
+        void CreateHarvester();
+        void CreateLumberjack();
+        void CreateEntityEvent(CreateEvent createEvent);
+    }
 }
