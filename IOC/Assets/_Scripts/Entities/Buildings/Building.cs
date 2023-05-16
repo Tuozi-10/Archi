@@ -1,6 +1,6 @@
-﻿using DesignPattern;
+﻿using DesignPatterns;
 
-namespace Buildings
+namespace Entities.Buildings
 {
     public class Building : Composite
     {

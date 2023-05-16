@@ -1,4 +1,4 @@
-﻿namespace DesignPattern
+﻿namespace DesignPatterns
 {
     public interface IComponent
     {

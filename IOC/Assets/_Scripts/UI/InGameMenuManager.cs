@@ -9,7 +9,7 @@ namespace UI
         [SerializeField] private Button _harvesterButton;
         [SerializeField] private Button _lumberjackButton;
 
-        public void Setup(IEntitiesFactoryService entityFactoryService, IEventService eventService)
+        public void Setup(IEventService eventService)
         {
             _harvesterButton.onClick.AddListener(() => eventService.Trigger(new CreateEvent(TypeWorker.HARVESTER)));
             _lumberjackButton.onClick.AddListener(() => eventService.Trigger(new CreateEvent(TypeWorker.LUMBERJACK)));

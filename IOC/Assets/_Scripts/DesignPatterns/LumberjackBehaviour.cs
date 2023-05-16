@@ -1,15 +1,10 @@
-﻿using Entities;
+﻿using Entities.Workers;
 
-namespace DesignPattern
+namespace DesignPatterns
 {
     public class LumberjackBehaviour : StateMachineComponent
     {
-        private MoveToTargetComponent _moveToTargetComponent;
-        
-        public LumberjackBehaviour(Entity owner) : base(owner)
-        {
-            _moveToTargetComponent = _entity.GetComponent<MoveToTargetComponent>() as MoveToTargetComponent;
-        }
+        public LumberjackBehaviour(Worker owner) : base(owner) { }
         
         public override void Init()
         {
@@ -19,12 +14,13 @@ namespace DesignPattern
         protected override void DoIdle()
         {
             base.DoIdle();
+            ChangeState(States.WANDER);
         }
 
         protected override void DoWander()
         {
             base.DoWander();
-            ChangeState(States.HARVEST);
+            ChangeState(States.WANDER);
         }
 
         protected override void DoHarvest()

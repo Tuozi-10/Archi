@@ -2,21 +2,21 @@
 using UnityEngine;
 using UnityEngine.AI;
 
-namespace DesignPattern
+namespace DesignPatterns
 {
     public class MoveToTargetComponent : IComponent
     {
-        private Transform _mover;
-        private Transform _target;
+        private IEntitiesFactoryService _entitiesFactoryService;
         private NavMeshAgent _agent;
-        private IFightService _fightService;
+        private Transform _worker;
+        private Transform _target;
         private TypeResource _typeResource;
 
-        public MoveToTargetComponent(Transform mover, NavMeshAgent agent, IFightService fightService, TypeResource typeResource)
+        public MoveToTargetComponent(Transform worker, NavMeshAgent agent, IEntitiesFactoryService entitiesFactoryService, TypeResource typeResource)
         {
-            _mover = mover;
+            _worker = worker;
             _agent = agent;
-            _fightService = fightService;
+            _entitiesFactoryService = entitiesFactoryService;
             _typeResource = typeResource;
             SetClosestTarget();
         }
@@ -25,16 +25,16 @@ namespace DesignPattern
 
         public void Update() { }
 
-        public void SetTarget(Transform target)
+        public void SetTarget(Transform target = null)
         {
             _target = target;
-            _agent.SetDestination(_target.position);
+            if (_target is not null) _agent.SetDestination(_target.position);
         }
 
         public void SetClosestTarget()
         {
-            if (_typeResource == TypeResource.Tree) _target = _fightService.GetClosestTree(_mover.transform.position);
-            else if (_typeResource == TypeResource.Stone) _target = _fightService.GetClosestStone(_mover.transform.position);
+            if (_typeResource == TypeResource.Tree) _target = _entitiesFactoryService.GetClosestTree(_worker.transform.position);
+            else if (_typeResource == TypeResource.Stone) _target = _entitiesFactoryService.GetClosestStone(_worker.transform.position);
             _agent.SetDestination(_target.position);
         }
 
@@ -43,13 +43,13 @@ namespace DesignPattern
             int random;
             if (_typeResource == TypeResource.Tree)
             {
-                random = Random.Range(0, _fightService.GetTrees().Count-1);
-                _target = _fightService.GetTrees()[random].transform;
+                random = Random.Range(0, _entitiesFactoryService.GetTrees().Count-1);
+                _target = _entitiesFactoryService.GetTrees()[random].transform;
             }
             else if (_typeResource == TypeResource.Stone)
             {
-                random = Random.Range(0, _fightService.GetStones().Count-1);
-                _target = _fightService.GetStones()[random].transform;
+                random = Random.Range(0, _entitiesFactoryService.GetStones().Count-1);
+                _target = _entitiesFactoryService.GetStones()[random].transform;
             }
             
             _agent.SetDestination(_target.position);

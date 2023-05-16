@@ -1,7 +1,7 @@
 ﻿using System.Collections.Generic;
 using UnityEngine;
 
-namespace DesignPattern
+namespace DesignPatterns
 {
     public class Composite : MonoBehaviour
     {
@@ -28,17 +28,25 @@ namespace DesignPattern
             component.Init();
         }
 
-        public IComponent GetComponent<T>()
+        public T GetComponent<T>()
         {
             foreach (var component in _components)
             {
-                if (component is T)
+                if (component is T myComponent)
                 {
-                    return component;
+                    return myComponent;
                 }
             }
             
             return default;
+        }
+
+        public void RemoveComponent(IComponent component)
+        {
+            if (_components.Contains(component))
+            {
+                _components.Remove(component);
+            }
         }
         
         public void Update()

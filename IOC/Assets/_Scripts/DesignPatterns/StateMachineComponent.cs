@@ -1,16 +1,16 @@
 ﻿using System;
-using Entities;
+using Entities.Workers;
 
-namespace DesignPattern
+namespace DesignPatterns
 {
     public abstract class StateMachineComponent : IComponent
     {
         private States _currentState = States.IDLE;  
-        public readonly Entity _entity;
+        public readonly Worker Worker;
 
-        public StateMachineComponent(Entity owner)
+        public StateMachineComponent(Worker owner)
         {
-            _entity = owner;
+            Worker = owner;
         }
         
         public virtual void Init()

@@ -53,7 +53,7 @@ namespace Service
         {
             isLoading = false;
             _inGameMenu = Object.Instantiate(gameObject);
-            _inGameMenu.GetComponent<InGameMenuManager>().Setup(_entitiesFactoryService, _eventService);
+            _inGameMenu.GetComponent<InGameMenuManager>().Setup(_eventService);
             Release(gameObject);
         }
     }

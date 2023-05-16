@@ -1,6 +1,6 @@
 ﻿using UnityEngine;
 
-namespace Buildings
+namespace Entities.Buildings
 {
     [CreateAssetMenu(menuName = "BuildingSO", fileName = "new BuildingSO")]
     public class BuildingSO : ScriptableObject

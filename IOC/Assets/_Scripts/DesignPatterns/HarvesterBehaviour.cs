@@ -1,13 +1,10 @@
-﻿using Entities; 
+﻿using Entities.Workers;
 
-namespace DesignPattern
+namespace DesignPatterns
 {
     public class HarvesterBehaviour : StateMachineComponent
     {
-        public HarvesterBehaviour(Entity owner) : base(owner)
-        {
-            
-        }
+        public HarvesterBehaviour(Worker owner) : base(owner) { }
         
         public override void Init()
         {
