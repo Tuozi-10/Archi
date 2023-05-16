@@ -1,6 +1,6 @@
 using Addressables;
 using Attributes;
-using DefaultNamespace;
+using Entities;
 using DesignPattern;
 using Service;
 using UnityEngine;

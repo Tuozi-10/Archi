@@ -1,6 +1,6 @@
 ﻿using DesignPattern;
 
-namespace DefaultNamespace
+namespace Entities
 {
     public class Entity : Composite
     {

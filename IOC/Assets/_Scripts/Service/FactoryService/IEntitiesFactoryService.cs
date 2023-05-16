@@ -1,4 +1,3 @@
-using DefaultNamespace;
 using Service;
 
 public interface IEntitiesFactoryService : IService

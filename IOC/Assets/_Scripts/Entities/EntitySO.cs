@@ -1,6 +1,6 @@
 ﻿using UnityEngine;
 
-namespace DefaultNamespace
+namespace Entities
 {
     [CreateAssetMenu(menuName = "EntitySO", fileName = "new EntitySO")]
     public class EntitySO : ScriptableObject
