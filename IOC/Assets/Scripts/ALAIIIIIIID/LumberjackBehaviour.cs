@@ -2,7 +2,7 @@ using UnityEngine;
 
 public class LumberjackBehaviour : StateMachineComponent
 {
-    float timer = 5f;
+    float timer = 2f;
 
     public LumberjackBehaviour(Entity owner) : base(owner)
     {
@@ -23,8 +23,8 @@ public class LumberjackBehaviour : StateMachineComponent
         if (m_entity)
         {
             MoveToTargetComponent moveComponent = m_entity.myGetComponent<MoveToTargetComponent>();
-            if (Vector3.Distance(m_entity.GetWoodTarget(), m_entity.currentPos) > 1f)
-                moveComponent.SetTarget(m_entity.GetWoodTarget());
+            if (Vector3.Distance(m_entity.GetTarget(), m_entity.currentPos) > 10f)
+                moveComponent.SetTarget(m_entity.GetTarget());
             else
                 ChangeState(states.harvest);
         }
@@ -45,7 +45,7 @@ public class LumberjackBehaviour : StateMachineComponent
         if (m_entity)
         {
             MoveToTargetComponent moveComponent = m_entity.myGetComponent<MoveToTargetComponent>();
-            if (Vector3.Distance(Vector3.zero, m_entity.currentPos) > 1f)
+            if (Vector3.Distance(Vector3.zero, m_entity.currentPos) > 5f)
                 moveComponent.SetTarget(Vector3.zero);
             else
             {
@@ -58,7 +58,7 @@ public class LumberjackBehaviour : StateMachineComponent
 
 public class BlackSmithBehaviour : StateMachineComponent
 {
-    float timer = 5f;
+    float timer = 2f;
     MoveToTargetComponent moveComponent = null;
 
     public BlackSmithBehaviour(Entity owner) : base(owner)
@@ -91,8 +91,8 @@ public class BlackSmithBehaviour : StateMachineComponent
         {
             if (moveComponent == null)
                 moveComponent = m_entity.myGetComponent<MoveToTargetComponent>();
-            if (Vector3.Distance(m_entity.GetWoodTarget(), m_entity.currentPos) > 1f)
-                moveComponent.SetTarget(m_entity.GetWoodTarget());
+            if (Vector3.Distance(m_entity.GetTarget(), m_entity.currentPos) > 10f)
+                moveComponent.SetTarget(m_entity.GetTarget());
             else
                 ChangeState(states.harvest);
         }
@@ -104,7 +104,7 @@ public class BlackSmithBehaviour : StateMachineComponent
         if (timer <= 0)
         {
             ChangeState(states.GoToBase);
-            timer = 10f;
+            timer = 0.5f;
         }
     }
 
@@ -112,7 +112,7 @@ public class BlackSmithBehaviour : StateMachineComponent
     {
         if (m_entity)
         {
-            if (Vector3.Distance(Vector3.zero, m_entity.currentPos) > 1f)
+            if (Vector3.Distance(Vector3.zero, m_entity.currentPos) > 10f)
                 moveComponent.SetTarget(Vector3.zero);
             else
             {

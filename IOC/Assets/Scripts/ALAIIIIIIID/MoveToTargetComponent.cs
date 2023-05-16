@@ -20,7 +20,7 @@ public class MoveToTargetComponent : IComponent
         if (root is not null)
         {
             entity = _entity;
-            m_target = entity.GetWoodTarget();
+            m_target = entity.GetTarget();
         }
 
         

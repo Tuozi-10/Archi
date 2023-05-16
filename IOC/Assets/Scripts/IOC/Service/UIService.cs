@@ -29,7 +29,7 @@ namespace Service
 
         public void LoadUI()
         {
-            AddressableHelper.LoadAssetAsyncWithCompletionHandler<GameObject>("Canvas2", CreateUI);
+            // AddressableHelper.LoadAssetAsyncWithCompletionHandler<GameObject>("Canvas2", CreateUI);
         }
 
         public void CallPopUpGeneric<T>() where T : Object

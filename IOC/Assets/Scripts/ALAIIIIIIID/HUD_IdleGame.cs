@@ -1,12 +1,16 @@
 using System.Collections;
 using System.Collections.Generic;
 using Addressables;
+using ALAIIIIIIID;
+using Attributes;
 using DG.Tweening;
 using Service;
 using UnityEngine;
 
 public class HUD_IdleGame : IUIService
 {
+        [DependsOnService] private IIdleGame_Service m_idleGameService;
+        
         private GameObject mainMenu = null;
         private bool isLoading = false;
         
@@ -55,10 +59,11 @@ public class HUD_IdleGame : IUIService
 
         private void CreateUI(GameObject UI)
         {
-            mainMenu = Object.Instantiate(UI);
+             mainMenu = Object.Instantiate(UI);
              mainMenu.SetActive(true);
 
              _uiIdleGame = mainMenu.GetComponent<UI_Idle_Game>();
+             _uiIdleGame.m_idleGameService = m_idleGameService;
         }
 
         public UI_Idle_Game GetTextManager()

@@ -7,11 +7,11 @@ using UnityEngine;
 
 namespace ALAIIIIIIID
 {
-    public class IdleGame_Service : IGameService
+    public class IdleGame_Service : IIdleGame_Service
     {
         private int lumber = 0;
         private int rock = 0;
-        private int tool = 0;
+        private int cartePokemon = 0;
         [DependsOnService] private IUIService UIService;
         [DependsOnService] private IEntityFactoryService entityFactoryService;
 
@@ -20,13 +20,15 @@ namespace ALAIIIIIIID
         private Vector3 RockPos;
         private Vector3 ForgePos;
         private GameObject MinionPrefab = null;
+
+        private UI_Idle_Game _uiIdleGame;
         
         [ServiceInit]
         public void InitService()
         {
             lumber = 0;
             rock = 0;
-            tool = 0;
+            cartePokemon = 0;
 
             TreePos = GameObject.Find("Lumbers").transform.position;
             RockPos = GameObject.Find("Rock").transform.position;
@@ -35,22 +37,33 @@ namespace ALAIIIIIIID
             AddressableHelper.LoadAssetAsyncWithCompletionHandler<GameObject>("Minion", GenerateMinion);
         }
 
+        public void SetUiIdleGame(UI_Idle_Game uiIdleGame)
+        {
+            this._uiIdleGame = uiIdleGame;
+            _uiIdleGame.SetLumber(lumber);
+            _uiIdleGame.SetRock(rock);
+            _uiIdleGame.SetCartePokemon(cartePokemon);
+        }
+
         private void AddWood(int nb)
         {
             lumber += nb;
+            _uiIdleGame.SetLumber(lumber);
         }
         
         private void AddRock(int nb)
         {
             rock += nb;
+            _uiIdleGame.SetRock(rock);
         }
         
-        private void AddTool(int nb)
+        private void AddCartePokemon(int nb)
         {
-            tool += nb;
+            cartePokemon += nb;
+            _uiIdleGame.SetCartePokemon(cartePokemon);
         }
 
-        private void GetRessourceToTool()
+        private void UseRessourcesToMakeCartePokemon()
         {
             lumber -= 5;
             rock -= 5;
@@ -113,8 +126,8 @@ namespace ALAIIIIIIID
             newMinion.transform.position = Vector3.zero;
 
             Entity MyEntity = entityFactoryService.CreateBlackSmith(newMinion.transform, ForgePos);
-            MyEntity.OnGainRessource += AddTool;
-            MyEntity.OnCreateTool += GetRessourceToTool;
+            MyEntity.OnGainRessource += AddCartePokemon;
+            MyEntity.OnCreateTool += UseRessourcesToMakeCartePokemon;
             MyEntity.OnIdle += CheckRessource;
             
             newMinion.GetComponent<MinionScript>().SetComposite(MyEntity);

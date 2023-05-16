@@ -24,7 +24,7 @@ public class Entity : Composite
        data = _data;
     }
 
-    public Vector3 GetWoodTarget()
+    public Vector3 GetTarget()
     {
         return data.ressourceTarget;
     }

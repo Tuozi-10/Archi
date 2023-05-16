@@ -190,14 +190,14 @@ public class Compositor : MonoBehaviour
     
     private void CreateAndWireObjects()
     {
-        AddService<IGameService>(new IdleGame_Service());
+        // AddService<IGameService>(new IdleGame_Service());
         AddService<IAudioService>(new AudioService());
 
         // AddService<IFightService>(new FightService());
         AddService<IUIService>(new HUD_IdleGame());
         AddService<IEntityFactoryService>(new EntityFactoryService());
 
-        AddService<IdleGame_Service>(new IdleGame_Service());
+        AddService<IIdleGame_Service>(new IdleGame_Service());
         AddService<EntityFactoryService>(new EntityFactoryService());
     }
     
