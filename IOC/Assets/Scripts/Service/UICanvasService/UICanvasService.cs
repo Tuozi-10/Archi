@@ -19,6 +19,7 @@ namespace Service
 
         [DependsOnService] public ITickeableSwitchableService tickeableService;
 
+        
         Queue<PopUpData> popUpsNeededToPrint = new Queue<PopUpData>();
 
         PopUp currentPopUpPrinted;
@@ -31,11 +32,18 @@ namespace Service
 
         private GameObject popUpPrefab;
 
+        private Action tempCallback; 
+
         public void LoadMainMenu()
         {
             AddressableHelper.LoadAssetAsyncWithCompletionHandler<GameObject>("MainMenu", GenerateMainMenu);
         }
 
+        public void LoadInGameMenu(Action callback)
+        {
+            AddressableHelper.LoadAssetAsyncWithCompletionHandler<GameObject>("InGameMenu", GenerateInGameMenu);
+            tempCallback = callback;
+        }
         public void LoadPopUpCanvas()
         {
             AddressableHelper.LoadAssetAsyncWithCompletionHandler<GameObject>("PopUpCanvas", InitPopUpCanvas);
@@ -87,8 +95,18 @@ namespace Service
             EnabledService();
             Release(gameObject);
         }
+        
+        private void GenerateInGameMenu(GameObject gameObject)
+        {
+            var canvasObject = Object.Instantiate(gameObject);
+            tempCallback?.Invoke();
+            Release(gameObject);
+        }
+        
 
+        
 
+        
         public void EnabledService(Action callback = null)
         {
             isActive = true;

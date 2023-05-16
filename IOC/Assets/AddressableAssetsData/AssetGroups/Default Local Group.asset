@@ -81,6 +81,14 @@ MonoBehaviour:
     m_Address: Agent
     m_ReadOnly: 0
     m_SerializedLabels: []
+  - m_GUID: 62454180f4b2b6743ac0e446fdbd12b2
+    m_Address: EventManagerSingleton
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+  - m_GUID: d922688a0120dc5489f72bd550393ad6
+    m_Address: InGameMenu
+    m_ReadOnly: 0
+    m_SerializedLabels: []
   m_ReadOnly: 0
   m_Settings: {fileID: 11400000, guid: f85571e7fcd70ac4190d36e8b6377275, type: 2}
   m_SchemaSet:

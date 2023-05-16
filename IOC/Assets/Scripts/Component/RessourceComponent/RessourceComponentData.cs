@@ -9,5 +9,6 @@ namespace Components
     public struct RessourceComponentData
     {
         [field: SerializeField] public int StartRessourceCount { get; set; }
+        public RessourceOwnerEnum OwnerEnum;
     }
 }

@@ -17,8 +17,12 @@ namespace Components
         protected override void Enable()
         {
             base.Enable();
+            Debug.Log(_ressourceComponent.Ressource);
             if (_ressourceComponent.Ressource > 0)
+            {
                 _stateMachine.ChangeState((int)AgentStateEnum.GoToRessource);
+                
+            }
         }
     }
 }

@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -9,7 +10,9 @@ public interface  IUICanvasService : IService
     void LoadMainMenu();
 
     void LoadPopUpCanvas();
-    
+
+    void LoadInGameMenu(Action callback);
+
 }
     
 }

@@ -4,6 +4,8 @@ using System.Collections.Generic;
 using Addressables;
 using Attributes;
 using Components;
+using Events;
+using Service.Event;
 using UnityEngine;
 using UnityEngine.AI;
 using static UnityEngine.AddressableAssets.Addressables;
@@ -17,6 +19,7 @@ namespace Service
         private Entity _agentPrefab;
         private LoaderAdressable loaderAdressable;
         private int _currentLoad;
+        [DependsOnService] private IEventService eventService;
 
         private const string _agentAdressableName = "Agent";
         private const string _lumberjackSOAdressableName = "LumberJackSO";
@@ -37,6 +40,11 @@ namespace Service
             AddressableHelper.LoadAssetAsyncWithCompletionHandler<AgentSO>(_lumberjackSOAdressableName,
                 SetLumberjackSO);
             AddressableHelper.LoadAssetAsyncWithCompletionHandler<GameObject>(_agentAdressableName, SetAgentPrefab);
+            
+        //    eventService.AddEvent<LumberjackCreatedEvent>();
+          //  eventService.AddEvent<NeedCreateLumberJackEvent>();
+            //eventService.AddListener<NeedCreateLumberJackEvent>(new IEventService.EventCallback<NeedCreateLumberJackEvent>(CreateLumberjack));
+            
         }
 
         private void SetLumberjackSO(AgentSO entitySo)
@@ -128,7 +136,17 @@ namespace Service
                 }, _lumberjackSO.StateMachineComponentData
             );
             lumberjack.AddComponent(new AgentDropStateComponent());
-            return lumberjack;
+          
+           // eventService.Trigger<LumberjackCreatedEvent>(new LumberjackCreatedEvent(lumberjack));
+           EventManagerSingleton.Get(TriggerCallback);
+           Debug.Log("test");
+           return lumberjack;
+        }
+
+        void TriggerCallback(EventManagerSingleton eventManagerSingleton)
+        {
+            Debug.Log("testaa");
+            eventManagerSingleton.Trigger(new OnAgentCreatedEvent());
         }
     }
 }

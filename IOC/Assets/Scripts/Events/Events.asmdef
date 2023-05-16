@@ -1,9 +1,7 @@
 {
-    "name": "Component",
+    "name": "Events",
     "rootNamespace": "",
     "references": [
-        "GUID:f51ebe6a0ceec4240a699833d6309b23",
-        "GUID:b0f8f8639c48a2b4084b7f0b364c5eec",
         "GUID:0a3bb207bbe3000409ae3f58eaf4afb8"
     ],
     "includePlatforms": [],

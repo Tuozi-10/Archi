@@ -30,7 +30,9 @@ namespace Service
         public void LoadGame()
         {
             sceneService.LoadScene("GameScene");
+        
             fightService.StartFight();
+            
         }
     }
 }

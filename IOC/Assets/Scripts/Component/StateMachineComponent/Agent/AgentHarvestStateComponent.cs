@@ -9,8 +9,6 @@ namespace Components
         private TimerComponent _timerComponent;
         private SteelRessourceComponent _steelRessourceComponent;
         
-        
-       
         public void Init(Entity entity,StateMachineComponent stateMachineComponent, TimerComponent timerComponent, SteelRessourceComponent steelRessourceComponent)
         {
             Init(entity, stateMachineComponent);
