@@ -30,18 +30,6 @@ public class WarcraftHUD : IUIService
 
         private void AddToQueue<T>(T obj) where T : Object
         {
-            // GameObject.Instantiate(obj as GameObject);
-            // log.Log(pool.Count.ToString());
-            // GameObject go = (obj as GameObject);
-            // Button btn = go.transform.GetChild(0).GetChild(0).GetComponent<Button>();
-            // btn.onClick.AddListener(() =>
-            // {
-            //     Reshow();
-            //     GetFromPool();
-            // });
-            // pool.Enqueue(obj as GameObject);
-            // if (obj is GameObject t)
-            //     t.SetActive(false);
         }
 
         private void Reshow()
@@ -58,25 +46,14 @@ public class WarcraftHUD : IUIService
                 root = go;
                 return go;
             }
-            else
-            {
-                return null;
-            }
+            return null;
         }
         
 
         private void CreateUI(GameObject UI)
         {
             mainMenu = Object.Instantiate(UI);
-            // show = mainMenu.transform.GetChild(2).GetComponent<Button>();
-            // hide = mainMenu.transform.GetChild(3).GetComponent<Button>();
-            // panel = mainMenu.transform.GetChild(1).GetComponent<RectTransform>();
-            // nullBut = mainMenu.transform.GetChild(0).GetComponent<Button>();
-            // show.onClick.AddListener(() => ShowUIMainMenu());
-            // hide.onClick.AddListener(() => HideUIInGame());
-            // //nullBut.onClick.AddListener(() => GetFromPool().transform.parent = mainMenu.transform);
-             mainMenu.SetActive(true);
-             log.Log("UI Loaded");
+            mainMenu.SetActive(true);
 
              uiWarcraft = mainMenu.GetComponent<UI_Warcraft>();
         }

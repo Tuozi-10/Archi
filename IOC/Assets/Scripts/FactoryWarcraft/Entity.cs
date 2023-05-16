@@ -18,6 +18,11 @@ public class Entity : Composite
     {
         data = _data;
     }
+
+    public void SetTransform(Transform _tr)
+    {
+       
+    }
     
     public void SetData(entitySO _data)
     {

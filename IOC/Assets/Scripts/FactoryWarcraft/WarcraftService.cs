@@ -1,21 +1,27 @@
+using System;
 using System.Collections.Generic;
 using Addressables;
 using Attributes;
 using Cysharp.Threading.Tasks;
+using Observer;
 using Service;
 using UnityEngine;
+using Object = UnityEngine.Object;
 
 namespace FactoryWarcraft
 {
+    public enum TypeOfEntity
+    {
+        Peon,
+        PeonMiner,
+        PeonBlacksmith
+    }
+    
     public class WarcraftService : IGameService
     {
-        private int m_lumber = 0;
-        private int m_rock = 0;
-        private int m_tool = 0;
         [DependsOnService] private IUIService m_UIService;
         [DependsOnService] private IEntityFactoryService m_entityFactoryService;
 
-        private GameObject newMinion = null;
         private Queue<GameObject> pool = new Queue<GameObject>();
         private UI_Warcraft UI = null;
         private bool BtnSet = false;
@@ -23,118 +29,102 @@ namespace FactoryWarcraft
         private Vector3 RockPos = new Vector3(35, -2, 15);
         private Vector3 ForgePos = new Vector3(16, -2, -35);
         private GameObject PeonPrefab = null;
+        private RessourceManager m_ressourceManager = null;
+        private MeshFactory m_meshFactory = null;
 
         [ServiceInit]
         private void InitService()
         {
-            m_lumber = 0;
-            m_rock = 0;
-            m_tool = 0;
+            m_ressourceManager = new RessourceManager();
             BtnSet = false;
 
             m_UIService.ShowUIMainMenu();
             AddressableHelper.LoadAssetAsyncWithCompletionHandler<GameObject>("Minion", GeneratePeon);
+            
+            EventManager.AddListener<TypeOfEntity>(CheckEntityToSpawn);
 
             OnUpdate();
         }
-
-        private void AddWood(int nb)
-        {
-            m_lumber += nb;
-        }
         
-        private void AddRock(int nb)
-        {
-            m_rock += nb;
-        }
-        
-        private void AddTool(int nb)
-        {
-            m_tool += nb;
-        }
+        public void Switch(){}
+        public void Enable(){}
+        public void Disable(){}
 
-        private void GetRessourceToTool()
-        {
-            m_lumber -= 20;
-            m_rock -= 20;
-        }
 
         private void CheckRessource(Entity entity)
         {
-            entity.OnReceiveInfo?.Invoke((m_lumber >= 20 && m_rock >= 20));
+            entity.OnReceiveInfo?.Invoke(m_ressourceManager.EnoughToTool());
         }
 
         private void GeneratePeon(GameObject obj)
         {
-            PeonPrefab = obj;
+            m_meshFactory = new MeshFactory(PeonPrefab);
+        }
+        
+        private void CheckEntityToSpawn(TypeOfEntity data)
+        {
+            switch (data)
+            {
+                case TypeOfEntity.Peon:
+                    GenerateMinion();
+                    break;
+                case TypeOfEntity.PeonMiner:
+                    GenerateMinionMiner();
+                    break;
+                case TypeOfEntity.PeonBlacksmith:
+                    GenerateMinionBlackSmith();
+                    break;
+                default:
+                    throw new ArgumentOutOfRangeException(nameof(data), data, null);
+            }
         }
 
-        private void GenerateMinion(GameObject obj)
+        private void GenerateMinion()
         {
-            newMinion = Object.Instantiate(obj);
-            newMinion.transform.position = Vector3.zero;
+            GameObject newMinion =  m_meshFactory.GenerateMinion();
 
             Entity MyEntity = m_entityFactoryService.CreateLumberjack(newMinion.transform, TreePos);
-            MyEntity.OnGainRessource += AddWood;
+            MyEntity.OnGainRessource += m_ressourceManager.AddWood;
             
-            newMinion.GetComponent<Peon>().SetComposite(MyEntity);
-
-            MoveToTargetComponent MtC = MyEntity.myGetComponent<MoveToTargetComponent>();
-            if (MtC != null)
-            {
-                MtC.Init(TreePos, newMinion.transform);
-            }
+            m_entityFactoryService.SetEntityToMesh(newMinion, MyEntity, ForgePos); 
         }
         
-        private void GenerateMinionMiner(GameObject obj)
+        private void GenerateMinionMiner()
         {
-            newMinion = Object.Instantiate(obj);
-            newMinion.transform.position = Vector3.zero;
+            GameObject newMinion =  m_meshFactory.GenerateMinion();
 
             Entity MyEntity = m_entityFactoryService.CreateLumberjack(newMinion.transform, RockPos);
-            MyEntity.OnGainRessource += AddRock;
+            MyEntity.OnGainRessource += m_ressourceManager.AddRock;
             
-            newMinion.GetComponent<Peon>().SetComposite(MyEntity);
-
-            MoveToTargetComponent MtC = MyEntity.myGetComponent<MoveToTargetComponent>();
-            if (MtC != null)
-            {
-                MtC.Init(RockPos, newMinion.transform);
-            }
+            m_entityFactoryService.SetEntityToMesh(newMinion, MyEntity, ForgePos);
         }
         
-        private void GenerateMinionBlackSmith(GameObject obj)
+        private void GenerateMinionBlackSmith()
         {
-            newMinion = Object.Instantiate(obj);
-            newMinion.transform.position = Vector3.zero;
-
+            GameObject newMinion =  m_meshFactory.GenerateMinion();
             Entity MyEntity = m_entityFactoryService.CreateBlackSmith(newMinion.transform, ForgePos);
-            MyEntity.OnGainRessource += AddTool;
-            MyEntity.OnCreateTool += GetRessourceToTool;
+            MyEntity.OnGainRessource += m_ressourceManager.AddTool;
+            MyEntity.OnCreateTool += m_ressourceManager.GetRessourceToTool;
             MyEntity.OnIdle += CheckRessource;
-            
-            newMinion.GetComponent<Peon>().SetComposite(MyEntity);
 
-            MoveToTargetComponent MtC = MyEntity.myGetComponent<MoveToTargetComponent>();
-            if (MtC != null)
-            {
-                MtC.Init(ForgePos, newMinion.transform);
-            }
+            m_entityFactoryService.SetEntityToMesh(newMinion, MyEntity, ForgePos); 
+
         }
 
         private void OnCreateLumber()
         {
-            GenerateMinion(PeonPrefab);
+            EventManager.Trigger(TypeOfEntity.Peon);
+            //GenerateMinion(PeonPrefab);
         }
         
         private void OnCreatePeonMiner()
         {
-            GenerateMinionMiner(PeonPrefab);
+            EventManager.Trigger(TypeOfEntity.PeonMiner);
         }
         
         private void OnCreatePeonBlackSmith()
         {
-            GenerateMinionBlackSmith(PeonPrefab);
+            EventManager.Trigger(TypeOfEntity.PeonBlacksmith);
         }
 
         private async void OnUpdate()
@@ -142,13 +132,7 @@ namespace FactoryWarcraft
             while (true)
             {
                 await UniTask.DelayFrame(0);
-                if (UI != null)
-                {
-                    UI.SetLumber(m_lumber);
-                    UI.SetGold(m_rock);
-                    UI.SetTool(m_tool);
-                }
-                else
+                if (!UI)
                 {
                     UI = ((WarcraftHUD)m_UIService).GetTextManager();
                     if (UI)
@@ -160,18 +144,6 @@ namespace FactoryWarcraft
                     }
                 }
             }
-        }
-
-        public void Switch()
-        {
-        }
-
-        public void Enable()
-        {
-        }
-
-        public void Disable()
-        {
         }
     }
 }

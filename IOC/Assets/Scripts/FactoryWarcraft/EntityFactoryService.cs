@@ -43,4 +43,15 @@ public class EntityFactoryService : IEntityFactoryService
         lumberjack.AddComponent(new BlackSmithBehaviour(lumberjack));
         return lumberjack;
     }
+
+    public void SetEntityToMesh(GameObject newMinion, Entity entity, Vector3 Dest)
+    {
+        newMinion.GetComponent<Peon>().SetComposite(entity);
+
+        MoveToTargetComponent MtC = entity.myGetComponent<MoveToTargetComponent>();
+        if (MtC != null)
+        {
+            MtC.Init(Dest, newMinion.transform);
+        }
+    }
 }

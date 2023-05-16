@@ -9,6 +9,7 @@ using UnityEngine;
 using System.Runtime.CompilerServices;
 using Cysharp.Threading.Tasks;
 using FactoryWarcraft;
+using Observer;
 using Service.AudioService;
 
 public class Compositor : MonoBehaviour
@@ -193,16 +194,21 @@ public class Compositor : MonoBehaviour
         AddService<IGameService>(new WarcraftService());
         AddService<IAudioService>(new AudioService());
 
-        // AddService<IFightService>(new FightService());
+        //AddService<IFightService>(new FightService());
+        
         AddService<IUIService>(new WarcraftHUD());
         AddService<IEntityFactoryService>(new EntityFactoryService());
-        
-        AddService<EntityFactoryService>(new EntityFactoryService());
+        AddService<IEventManager>(new EventManager());
     }
-    
+
     private void Awake()
     {
         InitCompositor().Forget();
+        //ManageEvent();
+    }
+    
+    private void ManageEvent()
+    {
     }
 
     private async UniTaskVoid InitCompositor()
