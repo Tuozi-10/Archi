@@ -14,7 +14,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   <Material>k__BackingField: {fileID: 2100000, guid: 013b7e081a17a65459eab833fc473d2b, type: 2}
   <MoveSpeed>k__BackingField: 4
-  <WorkTime>k__BackingField: 1
-  <WorkRange>k__BackingField: 2.5
-  <TargetResources>k__BackingField: 0100000000000000
+  <WorkTime>k__BackingField: 0.5
+  <WorkRange>k__BackingField: 3
+  <TargetStructures>k__BackingField: 0100000000000000
+  <TargetResource>k__BackingField: 0
   <MaxResource>k__BackingField: 1

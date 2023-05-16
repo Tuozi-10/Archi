@@ -35,9 +35,13 @@ namespace Service.UIService
             gameService.OnResourceUpdated += UpdateResourceCount;
 
             int resourceIndex = 0;
-            uiElements.GetButton(0).onClick.AddListener(()=>gameService.SpawnUnit(0));
-            uiElements.GetButton(1).onClick.AddListener(()=>gameService.SpawnUnit(1));
-            uiElements.GetButton(2).onClick.AddListener(ChangeResourceIndex);
+            var createUnit0 = new UnitCreatedEvent(0);
+            var createUnit1 = new UnitCreatedEvent(1);
+            var createUnit2 = new UnitCreatedEvent(2);
+            
+            uiElements.GetButton(0).onClick.AddListener(()=>EventManager.Trigger(createUnit0));
+            uiElements.GetButton(1).onClick.AddListener(()=>EventManager.Trigger(createUnit1));
+            uiElements.GetButton(2).onClick.AddListener(()=>EventManager.Trigger(createUnit2));
             
             void UpdateResourceCount(int index,int amount)
             {
@@ -52,8 +56,16 @@ namespace Service.UIService
                     resourceIndex = 0;
                 }
             }
-            
         }
+    }
+}
+
+public class UnitCreatedEvent
+{
+    public int Id { get; private set; }
+    public UnitCreatedEvent(int id)
+    {
+        Id = id;
     }
 }
 

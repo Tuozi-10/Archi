@@ -377,6 +377,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Stock
       objectReference: {fileID: 0}
+    - target: {fileID: 4072794399493010357, guid: 5d7577270e532be4ca1610c1c51fd4a6, type: 3}
+      propertyPath: deposit
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 6501310996724488384, guid: 5d7577270e532be4ca1610c1c51fd4a6, type: 3}
       propertyPath: m_RootOrder
       value: 4

@@ -1,7 +1,6 @@
 using System;
 using Addressables;
 using Attributes;
-using UnityEditor.AI;
 using UnityEngine;
 using static UnityEngine.AddressableAssets.Addressables;
 using Object = UnityEngine.Object;
@@ -15,9 +14,6 @@ namespace Service
         private UIRTS ui;
 
         private int[] targetResources = { 3, 3, 6 };
-        private int[] resources;
-        public int GetResources(int index) => index >= resources.Length || index < 0 ? resources[0] : resources[index];
-        
         public event Action<int, int> OnResourceUpdated;
 
         private static EntityLocation entityLocation;
@@ -28,24 +24,7 @@ namespace Service
         {
             StartLoadingAssets();
         }
-
-        //[OnTick]
-        private void Update()
-        {
-            GenerateMissingUnits();
-        }
-
-        private void GenerateMissingUnits()
-        {
-            for (int i = 0; i < targetResources.Length; i++)
-            {
-                if (resources[i] < targetResources[i])
-                {
-                    
-                }
-            }
-        }
-
+        
         private void StartLoadingAssets()
         {
             AddressableHelper.LoadAssetAsyncWithCompletionHandler<GameObject>("RTSMap",OnMapLoad);
@@ -54,8 +33,6 @@ namespace Service
             {
                 var map = Object.Instantiate(mapAsset);
                 Release(mapAsset);
-                
-                NavMeshBuilder.BuildNavMesh();
 
                 entityLocation = map.GetComponent<EntityLocation>();
                 
@@ -72,55 +49,38 @@ namespace Service
 
         private void LinkStructures()
         {
+            var hubWoodContainer = new ResourceContainer(0, 0);
+            var hubRockContainer = new ResourceContainer(1, 0);
+            var stockContainer = new ResourceContainer(2, 0);
+            
+            ((HubStructure)GetStructure(0)).AssignContainers(hubWoodContainer,hubRockContainer);
             
             ((ResourceStructure)GetStructure(1)).AssignContainer(new ResourceContainer(0,100));
             ((ResourceStructure)GetStructure(2)).AssignContainer(new ResourceContainer(1,100));
-            ((ResourceStructure)GetStructure(4)).AssignContainer(new ResourceContainer(2,100));
+            ((Forge)GetStructure(3)).AssignContainers(hubWoodContainer,2,hubRockContainer,2);
+            ((ResourceStructure)GetStructure(4)).AssignContainer(stockContainer);
 
-            GetStructure(0).OnWorkEnded += GiveResource;
-
-            void GiveResource(Unit unit)
+            EventManager.AddListener<ResourceContainerUpdatedEvent>(UpdateResource);
+            
+            void UpdateResource(ResourceContainerUpdatedEvent container)
             {
-                var container = unit.Container;
-                IncreaseResources(container.associatedResource,container.amount);
-                container.amount = 0;
+                if(container.Container == hubWoodContainer) UpdateResources(0,hubWoodContainer.amount);
+                if(container.Container == hubRockContainer) UpdateResources(1,hubRockContainer.amount);
+                if(container.Container == stockContainer) UpdateResources(2,stockContainer.amount);
             }
         }
 
         private void InitResources()
         {
-            resources = new int[3];
-            for (int i = 0; i < resources.Length; i++)
+            for (int i = 0; i < 3; i++)
             {
                 UpdateResources(i,0);
             }
         }
-
-        public void IncreaseResources(int index,int amount)
-        {
-            if(index >= resources.Length || index < 0) index = 0;
-            UpdateResources(index,resources[index]+amount);
-        }
-
-        public void DecreaseResources(int index,int amount)
-        {
-            if(index >= resources.Length || index < 0) index = 0;
-            UpdateResources(index,resources[index]-amount);
-        }
-
+        
         public void UpdateResources(int index,int amount)
         {
-            if(index >= resources.Length || index < 0) index = 0;
-            resources[index] = amount;
             OnResourceUpdated?.Invoke(index,amount);
-        }
-
-        public void SpawnUnit(int index)
-        {
-            var unit = factoryService.CreateGatherUnit(Vector3.zero, index);
-            unit.GetComponent<UnitStateMachine>().Init();
         }
     }
 }
-
-

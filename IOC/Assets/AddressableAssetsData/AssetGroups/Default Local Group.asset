@@ -81,6 +81,10 @@ MonoBehaviour:
     m_Address: WoodGathererSO
     m_ReadOnly: 0
     m_SerializedLabels: []
+  - m_GUID: 2aa6378c839741a4583c78031855ddc7
+    m_Address: EventManager
+    m_ReadOnly: 0
+    m_SerializedLabels: []
   m_ReadOnly: 0
   m_Settings: {fileID: 11400000, guid: f85571e7fcd70ac4190d36e8b6377275, type: 2}
   m_SchemaSet:

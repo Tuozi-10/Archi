@@ -4,11 +4,33 @@ using UnityEngine;
 
 public class ForgeWorker : GatherWorker
 {
-    public ForgeWorker(Unit owner, ScriptableUnitData unitData, ResourceContainer container) : base(owner, unitData, container)
+    private ResourceContainer woodContainer;
+    private ResourceContainer rockContainer;
+    
+    public ForgeWorker(Unit owner, ScriptableUnitData unitData, ResourceContainer container,ResourceContainer wContainer,ResourceContainer rContainer) : base(owner, unitData, container)
     {
-        
+        woodContainer = wContainer;
+        rockContainer = rContainer;
     }
     
+    public override void Init()
+    {
+        m_currentState = states.idle;
+        ChangeToIdle();
+    }
+
+    protected override void ChangeToIdle()
+    {
+        EventManager.AddListener<OnStockCraftableEvent>(CollectHubResources);
+    }
+
+    private void CollectHubResources(OnStockCraftableEvent _)
+    {
+        EventManager.RemoveListener<OnStockCraftableEvent>(CollectHubResources);
+        targetIndex = data.TargetStructures.Length - 1;
+        ChangeState(states.wander);
+    }
+
     protected override void OnDestinationArrived()
     {
         ChangeState(states.work);
@@ -16,6 +38,17 @@ public class ForgeWorker : GatherWorker
 
     protected override void NextWork()
     {
+        // TODO
+        targetIndex++;
+        if (targetIndex >= data.TargetStructures.Length-1) targetIndex = 0;
         
+        
+        if (!targetStructure.CanWork())
+        {
+            ChangeState(states.idle);
+            return;
+        }
+        
+        ChangeState(states.work);
     }
-}
+}   

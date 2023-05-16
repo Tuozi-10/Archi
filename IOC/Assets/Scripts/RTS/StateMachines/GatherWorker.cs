@@ -3,12 +3,11 @@ using UnityEngine;
 
 public class GatherWorker : UnitStateMachine
 {
-    private Structure targetStructure => RTSService.GetStructure(data.TargetResources[targetIndex]);
-    private int targetIndex;
-
-    private int currentResource = 0;
+    protected Structure targetStructure => RTSService.GetStructure(data.TargetStructures[targetIndex]);
+    protected int targetIndex;
+    
     private float workTimer = 0;
-    private ResourceContainer container;
+    protected ResourceContainer container;
     
     public GatherWorker(Unit owner, ScriptableUnitData unitData,ResourceContainer container) : base(owner, unitData)
     {
@@ -19,8 +18,6 @@ public class GatherWorker : UnitStateMachine
     protected override void DoWander()
     {
         Agent.SetDestination(targetStructure.EntrancePosition);
-
-        var distance = Vector3.Distance(targetStructure.Position, Position);
         
         if (!(Vector3.Distance(targetStructure.Position, Position) <= data.WorkRange)) return;
         
@@ -42,6 +39,12 @@ public class GatherWorker : UnitStateMachine
 
     protected override void DoWork()
     {
+        if (!targetStructure.CanWork())
+        {
+            NextWork();
+            return;
+        }
+        
         workTimer += Time.deltaTime;
         
         if(workTimer < data.WorkTime) return;
@@ -55,7 +58,7 @@ public class GatherWorker : UnitStateMachine
     protected virtual void NextWork()
     {
         targetIndex++;
-        if (targetIndex >= data.TargetResources.Length) targetIndex = 0;
+        if (targetIndex >= data.TargetStructures.Length) targetIndex = 0;
         
         ChangeState(states.wander);
         

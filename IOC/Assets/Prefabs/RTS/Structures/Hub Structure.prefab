@@ -80,3 +80,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   entranceOffset: {fileID: 1105486148767501008}
+  containers:
+  - associatedResource: 0
+    amount: 0
+  - associatedResource: 1
+    amount: 0
+  - associatedResource: 2
+    amount: 0

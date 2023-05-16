@@ -12,7 +12,7 @@ namespace Addressables
             var handle = LoadAssetAsync<T>(key);
             handle.Completed += (_) => OnLoadedAssetAsync(key, _, completionHandlerCallback);
         }
-     
+
         private static void OnLoadedAssetAsync<T>(string key, AsyncOperationHandle<T> handle, System.Action<T> completionHandlerCallback)
         {
             if(handle.Status == AsyncOperationStatus.Succeeded)

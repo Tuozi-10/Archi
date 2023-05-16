@@ -1,11 +1,10 @@
 using System;
-using Service;
 using UnityEngine;
 using UnityEngine.AI;
 
 public class UnitStateMachine : IComponent
 {
-    private states m_currentState = states.idle;
+    protected states m_currentState = states.idle;
     protected readonly Unit unit;
     protected NavMeshAgent Agent => unit.Agent;
     protected Renderer Renderer => unit.Renderer;
