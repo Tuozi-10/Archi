@@ -10,4 +10,9 @@ public class HubStructure : Structure
     {
         
     }
+
+    public override bool CanWork()
+    {
+        return true;
+    }
 }

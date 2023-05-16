@@ -26,6 +26,11 @@ public class GatherWorker : UnitStateMachine
         
         Agent.velocity = Vector3.zero;
         Agent.SetDestination(Position);
+        OnDestinationArrived();
+    }
+
+    protected virtual void OnDestinationArrived()
+    {
         ChangeState(states.work);
     }
     
@@ -44,9 +49,15 @@ public class GatherWorker : UnitStateMachine
         workTimer = 0;
         targetStructure.EndWork();
         
+        NextWork();
+    }
+
+    protected virtual void NextWork()
+    {
         targetIndex++;
         if (targetIndex >= data.TargetResources.Length) targetIndex = 0;
         
         ChangeState(states.wander);
+        
     }
 }

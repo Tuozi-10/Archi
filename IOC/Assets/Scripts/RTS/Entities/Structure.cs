@@ -16,6 +16,8 @@ public abstract class Structure : Entity
         WorkingUnit = unit;
     }
 
+    public abstract bool CanWork();
+
     public void EndWork()
     {
         Work();

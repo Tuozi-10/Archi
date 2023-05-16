@@ -7,10 +7,18 @@ public class ResourceStructure : Structure
         container = AddComponent(c);
     }
     
+    
+    
     protected override void Work()
     {
         if(container.amount <= 0) return;
         WorkingUnit.Container.amount++;
         container.amount--;
+    }
+
+    public override bool CanWork()
+    {
+        if (container == null) return false;
+        return container.amount > 0;
     }
 }
