@@ -1,6 +1,8 @@
 using System;
 using Addressables;
+using DesignPatterns;
 using DG.Tweening;
+using Service;
 using Service.UIService;
 using UnityEngine;
 using Object = UnityEngine.Object;
@@ -33,12 +35,12 @@ namespace UI
             }
         }
 
-        public void AssignService(IUIService uiService, IEventManagerService eventService)
+        public void AssignService(IUIService uiService, IEventManagerService eventService, IEntitiesFactoryService factoryService)
         {
             m_uiService = uiService;
             m_eventService = eventService;
             
-            m_eventService.AddListener();
+            m_eventService.AddListener(EntityCreatorEvent);
         }
 
         public void Enable()
