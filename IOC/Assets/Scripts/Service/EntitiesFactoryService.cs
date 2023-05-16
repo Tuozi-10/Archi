@@ -1,4 +1,5 @@
-﻿using Addressables;
+﻿using System.Threading.Tasks;
+using Addressables;
 using DefaultNamespace;
 using entities;
 using Service;
@@ -42,6 +43,11 @@ namespace Dp.DesignPatterns
             entity.AddComponent(new MoveToTargetComponent(entity));
             entity.AddComponent(new LumberjackBehaviour(entity));
             Release(lumberjack);
+        }
+
+        public async void Text()
+        {
+            await Task.Yield();
         }
 
         public override void Enable()

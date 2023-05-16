@@ -54,8 +54,8 @@ MonoBehaviour:
   stone: {fileID: 2361574759665854473}
   forge: {fileID: 2361574759825027930}
   stock: {fileID: 2361574759624734836}
-  woodLoadDuration: 5
-  stoneLoadDuration: 10
+  woodLoadDuration: 1
+  stoneLoadDuration: 2
 --- !u!1 &2361574758553729193
 GameObject:
   m_ObjectHideFlags: 0

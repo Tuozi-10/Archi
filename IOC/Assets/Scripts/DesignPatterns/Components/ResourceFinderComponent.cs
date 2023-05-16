@@ -27,17 +27,7 @@ public class ResourceFinderComponent : IComponent
     }
 
     public void Update() { }
-
-    public Transform FindClosestResource()
-    {
-        return resource switch
-        {
-            ResourceType.Tree => SceneReferenceHolder.instance.wood,
-            ResourceType.Stone => SceneReferenceHolder.instance.stone,
-            _ => null
-        };
-    }
-
+    
     private float timer;
 
     public bool LoadingResource()

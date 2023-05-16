@@ -20,7 +20,6 @@ namespace Service
         [DependsOnService] private ITickableService m_tickableService;
         [DependsOnService] private IFightService m_fightService;
         [DependsOnService] private IEntitiesFactoryService m_factoryService;
-        [DependsOnService] private IEventManagerService m_eventService;
 
         [ServiceInit]
         private void Initialize()

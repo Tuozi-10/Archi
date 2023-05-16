@@ -28,7 +28,7 @@ namespace Dp.DesignPatterns
 
         public bool MoveToPoint()
         {
-            if (DistanceToTarget() < .5f)
+            if (DistanceToTarget() < 1f)
             {
                 return true;
             }

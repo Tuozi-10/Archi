@@ -12,4 +12,5 @@ public class SceneReferenceHolder : MonoBehaviour
 
     public Transform hub, wood, stone, forge, stock;
     public int woodLoadDuration, stoneLoadDuration;
+    public int hubWood, hubStone, hubTools;
 }

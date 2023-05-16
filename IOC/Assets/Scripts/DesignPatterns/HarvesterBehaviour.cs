@@ -50,7 +50,8 @@ public class HarvesterBehaviour : StateMachineComponent
 
         if (_moveToTargetComponent.MoveToPoint())
         {
-            // todo - add collected resources to main stock in hub
+            SceneReferenceHolder.instance.hubWood += m_entity.stone;
+            m_entity.stone = 0;
             ChangeState(states.craft);
         }
     }
@@ -70,9 +71,9 @@ public class HarvesterBehaviour : StateMachineComponent
         if (_moveToTargetComponent.MoveToPoint())
         {
             Debug.Log("Going to forge");
-            // todo - craft items with stocked resources from hub
-            
-            // todo - change state to stock state when crafting is over
+            // Par exemple : 2 bois pour faire un tool
+            SceneReferenceHolder.instance.hubStone -= 2;
+
             ChangeState(states.stock);
         }
     }
@@ -82,12 +83,10 @@ public class HarvesterBehaviour : StateMachineComponent
         if (_moveToTargetComponent.MoveToPoint())
         {
             Debug.Log("Going to stock...");
-            // todo - stock crafted tool
+            SceneReferenceHolder.instance.hubTools += 2;
             
-            // todo - must check if a new tool can be crafted
-            ChangeState(states.craft);
-            
-            // todo - if can't craft any tool, must go back to harvest
+            if(SceneReferenceHolder.instance.hubStone >= 2) ChangeState(states.craft);
+            else ChangeState(states.harvest);
         }
     }
 }

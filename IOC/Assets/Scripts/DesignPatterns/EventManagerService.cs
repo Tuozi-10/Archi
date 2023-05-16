@@ -4,7 +4,7 @@ using UnityEngine;
 
 namespace DesignPatterns
 {
-    public class EventManagerService : IEventManagerService
+    public class EventManagerService : MonoSingleton<EventManagerService>
     {
         private static readonly Dictionary<Type, List<Delegate>> m_events = new();
 
@@ -86,8 +86,5 @@ namespace DesignPatterns
         }
 
         #endregion
-
-        // TODO TRANSFORMER EN SERVICE
-        // TODO TRANSFORMER EN SINGLETON
     }
 }

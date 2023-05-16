@@ -8,7 +8,7 @@ namespace entities
     {
         // data for our entity, hp, gold, stone, wood, speed ... 
         private entitySO data;
-        private int wood, stone;
+        public int wood, stone;
         private int maxWood, maxStone;
         public bool isFull;
         

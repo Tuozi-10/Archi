@@ -2,6 +2,7 @@ using System;
 using Addressables;
 using DesignPatterns;
 using DG.Tweening;
+using Dp.DesignPatterns;
 using Service;
 using Service.UIService;
 using UnityEngine;
@@ -13,7 +14,7 @@ namespace UI
     public class MainMenuManager : MonoBehaviour
     {
         private IUIService m_uiService;
-        private IEventManagerService m_eventService;
+        private IEntitiesFactoryService factory;
         [SerializeField] private RectTransform sideMenu;
         private bool isOpened;
         public Vector2 minMaxSideMenuPosX;
@@ -35,12 +36,13 @@ namespace UI
             }
         }
 
-        public void AssignService(IUIService uiService, IEventManagerService eventService, IEntitiesFactoryService factoryService)
+        public void AssignService(IUIService uiService, IEntitiesFactoryService fac)
         {
             m_uiService = uiService;
-            m_eventService = eventService;
-            
-            m_eventService.AddListener(EntityCreatorEvent);
+            factory = fac;
+
+            EventManagerService.instance.AddListener<EntitiesFactoryService>(CreateHarvesterWtf);
+            //m_eventService.AddListener<EntityCreatorEvent>(OnCreateHarvester);
         }
 
         public void Enable()
@@ -121,12 +123,15 @@ namespace UI
 
         public void OnCreateHarvester()
         {
-            
+            factory.CreateHarvester();
+            //EventManagerService.instance.Trigger(factory);
         }
 
-        public void OnCreateLumberjack()
+        private void CreateHarvesterWtf(EntitiesFactoryService service)
         {
-            
+            service.CreateHarvester();
         }
+
+        public void OnCreateLumberjack() { }
     }
 }
