@@ -11,12 +11,8 @@ public class LumberjackBehaviour : StateMachineComponent
     public override void Init()
     {
         ChangeState(states.wander);
-        //m_entity.OnIdle?.Invoke();
     }
-
-    protected override void DoIdle()
-    {
-    }
+    
 
     protected override void DoWander()
     {
@@ -36,8 +32,15 @@ public class LumberjackBehaviour : StateMachineComponent
         if (timer <= 0)
         {
             ChangeState(states.GoToBase);
+            m_entity.RemoveRessource();
             timer = 5f;
         }
+    }
+
+    protected override void DoIdle()
+    {
+        if (m_entity.data.ressourceTarget.nbRemaining > 0)
+            ChangeState(states.wander);
     }
 
     protected override void DoGoToBase()
@@ -50,7 +53,7 @@ public class LumberjackBehaviour : StateMachineComponent
             else
             {
                 m_entity.OnGainRessource?.Invoke(10);
-                ChangeState(states.wander);
+                ChangeState(states.idle);
             }
         }
     }

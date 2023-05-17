@@ -46,6 +46,14 @@ MonoBehaviour:
     m_Address: UIWarcraft
     m_ReadOnly: 0
     m_SerializedLabels: []
+  - m_GUID: 1ce305d304f3d4b4fa12d0346636b2c8
+    m_Address: SingletonEvent
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+  - m_GUID: 1c25240d411c9c14e8ed2b1e554f8d14
+    m_Address: Lumber
+    m_ReadOnly: 0
+    m_SerializedLabels: []
   m_ReadOnly: 0
   m_Settings: {fileID: 11400000, guid: f85571e7fcd70ac4190d36e8b6377275, type: 2}
   m_SchemaSet:

@@ -27,4 +27,20 @@ public class UI_Warcraft : MonoBehaviour
     {
         m_textTool.text = tool.ToString();
     }
+    
+    public void PrintLumber(int lumber)
+    {
+       m_textLumber.text = lumber.ToString();
+    }
+    
+    public void PrintGold(int gold)
+    {
+        m_textGold.text = gold.ToString();
+    }
+    
+    public void PrintTool(int tool)
+    {
+        m_textTool.text = tool.ToString();
+    }
+    
 }

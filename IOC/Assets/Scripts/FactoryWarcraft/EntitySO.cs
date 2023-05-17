@@ -1,4 +1,5 @@
 
+using FactoryWarcraft;
 using UnityEngine;
 
 namespace DefaultNamespace
@@ -6,7 +7,7 @@ namespace DefaultNamespace
     public class entitySO
     {
         public int hp { get; private set; } = 100;
-        public Vector3 ressourceTarget;
+        public RessourceData ressourceTarget;
 
         entity GetEntity()
         {
